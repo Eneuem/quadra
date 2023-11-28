@@ -21,6 +21,13 @@ if (!empty($genreId)) {
             echo "Synopsis: " . $movie['overview'] . "<br>";
             echo "<img src='https://image.tmdb.org/t/p/w500" . $movie['poster_path'] . "'><br>";
             echo "<hr>";
+
+            // Formulaire pour ajouter à la Wishlist
+            echo "<form action='wishlist_process.php' method='post'>";
+            echo "<label for='movie_id'>ID du Film:</label>";
+            echo "<input type='hidden' id='movie_id' name='movie_id' value='" . $movie['id'] . "'>";
+            echo "<input type='submit' value='Ajouter à la Wishlist'>";
+            echo "</form>";
         }
     } else {
         echo "Erreur lors de la récupération des données.";

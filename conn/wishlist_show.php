@@ -27,6 +27,12 @@
                     echo "<li>Titre: " . $movieDetails['title'] . "</li>";
                     echo "<img src='https://image.tmdb.org/t/p/w500" . $movieDetails['poster_path'] . "'><br>";
 
+                    echo "<form action='wishlist_delete.php' method='post'>";
+                    echo "<label for='movie_id'></label>";
+                    echo "<input type='hidden' id='movie_id' name='movie_id' value='$movieId'>";
+                    echo "<input type='submit' value='Supprimer'>";
+                    echo "</form>";
+
                     if (!empty($movieDetails['genres'])) {
                         echo "<li>Genres: ";
                         foreach ($movieDetails['genres'] as $genre) {
