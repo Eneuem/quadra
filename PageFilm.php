@@ -1,8 +1,7 @@
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
 <main class="container-lg w-full flex-col">
     <img src="./img/illustration.jpg" class="w-full h-1/2 object-cover">
-
-    <div class="border-2 border-black w-full flex pl-12">
+    <div class="w-full flex pl-12">
         <img src="./img/cover.jpg" class="w-52 object-contain md:relative md:bottom-36">
         <div class="flex-col items-center pl-4 w-full">
             <div class="flex font-bold text-5xl">
@@ -29,6 +28,9 @@
                 </div>
             </div>
         </div>
+    </div>
+    <div class="flex w-full h-1/3 border border-red-300">
+        <iframe src="./img/joker-trailer.mp4" frameborder="0" controls class="w-full"></iframe>
     </div>
 </main>
 
