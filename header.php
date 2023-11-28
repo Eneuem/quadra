@@ -1,5 +1,5 @@
    <!-- Nav Container -->
-   <nav class="relative container mx-auto p-2 mt-4 bg-gray-800 rounded-">
+   <nav class="relative container mx-auto p-2 mt-4 bg-gray-800">
 
        <!-- Flex Container For All Items -->
        <div class="flex items-center justify-between">
@@ -8,7 +8,7 @@
            <div class="flex items-center space-x-6">
 
                <!-- Logo -->
-               <img src="img/getflix-icone.png" alt="" class="h-10 w-10" />
+               <img src="img/Q.JPG" alt="" class="h-10 w-10 rounded-full" />
 
                <!-- Search -->
                <div>
@@ -48,13 +48,19 @@
        </div>
 
        <!-- Mobile Menu -->
-       <div id="menu" class="absolute hidden p-6 rounded-lg bg-blue-700 left-6 right-6 top-20 z-100">
-           <div class="flex flex-col items-center justify-center w-full space-y-6 font-bold text-lime-100 rounded-sm">
-               <a href="#" class="w-full text-center">Features</a>
-               <a href="#" class="w-full text-center">Pricing</a>
-               <a href="#" class="w-full text-center">Resources</a>
-               <a href="#" class="w-full pt-6 border-t border-gray-400 text-center">Login</a>
-               <a href="#" class="w-full py-3 text-center rounded-full bg-yellow-400">Sign Up</a>
+       <div id="menu" class="absolute hidden p-6 bg-gray-800   left-6 right-6 top-20 z-100">
+
+           <div class="flex flex-col items-center justify-center w-full space-y-6 font-bold text-yellow-400 rounded-md">
+               <div class=" items-center justify-center space-x-2">
+                   <a href="#" class="w-6 py-2 px-4 text-center rounded-md bg-yellow-400 text-lime-100">Sign Up</a>
+                   <a href="#" class="w-6 py-2 px-6 text-center rounded-md border">Login</a>
+
+               </div>
+
+               <a href=" #" class="w-full text-center border-t border-b border-gray-400">Free Movies & TV</a>
+               <a href="#" class="w-full text-center border-b border-gray-400">Live TV</a>
+               <a href="#" class="w-full text-center border-b border-gray-400">Featurs</a>
+
            </div>
        </div>
    </nav>
