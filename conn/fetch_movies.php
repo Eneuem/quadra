@@ -28,6 +28,15 @@ if (!empty($genreId)) {
             echo "<input type='hidden' id='movie_id' name='movie_id' value='" . $movie['id'] . "'>";
             echo "<input type='submit' value='Ajouter à la Wishlist'>";
             echo "</form>";
+
+            // Formulaire pour ajouter une note
+            echo "<form action='add_note.php' method='post'>";
+            echo "<label for='note'>Note:</label>";
+            echo "<input type='number' id='note' name='note' min='1' max='10' required>";
+            echo "<input type='hidden' id='user_id' name='user_id' value='1'>"; // Remplacez la valeur '1' par l'ID de l'utilisateur connecté
+            echo "<input type='hidden' id='movie_id' name='movie_id' value='" . $movie['id'] . "'>";
+            echo "<input type='submit' value='Ajouter une note'>";
+            echo "</form>";
         }
     } else {
         echo "Erreur lors de la récupération des données.";
