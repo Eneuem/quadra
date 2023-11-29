@@ -118,11 +118,11 @@ foreach ($movieVideos['results'] as $video) {
                     </ul>
                 </div>
             </div>
-            <p class="w-full md:w-2/3 mt-8 pr-2 mb-2 text-2xl mb-4">Synopsis : <br> <?php echo htmlspecialchars($randomMovie['overview']); ?></p>
+            <p class="w-full md:w-2/3 mt-8 pr-2 text-2xl mb-4">Synopsis : <br> <?php echo htmlspecialchars($randomMovie['overview']); ?></p>
         </div>
     </div>
     <?php if (!empty($trailerUrl)) : ?>
-        <iframe class="z-10 mb-20 rounded-md" width='560' height='315' src='https://www.youtube.com/embed/<?php echo $video['key']; ?>' frameborder='0' allow='autoplay; encrypted-media' allowfullscreen></iframe>
+        <iframe class="z-10 mb-20 rounded-md mt-10" width='840gi' height='480' src='https://www.youtube.com/embed/<?php echo $video['key']; ?>' frameborder='0' allow='autoplay; encrypted-media' allowfullscreen></iframe>
     <?php endif; ?>
 </main>
 <script>
