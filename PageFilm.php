@@ -82,7 +82,7 @@ foreach ($movieVideos['results'] as $video) {
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
 <main class="container-lg w-full h-100 flex flex-col items-center text-white bg-cover bg-center bg-no-repeat bg-fixed relative " style="background-image: url('https://image.tmdb.org/t/p/original/<?php echo $movieDetails['backdrop_path']; ?>');">
     <div class="absolute top-0 left-0 w-full h-full bg-black opacity-75"></div>
-    <div class="flex flex-col lg:flex-row w-full z-10 md:pl-12 mt-10 ">
+    <div class="flex flex-col lg:flex-row w-full z-10 md:pl-12 mt-10  tracking-wider">
         <img src="https://image.tmdb.org/t/p/w500<?php echo $randomMovie['poster_path']; ?>" class="w-96 ml-4 rounded object-contain">
         <div class="flex flex-col pl-4">
             <div class="flex flex-col">
