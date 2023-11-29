@@ -49,6 +49,8 @@ include 'connexion.php';
         <input type="text" name="pseudo" id="pseudo" placeholder="Votre identifiant (pseudo ou email)" required> <br/>
         <input type="password" name="password" id="password" placeholder="Votre Mot de passe" required><br/>
         <input type="submit" name="login" value="Se connecter"> <br/>
+        <a href="formulaire.php">mot de passe oublié</a>
+        
     </form>
 </body>
 </html>

@@ -1,12 +1,8 @@
-
 <?php
-
 define('HOST', 'localhost');
 define('DB_NAME', 'Connexion');
 define('USER', 'root');
 define('PASS', 'root');
-
-
 
 
 try {
