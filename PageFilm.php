@@ -1,37 +1,34 @@
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
-<main class="container-lg w-full flex-col">
-    <img src="./img/illustration.jpg" class="w-full h-1/2 object-cover">
-    <div class="w-full flex pl-12">
-        <img src="./img/cover.jpg" class="w-52 object-contain md:relative md:bottom-36">
-        <div class="flex-col items-center pl-4 w-full">
-            <div class="flex font-bold text-5xl">
-                <h1>Joker</h1>
-                <div class="pl-4">
-                    <span class="material-symbols-outlined cursor-pointer">
+<main class="container-lg w-full flex flex-col items-center">
+    <img src="./img/illustration.jpg" class="w-full h-96 object-cover hidden md:block">
+    <div class="flex flex-col md:flex-row w-full md:pl-12">
+        <img src="./img/cover.jpg" class="w-full rounded-md md:w-72 md:relative md:bottom-48">
+        <div class="flex flex-col pl-4">
+            <div class="flex flex-col">
+                <div class="flex items-center">
+                    <h1 class="font-bold text-5xl">Joker</h1>
+                    <span class="material-symbols-outlined cursor-pointer ml-2 mt-2">
                         favorite
                     </span>
-                    <span class="material-symbols-outlined">
-                        star
-                    </span>
                 </div>
+                <span class="material-symbols-outlined">
+                    star
+                </span>
             </div>
-            <div class="flex-col mt-4 font-normal text-xl">
-                <div class="flex-col lg:columns-2">
-                    <h5>année :</h5>
-                    <h5>Durée :</h5>
-                    <h5>Genres :</h5>
-                    <h5>Realisateur :</h5>
-                    <h5>Acteurs :</h5>
-                </div>
-                <div class="mt-4 border w-2/3 pr-4 font-normal text-lg">
-                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Magni ab commodi culpa et blanditiis illum porro quibusdam facilis facere debitis expedita, harum dolorum voluptate a, rem ut qui ullam fuga!</p>
-                </div>
+            <div class="columns-2">
+                <h5>année :</h5>
+                <h5>Durée :</h5>
+                <h5>Genres :</h5>
+                <h5>Realisateur :</h5>
+                <h5>Acteurs :</h5>
             </div>
+            <p class="w-full md:w-2/3 mt-12">Lorem ipsum dolor sit amet consectetur adipisicing elit. Hic fugiat quasi nemo fuga, ea animi iusto magni blanditiis odio! Velit aperiam quas vero assumenda atque dolorum soluta, ipsa in aut?</p>
         </div>
     </div>
-    <div class="flex w-full h-1/3 border border-red-300">
-        <iframe src="./img/joker-trailer.mp4" frameborder="0" controls class="w-full"></iframe>
-    </div>
+    <video class="w-full md:w-2/3" controls>
+        <source src="./img/joker-trailer.mp4" type="video/mp4">
+        Your browser does not support the video tag.
+    </video>
 </main>
 
 <script src="https://cdn.tailwindcss.com"></script>
