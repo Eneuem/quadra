@@ -78,7 +78,7 @@ foreach ($movieVideos['results'] as $video) {
             </div>
             <div class="grid grid-cols-1 md:grid-cols-2">
                 <h5>Year : <?php echo substr($movieDetails['release_date'], 0, 4); ?></h5>
-                <h5>Note : <?php echo $movieDetails['vote_average']; ?>/10</h5>
+                <h5>Note : <?php echo number_format($movieDetails['vote_average'], 1); ?>/10</h5>
                 <h5>Duration : <?php echo $movieDetails['runtime']; ?> minutes</h5>
                 <h5>Genres : <?php foreach ($movieDetails['genres'] as $genre) {
                                     echo htmlspecialchars($genre['name']) . ' ';
@@ -124,14 +124,10 @@ foreach ($movieVideos['results'] as $video) {
     <?php if (!empty($trailerUrl)) : ?>
         <iframe class="z-10 mb-20" width='560' height='315' src='https://www.youtube.com/embed/<?php echo $video['key']; ?>' frameborder='0' allow='autoplay; encrypted-media' allowfullscreen></iframe>
     <?php endif; ?>
-
-
-
 </main>
 <script>
     function favFill() {
         let favorite = document.getElementById("favorite");
-
         favorite.style.fontVariationSettings = "'FILL' 100";
         favorite.style.filter = 'hue-rotate(0deg)';
     }
