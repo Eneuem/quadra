@@ -1,9 +1,9 @@
 <?php
 
 define('HOST', 'localhost');
-define('DB_NAME', 'Connexion');
+define('DB_NAME', 'test');
 define('USER', 'root');
-define('PASS', 'root');
+define('PASS', 'Quadrastream1!');
 
 try {
     // Création de l'objet de connexion PDO
