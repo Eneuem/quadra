@@ -45,7 +45,7 @@ include 'connexion.php';
     </form>
 
     <h2>Connexion</h2>
-    <form action="connexion.php" method="post">
+    <form action="" method="post">
         <input type="text" name="pseudo" id="pseudo" placeholder="Votre identifiant (pseudo ou email)" required> <br/>
         <input type="password" name="password" id="password" placeholder="Votre Mot de passe" required><br/>
         <input type="submit" name="login" value="Se connecter"> <br/>
