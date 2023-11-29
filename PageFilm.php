@@ -129,7 +129,6 @@ foreach ($movieVideos['results'] as $video) {
     function favFill() {
         let favorite = document.getElementById("favorite");
         favorite.style.fontVariationSettings = "'FILL' 100";
-        favorite.style.filter = 'hue-rotate(0deg)';
     }
 </script>
 
