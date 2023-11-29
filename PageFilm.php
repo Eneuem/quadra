@@ -2,7 +2,7 @@
 session_start();
 
 // Supposons que $userId est défini après une authentification réussie
-$_SESSION['user_id'] = $userId;
+// $_SESSION['user_id'] = $userId;
 
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
@@ -58,17 +58,17 @@ foreach ($movieVideos['results'] as $video) {
 ?>
 
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
-<main class="container-lg w-full flex flex-col items-center text-white bg-cover bg-center bg-no-repeat bg-fixed relative" style="background-image: url('https://image.tmdb.org/t/p/original/<?php echo $movieDetails['backdrop_path']; ?>');">
+<main class="container-lg w-full h-100 flex flex-col items-center text-white bg-cover bg-center bg-no-repeat bg-fixed relative" style="background-image: url('https://image.tmdb.org/t/p/original/<?php echo $movieDetails['backdrop_path']; ?>');">
     <div class="absolute top-0 left-0 w-full h-full bg-black opacity-60"></div>
-    <div class="flex flex-col md:flex-row w-full z-10 md:pl-12 mt-10">
-        <img src="https://image.tmdb.org/t/p/w500<?php echo $randomMovie['poster_path']; ?>" class="w-72 rounded object-contain">
+    <div class="flex flex-col lg:flex-row w-full z-10 md:pl-12 mt-10">
+        <img src="https://image.tmdb.org/t/p/w500<?php echo $randomMovie['poster_path']; ?>" class="w-96 rounded object-contain">
         <div class="flex flex-col pl-4">
             <div class="flex flex-col">
                 <div class="flex items-center">
-                    <h1 class="font-bold text-5xl">
+                    <h1 class="font-bold text-5xl mb-4">
                         <?php echo htmlspecialchars($randomMovie['title']); ?>
                     </h1>
-                    <span id="favorite" onclick="favFill()" class="material-symbols-outlined cursor-pointer ml-2 mt-2" style="font-variation-settings:'FILL' 0;transition: filter 0.3s;">
+                    <span id="favorite" onclick="favFill()" class="material-symbols-outlined cursor-pointer ml-2" style="font-variation-settings:'FILL' 0;transition: filter 0.3s;">
                         favorite
                     </span>
                 </div>
@@ -76,14 +76,14 @@ foreach ($movieVideos['results'] as $video) {
                     star
                 </span>
             </div>
-            <div class="grid grid-cols-1 md:grid-cols-2">
+            <div class="grid grid-cols-1 md:grid-cols-2 mt-10 text-lg">
                 <h5>Year : <?php echo substr($movieDetails['release_date'], 0, 4); ?></h5>
                 <h5>Note : <?php echo number_format($movieDetails['vote_average'], 1); ?>/10</h5>
                 <h5>Duration : <?php echo $movieDetails['runtime']; ?> minutes</h5>
                 <h5>Genres : <?php foreach ($movieDetails['genres'] as $genre) {
                                     echo htmlspecialchars($genre['name']) . ' ';
                                 } ?></h5>
-                <h5>
+                <h5 class="mr-2">
                     <ul class="list-none">
                         <?php
                         $producerNames = [];
@@ -118,11 +118,11 @@ foreach ($movieVideos['results'] as $video) {
                     </ul>
                 </div>
             </div>
-            <p class="w-full md:w-2/3 mt-8 pr-2 mb-2">Synopsis : <br> <?php echo htmlspecialchars($randomMovie['overview']); ?></p>
+            <p class="w-full md:w-2/3 mt-8 pr-2 mb-2 text-2xl mb-4">Synopsis : <br> <?php echo htmlspecialchars($randomMovie['overview']); ?></p>
         </div>
     </div>
     <?php if (!empty($trailerUrl)) : ?>
-        <iframe class="z-10 mb-20" width='560' height='315' src='https://www.youtube.com/embed/<?php echo $video['key']; ?>' frameborder='0' allow='autoplay; encrypted-media' allowfullscreen></iframe>
+        <iframe class="z-10 mb-20 rounded-md" width='560' height='315' src='https://www.youtube.com/embed/<?php echo $video['key']; ?>' frameborder='0' allow='autoplay; encrypted-media' allowfullscreen></iframe>
     <?php endif; ?>
 </main>
 <script>
