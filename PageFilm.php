@@ -124,6 +124,9 @@ foreach ($movieVideos['results'] as $video) {
     <?php if (!empty($trailerUrl)) : ?>
         <iframe class="z-10 mb-20" width='560' height='315' src='https://www.youtube.com/embed/<?php echo $video['key']; ?>' frameborder='0' allow='autoplay; encrypted-media' allowfullscreen></iframe>
     <?php endif; ?>
+
+
+
 </main>
 <script>
     function favFill() {
