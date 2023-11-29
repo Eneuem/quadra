@@ -94,41 +94,20 @@ foreach ($movieVideos['results'] as $video) {
                         favorite
                     </span>
                 </div>
-                <span class="material-symbols-outlined">
+                <span class="material-symbols-outlined mt-4">
                     star
                 </span>
             </div>
             <div class="grid grid-cols-1 md:grid-cols-2 mt-10 text-lg">
-                <h5>Year : <?php echo substr($movieDetails['release_date'], 0, 4); ?></h5>
-                <h5>Note : <?php echo number_format($movieDetails['vote_average'], 1); ?>/10</h5>
-                <h5>Duration : <?php echo $movieDetails['runtime']; ?> minutes</h5>
-                <h5>Genres : <?php foreach ($movieDetails['genres'] as $genre) {
+                <div class="flex flex-col gap-2">
+                    <h5>Year: <?php echo substr($movieDetails['release_date'], 0, 4); ?></h5>
+                    <h5>Note: <?php echo number_format($movieDetails['vote_average'], 1); ?>/10</h5>
+                    <h5>Duration: <?php echo $movieDetails['runtime']; ?> minutes</h5>
+                    <h5>Genres: <?php foreach ($movieDetails['genres'] as $genre) {
                                     echo htmlspecialchars($genre['name']) . ' ';
                                 } ?></h5>
-                <h5 class="mr-2">
-                    <ul class="list-none">
-                        <?php
-                        $producerNames = [];
-                        $directorNames = [];
+                </div>
 
-                        foreach ($movieCredits['crew'] as $crew) {
-                            if ($crew['job'] == 'Producer') {
-                                $producerNames[] = $crew['name'];
-                            } elseif ($crew['job'] == 'Director') {
-                                $directorNames[] = $crew['name'];
-                            }
-                        }
-
-                        if (!empty($producerNames)) {
-                            echo '<li>Producer: ' . implode(', ', array_map('htmlspecialchars', $producerNames)) . '</li>';
-                        }
-
-                        if (!empty($directorNames)) {
-                            echo '<li>Director: ' . implode(', ', array_map('htmlspecialchars', $directorNames)) . '</li>';
-                        }
-                        ?>
-                    </ul>
-                </h5>
                 <div class="flex flex-col">
                     <h5>Actors :</h5>
                     <ul>
@@ -138,6 +117,30 @@ foreach ($movieVideos['results'] as $video) {
                             <?php endif; ?>
                         <?php endforeach; ?>
                     </ul>
+                    <h5 class="mr-2 mt-4">
+                        <ul class="list-none">
+                            <?php
+                            $producerNames = [];
+                            $directorNames = [];
+
+                            foreach ($movieCredits['crew'] as $crew) {
+                                if ($crew['job'] == 'Producer') {
+                                    $producerNames[] = $crew['name'];
+                                } elseif ($crew['job'] == 'Director') {
+                                    $directorNames[] = $crew['name'];
+                                }
+                            }
+
+                            if (!empty($producerNames)) {
+                                echo '<li>Producer: ' . implode(', ', array_map('htmlspecialchars', $producerNames)) . '</li>';
+                            }
+
+                            if (!empty($directorNames)) {
+                                echo '<li>Director: ' . implode(', ', array_map('htmlspecialchars', $directorNames)) . '</li>';
+                            }
+                            ?>
+                        </ul>
+                    </h5>
                 </div>
             </div>
             <p class="w-full md:w-2/3 mt-8 pr-2 text-2xl mb-4">Synopsis : <br> <?php echo htmlspecialchars($randomMovie['overview']); ?></p>
