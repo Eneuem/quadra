@@ -77,12 +77,11 @@ foreach ($movieVideos['results'] as $video) {
     body::-webkit-scrollbar-thumb {
         background: var(--sb-thumb-color);
         border-radius: 5px;
-
     }
 </style>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
 <main class="container-lg w-full h-100 flex flex-col items-center text-white bg-cover bg-center bg-no-repeat bg-fixed relative" style="background-image: url('https://image.tmdb.org/t/p/original/<?php echo $movieDetails['backdrop_path']; ?>');">
-    <div class="absolute top-0 left-0 w-full h-full bg-black opacity-60"></div>
+    <div class="absolute top-0 left-0 w-full h-full bg-black opacity-75"></div>
     <div class="flex flex-col lg:flex-row w-full z-10 md:pl-12 mt-10">
         <img src="https://image.tmdb.org/t/p/w500<?php echo $randomMovie['poster_path']; ?>" class="w-96 ml-4 rounded object-contain">
         <div class="flex flex-col pl-4">
@@ -145,7 +144,7 @@ foreach ($movieVideos['results'] as $video) {
         </div>
     </div>
     <?php if (!empty($trailerUrl)) : ?>
-        <iframe class="z-10 mb-20 rounded-md" width='560' height='315' src='https://www.youtube.com/embed/<?php echo $video['key']; ?>' frameborder='0' allow='autoplay; encrypted-media' allowfullscreen></iframe>
+        <iframe class="z-10 mb-20 rounded-md mt-4" width='560' height='315' src='https://www.youtube.com/embed/<?php echo $video['key']; ?>' frameborder='0' allow='autoplay; encrypted-media' allowfullscreen></iframe>
     <?php endif; ?>
 </main>
 <script>
