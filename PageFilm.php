@@ -2,7 +2,7 @@
 <main class="container-lg w-full flex flex-col items-center">
     <img src="./img/illustration.jpg" class="w-full h-96 object-cover hidden md:block">
     <div class="flex flex-col md:flex-row w-full md:pl-12">
-        <img src="./img/cover.jpg" class="w-full rounded-md md:w-72 md:relative md:bottom-48">
+        <img src="./img/cover.jpg" class="w-full md:rounded-md md:w-72 md:relative md:bottom-48">
         <div class="flex flex-col pl-4">
             <div class="flex flex-col">
                 <div class="flex items-center">
@@ -22,10 +22,10 @@
                 <h5>Realisateur :</h5>
                 <h5>Acteurs :</h5>
             </div>
-            <p class="w-full md:w-2/3 mt-12">Lorem ipsum dolor sit amet consectetur adipisicing elit. Hic fugiat quasi nemo fuga, ea animi iusto magni blanditiis odio! Velit aperiam quas vero assumenda atque dolorum soluta, ipsa in aut?</p>
+            <p class="w-full md:w-2/3 mt-12 pr-2 mb-2">Lorem ipsum dolor sit amet consectetur adipisicing elit. Hic fugiat quasi nemo fuga, ea animi iusto magni blanditiis odio! Velit aperiam quas vero assumenda atque dolorum soluta, ipsa in aut?</p>
         </div>
     </div>
-    <video class="w-full md:w-2/3" controls>
+    <video class="w-full md:w-2/3 mb-8" controls>
         <source src="./img/joker-trailer.mp4" type="video/mp4">
         Your browser does not support the video tag.
     </video>
