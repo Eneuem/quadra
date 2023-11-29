@@ -1,8 +1,8 @@
    <!-- Nav Container -->
-   <nav class="relative container mx-auto p-2 mt-4 bg-gray-800">
+   <nav class="relative mx-auto p-2 mt-4 w-full bg-gray-800">
 
        <!-- Flex Container For All Items -->
-       <div class="flex items-center justify-between">
+       <div class="flex items-center justify-between w-[100%]">
 
            <!-- Flex Container For Logo/Search -->
            <div class="flex items-center space-x-6">
@@ -35,7 +35,7 @@
                    <a href="#" class="text-yellow-400 hover:text-lime-100">Featurs</a>
                    <a href="#" class="text-yellow-400 hover:text-lime-100">Download</a>
                </div>
-               <div class="hover:text-lime-100">Login</div>
+               <div class="login-trigger w-6 py-2 px-6 text-center rounded-md border" id="loginButton">Login</div>
                <a href="#" class="px-4 py-1 font-bold text-lime-100  bg-yellow-400 rounded-sm hover:opacity-70">Sign Up</a>
            </div>
 
@@ -53,7 +53,7 @@
            <div class="flex flex-col items-center justify-center w-full space-y-6 font-bold text-yellow-400 rounded-md">
                <div class=" items-center justify-center space-x-2">
                    <a href="#" class="w-6 py-2 px-4 text-center rounded-md bg-yellow-400 text-lime-100">Sign Up</a>
-                   <a href="#" class="w-6 py-2 px-6 text-center rounded-md border">Login</a>
+                   <div class="login-trigger w-6 py-2 px-6 text-center rounded-md border" id="loginButton">Login</div>
 
                </div>
 
@@ -64,3 +64,33 @@
            </div>
        </div>
    </nav>
+
+   <!-- Modal -->
+<div id="loginModal" class="modal">
+    <div class="modal-content">
+        <!-- CONTENT -->
+    </div>
+</div>
+<script>
+    // Récupérez la référence du bouton "Login" et de la modal
+    const loginButton = document.getElementById('loginButton');
+    const modal = document.getElementById('loginModal');
+
+    // Ajoutez un gestionnaire d'événements au clic sur le bouton "Login"
+    loginButton.addEventListener('click', () => {
+        // Faites une requête AJAX pour charger la page PHP
+        const xhr = new XMLHttpRequest();
+        xhr.open('GET', 'php/login.php', true);
+        xhr.onreadystatechange = function () {
+            if (xhr.readyState === 4 && xhr.status === 200) {
+                // Le contenu de la page PHP est chargé avec succès
+                // Mettez ce contenu dans la modal
+                modal.querySelector('.modal-content').innerHTML = xhr.responseText;
+                // Affichez la modal
+                modal.style.display = 'block';
+            }
+        };
+        xhr.send();
+    });
+</script>
+

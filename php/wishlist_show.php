@@ -8,13 +8,20 @@
         error_reporting(E_ALL);
 
         include 'db_connect.php';
-        include 'api_connect.php'; 
+        include 'api_connect.php';
+
+        session_start(); // Assurez-vous que la session est démarrée
+
+        if (!isset($_SESSION['userid'])) {
+            echo "Veuillez vous connecter pour voir votre wishlist.";
+            exit; // Arrête l'exécution du script si l'utilisateur n'est pas connecté
+        }
 
         try {
-            $pdo = new PDO($dsn, $user, $password);
-            $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-
-            $stmt = $pdo->query("SELECT movie_id FROM wishlist");
+            $userId = $_SESSION['userid']; // Récupère l'ID de l'utilisateur de la session
+            $stmt = $pdo->prepare("SELECT movie_id FROM wishlist WHERE user_id = :userid");
+            $stmt->bindParam(':userid', $userId, PDO::PARAM_INT);
+            $stmt->execute();
 
             while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
                 $movieId = $row['movie_id'];
@@ -23,13 +30,11 @@
                 $movieDetails = makeApiRequest($apiUrl);
 
                 if ($movieDetails) {
-                    echo "<li>ID du Film: " . $movieDetails['id'] . "</li>";
                     echo "<li>Titre: " . $movieDetails['title'] . "</li>";
                     echo "<img src='https://image.tmdb.org/t/p/w500" . $movieDetails['poster_path'] . "'><br>";
 
                     echo "<form action='wishlist_delete.php' method='post'>";
-                    echo "<label for='movie_id'></label>";
-                    echo "<input type='hidden' id='movie_id' name='movie_id' value='$movieId'>";
+                    echo "<input type='hidden' name='movie_id' value='$movieId'>";
                     echo "<input type='submit' value='Supprimer'>";
                     echo "</form>";
 

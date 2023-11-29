@@ -12,4 +12,6 @@ function makeApiRequest($url) {
     }
     return json_decode($response, true);
 }
+
+
 ?>

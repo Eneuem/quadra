@@ -11,8 +11,8 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Manrope&family=Poppins:wght@400;500;700&family=Roboto:ital,wght@1,900&display=swap" rel="stylesheet">
     <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="css/reset.css" />
     <link rel="stylesheet" href="css/style.css" />
-    <link rel="stylesheet" href="css/input.css" />
     <script src="js/script.js" defer></script>
     <title>Quadra | Streaming services</title>
 </head>

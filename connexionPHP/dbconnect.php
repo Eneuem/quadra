@@ -1,19 +1,18 @@
-
 <?php
 
 define('HOST', 'localhost');
-define('DB_NAME', 'Connexion');
+define('DB_NAME', 'test');
 define('USER', 'root');
-define('PASS', 'root');
-
-
-
+define('PASS', 'Quadrastream1!');
 
 try {
     // Création de l'objet de connexion PDO
-    $pdo = new PDO("mysql:host=" . HOST . ";dbname=" . DB_NAME, USER, PASS);
+    $conn = new PDO("mysql:host=" . HOST . ";dbname=" . DB_NAME, USER, PASS);
     // Configuration pour afficher les erreurs PDO
-    $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-} catch (PDOException $e) {}
+    $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+} catch (PDOException $e) {
+    echo "Erreur de connexion à la base de données : " . $e->getMessage();
+    die();
+}
 
 ?>
