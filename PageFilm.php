@@ -36,40 +36,39 @@ function getMovieVideos($movieId)
     return makeApiRequest($videosUrl);
 }
 
-
-
 // Récupérer les films tendance
 $trendingMovies = getTrendingMovies();
+
+// Sélectionner un film au hasard
+$randomIndex = array_rand($trendingMovies['results']);
+$randomMovie = $trendingMovies['results'][$randomIndex];
+
+// Récupérer les détails du film sélectionné
+$movieDetails = getMovieDetails($randomMovie['id']);
+$movieCredits = getMovieCredits($randomMovie['id']);
+$movieVideos = getMovieVideos($randomMovie['id']);
+$trailerUrl = '';
+
+foreach ($movieVideos['results'] as $video) {
+    if ($video['type'] == 'Trailer' && $video['site'] == 'YouTube') {
+        $trailerUrl = 'https://www.youtube.com/watch?v=' . $video['key'];
+        break;
+    }
+}
 ?>
 
-
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
-<main class="container-lg w-full flex flex-col items-center">
-    <?php
-    $randomIndex = array_rand($trendingMovies['results']);
-    $randomMovie = $trendingMovies['results'][$randomIndex];
-    $movieDetails = getMovieDetails($randomMovie['id']);
-    $movieCredits = getMovieCredits($randomMovie['id']);
-    $movieVideos = getMovieVideos($randomMovie['id']);
-    $trailerUrl = '';
-
-    foreach ($movieVideos['results'] as $video) {
-        if ($video['type'] == 'Trailer' && $video['site'] == 'YouTube') {
-            $trailerUrl = 'https://www.youtube.com/watch?v=' . $video['key'];
-            break;
-        }
-    }
-    ?>
-    <img src="./img/illustration.jpg" class="w-full h-96 object-cover hidden md:block">
-    <div class="flex flex-col md:flex-row w-full md:pl-12">
-        <img src="https://image.tmdb.org/t/p/w500<?php echo $randomMovie['poster_path']; ?>" class="w-full md:rounded-md md:w-72 md:relative md:bottom-48">
+<main class="container-lg w-full flex flex-col items-center text-white bg-cover bg-center bg-no-repeat bg-fixed relative" style="background-image: url('https://image.tmdb.org/t/p/original/<?php echo $movieDetails['backdrop_path']; ?>');">
+    <div class="absolute top-0 left-0 w-full h-full bg-black opacity-60"></div>
+    <div class="flex flex-col md:flex-row w-full z-10 md:pl-12 mt-10">
+        <img src="https://image.tmdb.org/t/p/w500<?php echo $randomMovie['poster_path']; ?>" class="w-72 rounded object-contain">
         <div class="flex flex-col pl-4">
             <div class="flex flex-col">
                 <div class="flex items-center">
                     <h1 class="font-bold text-5xl">
                         <?php echo htmlspecialchars($randomMovie['title']); ?>
                     </h1>
-                    <span class="material-symbols-outlined cursor-pointer ml-2 mt-2">
+                    <span id="favorite" onclick="favFill()" class="material-symbols-outlined cursor-pointer ml-2 mt-2" style="font-variation-settings:'FILL' 0;transition: filter 0.3s;">
                         favorite
                     </span>
                 </div>
@@ -80,38 +79,40 @@ $trendingMovies = getTrendingMovies();
             <div class="grid grid-cols-1 md:grid-cols-2">
                 <h5>Year : <?php echo substr($movieDetails['release_date'], 0, 4); ?></h5>
                 <h5>Note : <?php echo $movieDetails['vote_average']; ?>/10</h5>
-                <h5>Duration : </h5>
-                <h5>Genres : </h5>
-                <h5>Producer and director
-                    <?php
-                    $producerNames = [];
-                    $directorNames = [];
+                <h5>Duration : <?php echo $movieDetails['runtime']; ?> minutes</h5>
+                <h5>Genres : <?php foreach ($movieDetails['genres'] as $genre) {
+                                    echo htmlspecialchars($genre['name']) . ' ';
+                                } ?></h5>
+                <h5>
+                    <ul class="list-none">
+                        <?php
+                        $producerNames = [];
+                        $directorNames = [];
 
-                    foreach ($movieCredits['crew'] as $crew) {
-                        if ($crew['job'] == 'Producer') {
-                            $producerNames[] = $crew['name'];
-                        } elseif ($crew['job'] == 'Director') {
-                            $directorNames[] = $crew['name'];
+                        foreach ($movieCredits['crew'] as $crew) {
+                            if ($crew['job'] == 'Producer') {
+                                $producerNames[] = $crew['name'];
+                            } elseif ($crew['job'] == 'Director') {
+                                $directorNames[] = $crew['name'];
+                            }
                         }
-                    }
 
-                    if (!empty($producerNames)) {
-                        echo '<li>Producer: ' . implode(', ', array_map('htmlspecialchars', $producerNames)) . '</li>';
-                    }
+                        if (!empty($producerNames)) {
+                            echo '<li>Producer: ' . implode(', ', array_map('htmlspecialchars', $producerNames)) . '</li>';
+                        }
 
-                    if (!empty($directorNames)) {
-                        echo '<li>Director: ' . implode(', ', array_map('htmlspecialchars', $directorNames)) . '</li>';
-                    }
-                    ?>
-
-
+                        if (!empty($directorNames)) {
+                            echo '<li>Director: ' . implode(', ', array_map('htmlspecialchars', $directorNames)) . '</li>';
+                        }
+                        ?>
+                    </ul>
                 </h5>
                 <div class="flex flex-col">
-                    <h5>Acteurs :</h5>
+                    <h5>Actors :</h5>
                     <ul>
                         <?php foreach ($movieCredits['cast'] as $key => $cast) : ?>
                             <?php if ($key < 5) : ?>
-                                <li><?php echo htmlspecialchars($cast['name']); ?> (en tant que <?php echo htmlspecialchars($cast['character']); ?>)</li>
+                                <li><?php echo htmlspecialchars($cast['name']); ?> (as <?php echo htmlspecialchars($cast['character']); ?>)</li>
                             <?php endif; ?>
                         <?php endforeach; ?>
                     </ul>
@@ -120,10 +121,17 @@ $trendingMovies = getTrendingMovies();
             <p class="w-full md:w-2/3 mt-8 pr-2 mb-2">Synopsis : <br> <?php echo htmlspecialchars($randomMovie['overview']); ?></p>
         </div>
     </div>
-    <video class="w-full md:w-2/3 mb-8" controls>
-        <source src="./img/joker-trailer.mp4" type="video/mp4">
-        Your browser does not support the video tag.
-    </video>
+    <?php if (!empty($trailerUrl)) : ?>
+        <iframe class="z-10 mb-20" width='560' height='315' src='https://www.youtube.com/embed/<?php echo $video['key']; ?>' frameborder='0' allow='autoplay; encrypted-media' allowfullscreen></iframe>
+    <?php endif; ?>
 </main>
+<script>
+    function favFill() {
+        let favorite = document.getElementById("favorite");
+
+        favorite.style.fontVariationSettings = "'FILL' 100";
+        favorite.style.filter = 'hue-rotate(0deg)';
+    }
+</script>
 
 <script src="https://cdn.tailwindcss.com"></script>
