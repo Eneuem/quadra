@@ -11,7 +11,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Manrope&family=Poppins:wght@400;500;700&family=Roboto:ital,wght@1,900&display=swap" rel="stylesheet">
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="css/style.css" />
-    <link rel="stylesheet" href="css/input.css" />
+    <link rel="stylesheet" href="input.css" />
     <script src="js/script.js" defer></script>
     <title>Quadra | Streaming services</title>
 </head>
@@ -19,6 +19,7 @@
 <body>
     <?php include("header.php"); ?>
     <?php include("footer.php"); ?>
+
 </body>
 
 </html>
