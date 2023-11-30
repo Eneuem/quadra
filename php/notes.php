@@ -15,8 +15,17 @@ try {
 $userId = $_SESSION['userid']; // Récupérez l'ID utilisateur de la session
 $note = $_POST["note"]; // Récupérez la note du formulaire
 $movieId = $_POST["movie_id"]; // Récupérez l'ID du film du formulaire
-var_dump($note, $userId, $movieId);  // Déboguez
 
+$checkSql = "SELECT * FROM notes WHERE userid = :userid AND movie_id = :movieid";
+$checkStmt = $pdo->prepare($checkSql);
+$checkStmt->bindParam(':userid', $userId);
+$checkStmt->bindParam(':movieid', $movieId);
+$checkStmt->execute();
+
+if ($checkStmt->rowCount() > 0) {
+    echo "Vous avez déjà voté pour ce film.";
+    exit;
+}
 
 $currentRating = null;
 if (isset($movieId)) {
@@ -29,16 +38,6 @@ if (isset($movieId)) {
     $currentRating = $ratingResult ? $ratingResult['notes_value'] : null;
 }
 
-$checkSql = "SELECT * FROM notes WHERE userid = :userid AND movie_id = :movieid";
-$checkStmt = $pdo->prepare($checkSql);
-$checkStmt->bindParam(':userid', $userId);
-$checkStmt->bindParam(':movieid', $movieId);
-$checkStmt->execute();
-
-if ($checkStmt->rowCount() > 0) {
-    echo "Vous avez déjà voté pour ce film.";
-    exit;
-}
 
 // Préparez la requête d'insertion avec l'ID utilisateur
 $sql = "INSERT INTO notes (notes_value, userid, movie_id) VALUES (:note, :userid, :movieid)";
