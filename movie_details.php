@@ -58,18 +58,76 @@ foreach ($movieVideos['results'] as $video) {
 <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 <script src="https://cdn.tailwindcss.com"></script>
 <link rel="stylesheet" href="./css/rating_star.css">
-<link rel="stylesheet" href="./css/PageFilm.css">
+<link rel="stylesheet" href="./css/movie_details.css">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
-<main class="container-lg w-full flex flex-col items-center text-neutral-300 bg-cover md:bg-center bg-left bg-no-repeat bg-fixed relative " style="background-image: url('https://image.tmdb.org/t/p/original/<?php echo $movieDetails['backdrop_path']; ?>');">
+<div class="container-lg w-full min-h-screen flex flex-col items-center text-neutral-300 bg-cover md:bg-center bg-left bg-no-repeat bg-fixed relative " style="background-image: url('https://image.tmdb.org/t/p/original/<?php echo $movieDetails['backdrop_path']; ?>');">
     <div class="absolute top-0 left-0 w-full h-full bg-black opacity-75"></div>
-    <div class="flex flex-col lg:flex-row w-full z-10 md:pl-12 mt-10  tracking-wider">
-        <img src="https://image.tmdb.org/t/p/w500<?php echo $randomMovie['poster_path']; ?>" class="w-96 ml-4 rounded-lg drop-shadow-lg object-contain">
+    <div class="flex flex-col xl:flex-row w-full z-10 md:pl-12 mt-10  tracking-wider">
+        <img src="https://image.tmdb.org/t/p/w500<?php echo $randomMovie['poster_path']; ?>" class="w-96 h-full ml-4 rounded-lg drop-shadow-lg object-contain mb-4">
         <div class="flex flex-col pl-4">
             <div class="flex flex-col">
                 <div class="flex items-center">
                     <h1 class="font-bold text-5xl mb-4">
                         <?php echo htmlspecialchars($randomMovie['title']); ?>
                     </h1>
+
+                </div>
+                <div class="flex items-center gap-1">
+                    <!----rating star components start---->
+                    <form action='notes.php' method='post' class="mt-2">
+                        <fieldset>
+                            <input type='hidden' name='id' value='sessionID'>
+                            <p class='wrapper-rating'>
+                                <input name='note' id='note_0' value='-1' type='radio' checked autofocus>
+                                <span class='star'>
+                                    <input name='note' id='note_1' value='1' type='radio'>
+                                    <label for='note_1' title='Très mauvaise'>
+                                        <svg xmlns='http://www.w3.org/2000/svg' viewBox='-2 -2 24 24'>
+                                            <path d='m10 15-5.9 3 1.1-6.5L.5 7 7 6 10 0l3 6 6.5 1-4.7 4.5 1 6.6z' />
+                                        </svg>
+                                    </label>
+                                    <span class='star'>
+                                        <input name='note' id='note_2' value='2' type='radio'>
+                                        <label for='note_2' title='Médiocre'>
+                                            <svg xmlns='http://www.w3.org/2000/svg' viewBox='-2 -2 24 24'>
+                                                <path d='m10 15-5.9 3 1.1-6.5L.5 7 7 6 10 0l3 6 6.5 1-4.7 4.5 1 6.6z' />
+                                            </svg>
+                                        </label>
+                                        <span class='star'>
+                                            <input name='note' id='note_3' value='3' type='radio'>
+                                            <label for='note_3' title='Moyenne'>
+                                                <svg xmlns='http://www.w3.org/2000/svg' viewBox='-2 -2 24 24'>
+                                                    <path d='m10 15-5.9 3 1.1-6.5L.5 7 7 6 10 0l3 6 6.5 1-4.7 4.5 1 6.6z' />
+                                                </svg>
+                                            </label>
+                                            <span class='star'>
+                                                <input name='note' id='note_4' value='4' type='radio'>
+                                                <label for='note_4' title='Bonne'>
+                                                    <svg xmlns='http://www.w3.org/2000/svg' viewBox='-2 -2 24 24'>
+                                                        <path d='m10 15-5.9 3 1.1-6.5L.5 7 7 6 10 0l3 6 6.5 1-4.7 4.5 1 6.6z' />
+                                                    </svg>
+                                                </label>
+                                                <span class='star'>
+                                                    <input name='note' id='note_5' value='5' type='radio'>
+                                                    <label for='note_5' title='Excellente'>
+                                                        <svg xmlns='http://www.w3.org/2000/svg' viewBox='-2 -2 24 24'>
+                                                            <path d='m10 15-5.9 3 1.1-6.5L.5 7 7 6 10 0l3 6 6.5 1-4.7 4.5 1 6.6z' />
+                                                        </svg>
+                                                    </label>
+                                                </span>
+                                            </span>
+                                        </span>
+                                    </span>
+                                </span>
+                                </span>
+                                </span>
+                            </p>
+                            <input type='hidden' name='movie_id' value='<?php echo $movie['id']; ?>'>
+                            <input type='hidden' name='user_id' value='<?php echo $_SESSION['userid']; ?>'>
+                        </fieldset>
+                    </form>
+                    <!----rating star components end---->
+
                     <!----wishlist icon start ---->
                     <form id="wishlistForm" action='wishlist_process.php' method='post'>
                         <input type='hidden' name='movie_id' value='<?php echo $randomMovie['id']; ?>'>
@@ -86,60 +144,6 @@ foreach ($movieVideos['results'] as $video) {
                     </form>
                     <!----wishlist icon end ---->
                 </div>
-                <!----rating star components start---->
-                <form action='notes.php' method='post'>
-                    <fieldset>
-                        <input type='hidden' name='id' value='sessionID'>
-                        <p class='wrapper-rating'>
-                            <input name='note' id='note_0' value='-1' type='radio' checked autofocus>
-                            <span class='star'>
-                                <input name='note' id='note_1' value='1' type='radio'>
-                                <label for='note_1' title='Très mauvaise'>
-                                    <svg xmlns='http://www.w3.org/2000/svg' viewBox='-2 -2 24 24'>
-                                        <path d='m10 15-5.9 3 1.1-6.5L.5 7 7 6 10 0l3 6 6.5 1-4.7 4.5 1 6.6z' />
-                                    </svg>
-                                </label>
-                                <span class='star'>
-                                    <input name='note' id='note_2' value='2' type='radio'>
-                                    <label for='note_2' title='Médiocre'>
-                                        <svg xmlns='http://www.w3.org/2000/svg' viewBox='-2 -2 24 24'>
-                                            <path d='m10 15-5.9 3 1.1-6.5L.5 7 7 6 10 0l3 6 6.5 1-4.7 4.5 1 6.6z' />
-                                        </svg>
-                                    </label>
-                                    <span class='star'>
-                                        <input name='note' id='note_3' value='3' type='radio'>
-                                        <label for='note_3' title='Moyenne'>
-                                            <svg xmlns='http://www.w3.org/2000/svg' viewBox='-2 -2 24 24'>
-                                                <path d='m10 15-5.9 3 1.1-6.5L.5 7 7 6 10 0l3 6 6.5 1-4.7 4.5 1 6.6z' />
-                                            </svg>
-                                        </label>
-                                        <span class='star'>
-                                            <input name='note' id='note_4' value='4' type='radio'>
-                                            <label for='note_4' title='Bonne'>
-                                                <svg xmlns='http://www.w3.org/2000/svg' viewBox='-2 -2 24 24'>
-                                                    <path d='m10 15-5.9 3 1.1-6.5L.5 7 7 6 10 0l3 6 6.5 1-4.7 4.5 1 6.6z' />
-                                                </svg>
-                                            </label>
-                                            <span class='star'>
-                                                <input name='note' id='note_5' value='5' type='radio'>
-                                                <label for='note_5' title='Excellente'>
-                                                    <svg xmlns='http://www.w3.org/2000/svg' viewBox='-2 -2 24 24'>
-                                                        <path d='m10 15-5.9 3 1.1-6.5L.5 7 7 6 10 0l3 6 6.5 1-4.7 4.5 1 6.6z' />
-                                                    </svg>
-                                                </label>
-                                            </span>
-                                        </span>
-                                    </span>
-                                </span>
-                            </span>
-                            </span>
-                            </span>
-                        </p>
-                        <input type='hidden' name='movie_id' value='<?php echo $movie['id']; ?>'>
-                        <input type='hidden' name='user_id' value='<?php echo $_SESSION['userid']; ?>'>
-                    </fieldset>
-                </form>
-                <!----rating star components end---->
             </div>
             <!---- film details start ---->
             <div class="grid grid-cols-1 md:grid-cols-2 text-lg">
@@ -195,15 +199,20 @@ foreach ($movieVideos['results'] as $video) {
                     </h5>
                 </div>
             </div>
-            <p class="w-full md:w-2/3 mt-10 pr-2 text-xl mb-4 leading-relaxed"><b>Synopsis </b>: <br> <?php echo htmlspecialchars($randomMovie['overview']); ?></p>
+            <p class="w-full md:w-2/3 mt-10 mr-2 text-xl mb-8 leading-relaxed"><b>Synopsis </b>: <br> <?php echo htmlspecialchars($randomMovie['overview']); ?></p>
             <!---- film details end ---->
+            <div class="mt-10 mb-10 flex items-center">
+                <?php if (!empty($trailerUrl)) : ?>
+                    <iframe class="z-10 rounded-md hidden md:block" width='720' height='400' src='https://www.youtube.com/embed/<?php echo $video['key']; ?>' frameborder='0' allow='autoplay; encrypted-media' allowfullscreen></iframe>
+                    <iframe class="z-10 rounded-md md:hidden" width='480' height='270' src='https://www.youtube.com/embed/<?php echo $video['key']; ?>' frameborder='0' allow='autoplay; encrypted-media' allowfullscreen></iframe>
+                <?php endif; ?>
+            </div>
         </div>
+
     </div>
-    <?php if (!empty($trailerUrl)) : ?>
-        <iframe class="z-10 mb-20 rounded-md mt-4 hidden md:block" width='720' height='400' src='https://www.youtube.com/embed/<?php echo $video['key']; ?>' frameborder='0' allow='autoplay; encrypted-media' allowfullscreen></iframe>
-        <iframe class="z-10 mb-20 rounded-md mt-4 md:hidden" width='480' height='270' src='https://www.youtube.com/embed/<?php echo $video['key']; ?>' frameborder='0' allow='autoplay; encrypted-media' allowfullscreen></iframe>
-    <?php endif; ?>
-</main>
+
+
+</div>
 
 <script>
     $(document).ready(function() {
