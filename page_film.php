@@ -55,9 +55,9 @@ foreach ($movieVideos['results'] as $video) {
     }
 }
 ?>
-
+<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 <script src="https://cdn.tailwindcss.com"></script>
-<link rel="stylesheet" href="./css/style.css">
+<link rel="stylesheet" href="./css/rating_star.css">
 <link rel="stylesheet" href="./css/PageFilm.css">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
 <main class="container-lg w-full flex flex-col items-center text-neutral-300 bg-cover bg-center bg-no-repeat bg-fixed relative " style="background-image: url('https://image.tmdb.org/t/p/original/<?php echo $movieDetails['backdrop_path']; ?>');">
@@ -70,6 +70,7 @@ foreach ($movieVideos['results'] as $video) {
                     <h1 class="font-bold text-5xl mb-4">
                         <?php echo htmlspecialchars($randomMovie['title']); ?>
                     </h1>
+                    <!----wishlist icon start ---->
                     <form id="wishlistForm" action='wishlist_process.php' method='post'>
                         <input type='hidden' name='movie_id' value='<?php echo $randomMovie['id']; ?>'>
                         <input type='hidden' name='user_id' value='<?php echo $_SESSION['userid']; ?>'>
@@ -83,10 +84,9 @@ foreach ($movieVideos['results'] as $video) {
                             </svg>
                         </label>
                     </form>
+                    <!----wishlist icon end ---->
                 </div>
-                <!-- <span class="material-symbols-outlined mt-2">
-                    star
-                </span> -->
+                <!----rating star components start---->
                 <form action='notes.php' method='post'>
                     <fieldset>
                         <input type='hidden' name='id' value='sessionID'>
@@ -137,28 +137,28 @@ foreach ($movieVideos['results'] as $video) {
                         </p>
                         <input type='hidden' name='movie_id' value='<?php echo $movie['id']; ?>'>
                         <input type='hidden' name='user_id' value='<?php echo $_SESSION['userid']; ?>'>
-                        <input type='submit' value='Ajouter une note'>
                     </fieldset>
                 </form>
-
+                <!----rating star components end---->
             </div>
-            <div class="grid grid-cols-1 md:grid-cols-2 mt-8 text-lg">
+            <!---- film details start ---->
+            <div class="grid grid-cols-1 md:grid-cols-2 text-lg">
                 <div class="flex flex-col gap-2">
                     <h5><b>Date </b>: <?php echo date('d/m/Y', strtotime($movieDetails['release_date'])); ?></h5>
                     <h5><b>Note </b>: <?php echo number_format($movieDetails['vote_average'], 1); ?>/10</h5>
                     <h5><b>Duration </b>: <?php echo $movieDetails['runtime']; ?> minutes</h5>
-                    <h5><b>Genres </b>: <?php
-                                        $firstGenre = true;
-                                        foreach ($movieDetails['genres'] as $genre) {
-                                            if (!$firstGenre) {
-                                                echo ', ';
-                                            } else {
-                                                $firstGenre = false;
-                                            }
-                                            echo htmlspecialchars($genre['name']);
-                                        }
-                                        ?></h5>
-
+                    <h5><b>Genres </b>:</h5>
+                    <?php
+                    $firstGenre = true;
+                    foreach ($movieDetails['genres'] as $genre) {
+                        if (!$firstGenre) {
+                            echo ', ';
+                        } else {
+                            $firstGenre = false;
+                        }
+                        echo htmlspecialchars($genre['name']);
+                    }
+                    ?>
                 </div>
                 <div class="flex flex-col">
                     <h5><b>Actors </b>:</h5>
@@ -195,7 +195,8 @@ foreach ($movieVideos['results'] as $video) {
                     </h5>
                 </div>
             </div>
-            <p class="w-full md:w-2/3 mt-8 pr-2 text-xl mb-4 leading-relaxed"><b>Synopsis </b>: <br> <?php echo htmlspecialchars($randomMovie['overview']); ?></p>
+            <p class="w-full md:w-2/3 mt-10 pr-2 text-xl mb-4 leading-relaxed"><b>Synopsis </b>: <br> <?php echo htmlspecialchars($randomMovie['overview']); ?></p>
+            <!---- film details end ---->
         </div>
     </div>
     <?php if (!empty($trailerUrl)) : ?>
@@ -205,6 +206,19 @@ foreach ($movieVideos['results'] as $video) {
 </main>
 
 <script>
+    $(document).ready(function() {
+        $('.star label').on('click', function() {
+            // Obtenez la valeur de l'étoile cliquée
+            var ratingValue = $(this).prev('input').val();
+
+            // Mettez à jour la valeur du champ de note
+            $('input[name="note"]').val(ratingValue);
+
+            // Soumettez le formulaire
+            $('form').submit();
+        });
+    });
+
     function toggleHeart() {
         var checkbox = document.getElementById("favorite");
         var heartWhite = document.getElementById("heartWhite");
