@@ -14,14 +14,13 @@
     <!-- Formulaire multistep -->
     <div x-data="{ step: 1 }" class="w-4/6 h-4/6 md:w-96 md:h-96 rounded-lg bg-white">
         <!-- Étape 1 -->
-        <div x-show="step === 1" class="text-center">
+        <form x-show="step === 1" class="text-center">
             <div class="border shadow-lg w-full h-full rounded-lg p-10 flex flex-col justify-evenly md:justify-between">
                 <h2 class="text-lg font-semibold mb-4">Step 1 : Login and Password</h2>
                 <!-- Champ de nom d'utilisateur (login) -->
                 <div class="mb-4">
                     <input type="text" placeholder="Login" id="username" name="username" class="required:border-red-500 mt-1 p-2 w-full border rounded-md text-lg" required>
                 </div>
-
                 <!-- Champ de mot de passe avec bouton pour afficher/masquer -->
                 <div class="mb-4 relative">
                     <input type="password" placeholder="Password" id="password" name="password" class="mt-1 p-2 w-full border rounded-md pr-10 text-lg">
@@ -38,7 +37,7 @@
                 </div>
                 <button @click="step = 2" class="bg-blue-500 text-white px-4 py-2 rounded-md">Next</button>
             </div>
-        </div>
+        </form>
 
         <!-- Étape 2 -->
         <div x-show="step === 2" class="text-center">
