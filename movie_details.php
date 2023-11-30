@@ -60,18 +60,17 @@ foreach ($movieVideos['results'] as $video) {
 <link rel="stylesheet" href="./css/rating_star.css">
 <link rel="stylesheet" href="./css/movie_details.css">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
-<div class="container-lg w-full min-h-screen flex flex-col items-center text-neutral-300 bg-cover md:bg-center bg-left bg-no-repeat bg-fixed relative " style="background-image: url('https://image.tmdb.org/t/p/original/<?php echo $movieDetails['backdrop_path']; ?>');">
-    <div class="absolute top-0 left-0 w-full h-full bg-black opacity-75"></div>
-    <div class="flex flex-col xl:flex-row w-full z-10 md:pl-12 mt-10  tracking-wider">
-        <img src="https://image.tmdb.org/t/p/w500<?php echo $randomMovie['poster_path']; ?>" class="w-96 h-full ml-4 rounded-lg drop-shadow-lg object-contain mb-4">
-        <div class="flex flex-col pl-4">
-            <div class="flex flex-col">
-                <div class="flex items-center">
-                    <h1 class="font-bold text-5xl mb-4">
-                        <?php echo htmlspecialchars($randomMovie['title']); ?>
-                    </h1>
 
-                </div>
+<div class="container-lg w-full min-h-screen flex flex-col items-center text-neutral-300 bg-cover bg-center bg-no-repeat bg-fixed relative" style="background-image: url('https://image.tmdb.org/t/p/original/<?php echo $movieDetails['backdrop_path']; ?>');">
+    <div class="absolute top-0 left-0 w-full h-full bg-black opacity-80"></div>
+    <div class="flex flex-col xl:flex-row w-full min-h-screen z-10 pt-10 tracking-wider">
+        <img src="https://image.tmdb.org/t/p/w500<?php echo $randomMovie['poster_path']; ?>" class="w-96 h-full ml-4 rounded-lg object-contain">
+        <div class="flex flex-col pl-4 pr-4 w-full min-h-full">
+            <div class="flex flex-col">
+                <!----title movie--->
+                <h1 class="font-bold text-5xl mb-4 flex items-center">
+                    <?php echo htmlspecialchars($randomMovie['title']); ?>
+                </h1>
                 <div class="flex items-center gap-1">
                     <!----rating star components start---->
                     <form action='notes.php' method='post' class="mt-2">
@@ -145,6 +144,7 @@ foreach ($movieVideos['results'] as $video) {
                     <!----wishlist icon end ---->
                 </div>
             </div>
+
             <!---- film details start ---->
             <div class="grid grid-cols-1 md:grid-cols-2 text-lg">
                 <div class="flex flex-col gap-2">
@@ -199,19 +199,18 @@ foreach ($movieVideos['results'] as $video) {
                     </h5>
                 </div>
             </div>
-            <p class="w-full md:w-2/3 mt-10 mr-2 text-xl mb-8 leading-relaxed"><b>Synopsis </b>: <br> <?php echo htmlspecialchars($randomMovie['overview']); ?></p>
+            <p class="w-full md:w-2/3 mt-10 mr-2 text-xl mb-8 leading-relaxed h-64"><b>Synopsis </b>: <br> <?php echo htmlspecialchars($randomMovie['overview']); ?></p>
             <!---- film details end ---->
-            <div class="mt-10 mb-10 flex items-center">
+
+            <div class="mb-10">
+                <!-----trailer video ---->
                 <?php if (!empty($trailerUrl)) : ?>
-                    <iframe class="z-10 rounded-md hidden md:block" width='720' height='400' src='https://www.youtube.com/embed/<?php echo $video['key']; ?>' frameborder='0' allow='autoplay; encrypted-media' allowfullscreen></iframe>
-                    <iframe class="z-10 rounded-md md:hidden" width='480' height='270' src='https://www.youtube.com/embed/<?php echo $video['key']; ?>' frameborder='0' allow='autoplay; encrypted-media' allowfullscreen></iframe>
+                    <iframe class="rounded-md hidden md:block" width='720' height='400' src='https://www.youtube.com/embed/<?php echo $video['key']; ?>' frameborder='0' allow='autoplay; encrypted-media' allowfullscreen></iframe>
+                    <iframe class="rounded-md md:hidden" width='480' height='270' src='https://www.youtube.com/embed/<?php echo $video['key']; ?>' frameborder='0' allow='autoplay; encrypted-media' allowfullscreen></iframe>
                 <?php endif; ?>
             </div>
         </div>
-
     </div>
-
-
 </div>
 
 <script>
@@ -242,5 +241,3 @@ foreach ($movieVideos['results'] as $video) {
         }
     }
 </script>
-
-<script src="https://cdn.tailwindcss.com"></script>
