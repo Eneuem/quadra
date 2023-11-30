@@ -60,10 +60,10 @@ foreach ($movieVideos['results'] as $video) {
 <link rel="stylesheet" href="./css/rating_star.css">
 <link rel="stylesheet" href="./css/PageFilm.css">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
-<main class="container-lg w-full flex flex-col items-center text-neutral-300 bg-cover bg-center bg-no-repeat bg-fixed relative " style="background-image: url('https://image.tmdb.org/t/p/original/<?php echo $movieDetails['backdrop_path']; ?>');">
+<main class="container-lg w-full flex flex-col items-center text-neutral-300 bg-cover md:bg-center bg-left bg-no-repeat bg-fixed relative " style="background-image: url('https://image.tmdb.org/t/p/original/<?php echo $movieDetails['backdrop_path']; ?>');">
     <div class="absolute top-0 left-0 w-full h-full bg-black opacity-75"></div>
     <div class="flex flex-col lg:flex-row w-full z-10 md:pl-12 mt-10  tracking-wider">
-        <img src="https://image.tmdb.org/t/p/w500<?php echo $randomMovie['poster_path']; ?>" class="w-96 ml-4 rounded object-contain">
+        <img src="https://image.tmdb.org/t/p/w500<?php echo $randomMovie['poster_path']; ?>" class="w-96 ml-4 rounded-lg drop-shadow-lg object-contain">
         <div class="flex flex-col pl-4">
             <div class="flex flex-col">
                 <div class="flex items-center">
@@ -200,8 +200,8 @@ foreach ($movieVideos['results'] as $video) {
         </div>
     </div>
     <?php if (!empty($trailerUrl)) : ?>
-        <iframe class="z-10 mb-20 rounded-md mt-4 hidden md:block" width='720' height='480' src='https://www.youtube.com/embed/<?php echo $video['key']; ?>' frameborder='0' allow='autoplay; encrypted-media' allowfullscreen></iframe>
-        <iframe class="z-10 mb-20 rounded-md mt-4 md:hidden" width='480' height='360' src='https://www.youtube.com/embed/<?php echo $video['key']; ?>' frameborder='0' allow='autoplay; encrypted-media' allowfullscreen></iframe>
+        <iframe class="z-10 mb-20 rounded-md mt-4 hidden md:block" width='720' height='400' src='https://www.youtube.com/embed/<?php echo $video['key']; ?>' frameborder='0' allow='autoplay; encrypted-media' allowfullscreen></iframe>
+        <iframe class="z-10 mb-20 rounded-md mt-4 md:hidden" width='480' height='270' src='https://www.youtube.com/embed/<?php echo $video['key']; ?>' frameborder='0' allow='autoplay; encrypted-media' allowfullscreen></iframe>
     <?php endif; ?>
 </main>
 
