@@ -101,7 +101,7 @@ $trendingMovies = getTrendingMovies();
             <?php endforeach; ?>
         </ul>
 
-        <form action="wishlist_process.php" method="post">
+        <form class="hidden" action="wishlist_process.php" method="post">
             <input type="hidden" name="movie_id" value="<?php echo $randomMovie['id']; ?>">
             <input type="hidden" name="user_id" value="<?php echo $_SESSION['userid']; ?>">
             <input type="submit" value="Ajouter à la Wishlist">

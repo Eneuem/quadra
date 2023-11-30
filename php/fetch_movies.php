@@ -43,7 +43,7 @@ if (!empty($genreId)) {
                 echo "</form>";
 
                 // Formulaire pour ajouter une note
-                echo "<form action='add_note.php' method='post'>";
+                echo "<form action='notes.php' method='post'>";
                 echo "<label for='note'>Note:</label>";
                 echo "<input type='number' id='note' name='note' min='1' max='10' required>";
                 echo "<input type='hidden' name='movie_id' value='" . $movie['id'] . "'>";
