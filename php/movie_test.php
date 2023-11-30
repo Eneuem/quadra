@@ -37,7 +37,6 @@ function getMovieVideos($movieId)
 }
 
 
-
 // Récupérer les films tendance
 $trendingMovies = getTrendingMovies();
 ?>
@@ -67,7 +66,7 @@ $trendingMovies = getTrendingMovies();
             }
         }
         ?>
-
+        //details des films (titre, cover, image de fond, durée, ...)
         <h1><?php echo htmlspecialchars($randomMovie['title']); ?></h1>
         <p>Année: <?php echo substr($movieDetails['release_date'], 0, 4); ?></p>
         <p>Durée: <?php echo $movieDetails['runtime']; ?> minutes</p>
