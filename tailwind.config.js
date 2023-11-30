@@ -134,6 +134,7 @@ module.exports = {
       150: "1.5",
       200: "2",
     },
+
     caretColor: ({ theme }) => theme("colors"),
     colors: ({ colors }) => ({
       inherit: colors.inherit,
