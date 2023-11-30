@@ -19,7 +19,7 @@
 
         try {
             $userId = $_SESSION['userid']; // Récupère l'ID de l'utilisateur de la session
-            $stmt = $pdo->prepare("SELECT movie_id FROM wishlist WHERE user_id = :userid");
+            $stmt = $pdo->prepare("SELECT movie_id FROM wishlist WHERE userid = :userid");
             $stmt->bindParam(':userid', $userId, PDO::PARAM_INT);
             $stmt->execute();
 

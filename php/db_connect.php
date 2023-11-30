@@ -1,7 +1,7 @@
 <?php
 $servername = "localhost";
 $dbname = "test";
-$username = "root";
+$user = "root";
 $password = "Quadrastream1!";
 $charset = "utf8mb4";
 
@@ -13,7 +13,7 @@ $options = [
 ];
 
 try {
-    $pdo = new PDO($dsn, $username, $password, $options);
+    $pdo = new PDO($dsn, $user, $password, $options);
 } catch (PDOException $e) {
     echo "Connection failed: " . $e->getMessage();
     exit;

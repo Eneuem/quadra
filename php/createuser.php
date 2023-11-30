@@ -1,7 +1,7 @@
 <?php
 require 'db_connect.php';
 
-$username = 'admin';
+$username = 'admin2';
 $password = 'pass';
 
 // Hacher le mot de passe avec la fonction password_hash()
