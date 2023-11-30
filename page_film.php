@@ -89,7 +89,6 @@ foreach ($movieVideos['results'] as $video) {
                 </span> -->
                 <form action='notes.php' method='post'>
                     <fieldset>
-                        <legend>Donnez une note</legend>
                         <input type='hidden' name='id' value='sessionID'>
                         <p class='wrapper-rating'>
                             <input name='note' id='note_0' value='-1' type='radio' checked autofocus>

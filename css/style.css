@@ -3,7 +3,7 @@
   line-height: 0;
   margin: 0;
   --coulFillHover: #fd0; /* couleur de fond au survol */
-  --coulFillSelected: #ffc; /* couleur de fond selected */
+  --coulFillSelected: var(--coulFillHover); /*couleur de fond selected*/
   --coulStrokeHover: #f00; /* couleur de bord au survol */
   --coulStrokeSelected: #fa0; /* couleur de bord selected */
 }
@@ -26,8 +26,8 @@
   cursor: pointer;
 }
 .wrapper-rating .star svg {
-  width: 1em;
-  height: 1em;
+  width: 0.5em;
+  height: 0.5em;
   transition: 0.25s;
   stroke-width: 1;
   stroke: var(--coulStrokeSelected);
@@ -35,5 +35,4 @@
 }
 .wrapper-rating .star:hover > label svg {
   fill: var(--coulFillHover);
-  stroke: var(--coulStrokeHover);
 }
