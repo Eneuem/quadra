@@ -73,7 +73,7 @@ foreach ($movieVideos['results'] as $video) {
                 </h1>
                 <div class="flex items-center gap-1">
                     <!----rating star components start---->
-                    <form action='notes.php' method='post' class="mt-2">
+                    <form action='php/notes.php' method='post' class="mt-2">
                         <fieldset>
                             <input type='hidden' name='id' value='sessionID'>
                             <p class='wrapper-rating'>
@@ -128,7 +128,7 @@ foreach ($movieVideos['results'] as $video) {
                     <!----rating star components end---->
 
                     <!----wishlist icon start ---->
-                    <form id="wishlistForm" action='wishlist_process.php' method='post'>
+                    <form id="wishlistForm" action='php/wishlist_process.php' method='post'>
                         <input type='hidden' name='movie_id' value='<?php echo $randomMovie['id']; ?>'>
                         <input type='hidden' name='user_id' value='<?php echo $_SESSION['userid']; ?>'>
                         <input type="checkbox" id="favorite" onclick="toggleHeart()" class="hidden">

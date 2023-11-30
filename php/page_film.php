@@ -8,7 +8,7 @@ ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
 
-include 'api_connect.php';
+include 'php/api_connect.php';
 
 function getTrendingMovies($timeWindow = 'week')
 {
@@ -58,7 +58,7 @@ foreach ($movieVideos['results'] as $video) {
 
 <script src="https://cdn.tailwindcss.com"></script>
 <link rel="stylesheet" href="style.css">
-<link rel="stylesheet" href="./css/PageFilm.css">
+<link rel="stylesheet" href="./css/page_film.css">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
 <main class="container-lg w-full flex flex-col items-center text-neutral-300 bg-cover bg-center bg-no-repeat bg-fixed relative " style="background-image: url('https://image.tmdb.org/t/p/original/<?php echo $movieDetails['backdrop_path']; ?>');">
     <div class="absolute top-0 left-0 w-full h-full bg-black opacity-75"></div>
@@ -70,7 +70,7 @@ foreach ($movieVideos['results'] as $video) {
                     <h1 class="font-bold text-5xl mb-4">
                         <?php echo htmlspecialchars($randomMovie['title']); ?>
                     </h1>
-                    <form id="wishlistForm" action='wishlist_process.php' method='post'>
+                    <form id="wishlistForm" action='php/wishlist_process.php' method='post'>
                         <input type='hidden' name='movie_id' value='<?php echo $randomMovie['id']; ?>'>
                         <input type='hidden' name='user_id' value='<?php echo $_SESSION['userid']; ?>'>
                         <input type="checkbox" id="favorite" onclick="toggleHeart()" class="hidden">
@@ -87,7 +87,7 @@ foreach ($movieVideos['results'] as $video) {
                 <!-- <span class="material-symbols-outlined mt-2">
                     star
                 </span> -->
-                <form action='notes.php' method='post'>
+                <form action='php/notes.php' method='post' id="ratingForm">
                     <fieldset>
                         <legend>Donnez une note</legend>
                         <input type='hidden' name='id' value='sessionID'>
@@ -136,7 +136,7 @@ foreach ($movieVideos['results'] as $video) {
                             </span>
                             </span>
                         </p>
-                        <input type='hidden' name='movie_id' value='<?php echo $movie['id']; ?>'>
+                        <input type='hidden' name='movie_id' value='<?php echo $randomMovie['id']; ?>'>
                         <input type='hidden' name='user_id' value='<?php echo $_SESSION['userid']; ?>'>
                         <input type='submit' value='Ajouter une note'>
                     </fieldset>
@@ -221,4 +221,32 @@ foreach ($movieVideos['results'] as $video) {
     }
 </script>
 
-<script src="https://cdn.tailwindcss.com"></script>
+<!-- FETCH SANS RELOAD -->
+
+<script>
+document.getElementById("ratingForm").addEventListener("submit", function(e) {
+    e.preventDefault(); 
+
+    var formData = new FormData(this);
+
+    fetch('php/notes.php', {
+        method: 'POST',
+        body: formData
+    })
+    .then(response => response.text())
+    .then(data => {
+        alert(data);
+    })
+    .catch(error => console.error('Error:', error));
+});
+</script>
+<!-- AFFICHAGE ETOILES -->
+
+<script>
+window.addEventListener('load', (event) => {
+    var currentRating = <?php echo json_encode($currentRating); ?>;
+    if (currentRating) {
+        document.getElementById('note_' + currentRating).checked = true;
+    }
+});
+</script>

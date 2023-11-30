@@ -20,6 +20,7 @@
 
 <body>
     <?php include("header.php"); ?>
+    <?php include("php/page_film.php"); ?>
     <?php include("footer.php"); ?>
 
 </body>
