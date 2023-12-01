@@ -54,7 +54,7 @@ if (isset($_POST['submit'])) {
                         <?php echo $error_message; ?>
                     </div>
                 <?php } ?>
-                <form action="php/login.php" method="post">
+                <form action="login.php" method="post">
                     <div class="mb-4">
                         <input type="text" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="username" name="username" placeholder="Nom d'utilisateur" required>
                     </div>
