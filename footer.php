@@ -1,6 +1,4 @@
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" referrerpolicy="no-referrer" />
-
-<footer class="p-4 sm:p-6 bg-gray-900 absolute bottom-0 w-full ">
+<footer class="p-4 sm:p-4 bg-gray-900 w-full ">
     <div class="mx-auto max-w-screen-2xl">
         <div class="md:flex md:justify-between items-center ">
             <div class="mb-6 md:mb-0">
