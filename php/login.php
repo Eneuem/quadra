@@ -37,7 +37,6 @@ if (isset($_POST['submit'])) {
         $_SESSION['loggedin'] = true;
         $_SESSION['userid'] = $user['id']; 
         $_SESSION['username'] = $user['username'];
-        header("Location: acc_admin.php");
         exit;
     } else {
         $error_message = "Nom d'utilisateur ou mot de passe incorrect";
