@@ -9,10 +9,10 @@
     switch($page) 
     {
     case 'wishlist':
-        include("php/page_wishlist.php");
+        include("php/to_front_model_wishlist_show.php");
         break;
     case 'categories':
-        include("php/page_categories.php");
+        include("php/to_front_model_category.php");
         break;
     case 'random_movie':
         include("php/page_film.php");
@@ -21,6 +21,7 @@
         include("php/login.php");
         break;
     case 'signup':
+        include("php/page_film.php");
         include("php/page_signup.php");
         break;
     case 'users':

@@ -16,11 +16,6 @@ if (session_status() == PHP_SESSION_NONE) {
 
 require 'db_connect.php'; // Inclure db_connect.php
 
-// Le reste de votre code
-if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] == true) {
-    header("Location: acc_admin.php");
-    exit;
-}
 
 if (isset($_POST['submit'])) {
     $username = $_POST['username'];
@@ -37,10 +32,13 @@ if (isset($_POST['submit'])) {
         $_SESSION['loggedin'] = true;
         $_SESSION['userid'] = $user['id']; 
         $_SESSION['username'] = $user['username'];
+    
+        // Redirection vers index.php
+        header("Location: ../index.php");
         exit;
     } else {
         $error_message = "Nom d'utilisateur ou mot de passe incorrect";
-    }
+    }    
 }
 
 
@@ -54,7 +52,7 @@ if (isset($_POST['submit'])) {
                         <?php echo $error_message; ?>
                     </div>
                 <?php } ?>
-                <form action="login.php" method="post">
+                <form action="php/login.php" method="post">
                     <div class="mb-4">
                         <input type="text" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="username" name="username" placeholder="Nom d'utilisateur" required>
                     </div>
