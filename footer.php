@@ -1,4 +1,6 @@
-<footer class="p-4 sm:p-4 bg-gray-900 w-full ">
+<script src="https://cdn.tailwindcss.com"></script>
+
+<footer class="p-4 sm:p-4 bg-slate-950 w-full">
     <div class="mx-auto max-w-screen-2xl">
         <div class="md:flex md:justify-between items-center ">
             <div class="mb-6 md:mb-0">
@@ -59,4 +61,3 @@
         </div>
     </div>
 </footer>
-<script src="https://cdn.tailwindcss.com"></script>

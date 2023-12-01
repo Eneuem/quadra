@@ -8,10 +8,10 @@ if (!isset($_SESSION)) {
 $userLoggedIn = isset($_SESSION['userid']) && $_SESSION['userid'] !== null;
 ?>
 <!-- Nav Container -->
-<nav class="sticky top-0 mx-auto p-2  bg-gray-900 bg-opacity-90 backdrop-blur-sm z-40">
+<nav class="sticky top-0 mx-auto p-2 bg-slate-950 z-40">
 
     <!-- Flex Container For All Items -->
-    <div class="flex items-center justify-between">
+    <div class="flex items-center justify-between ">
 
         <!-- Flex Container For Logo/Search -->
         <div class="flex items-center space-x-6">
