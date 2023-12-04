@@ -133,7 +133,7 @@ foreach ($movieVideos['results'] as $video) {
                     <!----rating star components end---->
 
                     <!----wishlist icon start ---->
-                    <form id="wishlistForm" action='wishlist_process.php' method='post'>
+                    <form id="wishlistForm" action='php/wishlist_process.php' method='post'>
                         <input type='hidden' name='movie_id' value='<?php echo $randomMovie['id']; ?>'>
                         <input type='hidden' name='user_id' value='<?php echo $_SESSION['userid']; ?>'>
                         <input type="checkbox" id="favorite" onclick="toggleHeart()" class="hidden">
