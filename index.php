@@ -21,7 +21,6 @@
         include("php/login.php");
         break;
     case 'signup':
-        include("php/page_film.php");
         include("php/page_signup.php");
         break;
     case 'users':

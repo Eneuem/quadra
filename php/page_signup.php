@@ -54,6 +54,7 @@
 
 
                         <div class="py-10">
+                            <form action="php/inscription.php">
                             <!-- Step 1 -->
                             <div x-show.transition.in="step === 1">
                                 <div class="mb-5">

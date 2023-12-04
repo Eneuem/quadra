@@ -3,10 +3,19 @@
 if (!isset($_SESSION)) {
     session_start();
 }
-// Vérifier si l'ID de l'utilisateur est défini et non nul
+// Vérifier l'ID de l'utilisateur
 
 $userLoggedIn = isset($_SESSION['userid']) && $_SESSION['userid'] !== null;
+
+// Obtenir l'URL
+$currentUrl = $_SERVER['REQUEST_URI'];
 ?>
+<style>
+    .active-link {
+    color: #aef359; 
+}
+
+</style>
          <!-- Nav Container -->
          <nav class="sticky top-0 mx-auto p-2  bg-gray-900 bg-opacity-90 backdrop-blur-sm z-40">
 
@@ -39,17 +48,17 @@ $userLoggedIn = isset($_SESSION['userid']) && $_SESSION['userid'] !== null;
 
                 <div class="hidden items-center space-x-6 font-bold text-yellow-400 lg:flex">
                     <div class=" hidden space-x-8 font-bold lg:flex">
-                        <a href="index.php?page=wishlist" class="text-yellow-400 hover:text-lime-100">Wishlist</a>
-                        <a href="index.php?page=categories" class="text-yellow-400 hover:text-lime-100">Categories</a>
-                        <a href="index.php?page=random_movie" class="text-yellow-400 hover:text-lime-100">Random Movie</a>
+                    <a href="index.php?page=wishlist" class="<?php echo (strpos($currentUrl, 'page=wishlist') !== false) ? 'active-link' : ''; ?>">Wishlist</a>
+                    <a href="index.php?page=categories" class="<?php echo (strpos($currentUrl, 'page=categories') !== false) ? 'active-link' : ''; ?>">Categories</a>
+                    <a href="index.php?page=random_movie" class="<?php echo (strpos($currentUrl, 'page=random_movie') !== false) ? 'active-link' : ''; ?>">Random Movie</a>
                     </div>
-                    <a href="#" class="text-yellow-400 hover:text-lime-100">|</a>
-                    <a href="" class="text-yellow-400 hover:text-lime-100">PROFILE</a>
-                    <a href="" class="text-yellow-400 hover:text-lime-100">SUPER-ADMIN</a>
+                    <a href="#" class="text-yellow-400 hover:text-lime-100 link-active">|</a>
+                    <a href="" class="text-yellow-400 hover:text-lime-100 link-active">PROFILE</a>
+                    <a href="" class="text-yellow-400 hover:text-lime-100 link-active">SUPER-ADMIN</a>
                     <a href="php/logout.php" class="text-yellow-400 hover:text-lime-100">LOGOUT</a>
                         <div class="items-center space-x-6 font-bold text-yellow-400 lg:flex">
                             <a href="index.php?page=login"><div id="loginBtn" class="hover:text-lime-100">Login</div></a>
-                            <a href="index.php?page=signup" id="signupBtn" class="px-4 py-1 font-bold text-lime-100 bg-yellow-400 rounded-xl hover:opacity-70">Sign Up</a>
+                            <a href="" id="signupBtn" data-page="signup" class="dynamic-load px-4 py-1 font-bold text-lime-100 bg-yellow-400 rounded-xl hover:opacity-70">Sign Up</a>
                             <div id="userName" class="hidden hover:text-lime-100"><?php echo $_SESSION['username']; ?></div>
                             <div id="userIcon">
                                 <svg class="hidden text-yellow-400 h-8 w-8 top-3" xmlns="http://www.w3.org/2000/svg" height="34" viewBox="0 -960 960 960" width="24">
