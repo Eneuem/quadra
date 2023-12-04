@@ -8,7 +8,7 @@
 
     switch ($page) {
         case 'wishlist':
-            include("php/to_front_model_wishlist_show.php");
+            include("php/wishlist_show.php");
             break;
         case 'categories':
             include("php/page_categories.php");
