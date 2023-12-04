@@ -1051,6 +1051,19 @@ Ensure the default browser behavior of the `hidden` attribute.
   }
 }
 
+#hero {
+  background-image: url("../img/joker.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+@media (max-width: 576px) {
+  #hero {
+    background-image: url("../img/joker.jpg");
+    background-position: center;
+  }
+}
+
 @media (min-width: 1280px) {
   .xl\:mb-52 {
     margin-bottom: 13rem;

@@ -1,11 +1,11 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" referrerpolicy="no-referrer" />
 
-<footer class="p-4 sm:p-6 bg-gray-800 absolute bottom-0 w-full ">
-    <div class="mx-auto max-w-screen-xl">
+<footer class="p-4 sm:p-6 bg-gray-900 w-full ">
+    <div class="mx-auto max-w-screen-2xl">
         <div class="md:flex md:justify-between items-center ">
             <div class="mb-6 md:mb-0">
                 <a href="" class="flex items-center">
-                    <img src="./img/logo.png" class="w-20 h-20 bg-white rounded-lg" alt="Quadra Logo" />
+                    <img src="./img/logo.png" class="w-20 h-20 bg-white rounded-full" alt="Quadra Logo" />
                 </a>
             </div>
             <div class="grid grid-cols-2 gap-8 sm:gap-6 sm:grid-cols-2 ">
@@ -61,3 +61,4 @@
         </div>
     </div>
 </footer>
+<script src="https://cdn.tailwindcss.com"></script>

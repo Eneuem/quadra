@@ -8,7 +8,8 @@ $average = $result['average'];
 
 echo "La moyenne des notes est : " . round($average, 2);
 
-function afficherMoyenneEnEtoiles($moyenne) {
+function afficherMoyenneEnEtoiles($moyenne)
+{
     // Nombre total d'étoiles
     $nombreEtoiles = 5;
 
@@ -22,6 +23,3 @@ function afficherMoyenneEnEtoiles($moyenne) {
     // Afficher les étoiles
     echo str_repeat('★', $etoilesPleines) . str_repeat('☆', $etoilesVides);
 }
-
-
-?>
