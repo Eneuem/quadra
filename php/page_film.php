@@ -1,8 +1,10 @@
 <?php
-session_start();
-
+// session_start();
+if (session_status() == PHP_SESSION_NONE) {
+    session_start();
+}
 // Supposons que $userId est défini après une authentification réussie
-$_SESSION['user_id'] = $userId;
+// $_SESSION['user_id'] = $userId;
 
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
@@ -70,7 +72,7 @@ foreach ($movieVideos['results'] as $video) {
                     <h1 class="font-bold text-5xl mb-4">
                         <?php echo htmlspecialchars($randomMovie['title']); ?>
                     </h1>
-                    <form id="wishlistForm" action='php/wishlist_process.php' method='post'>
+                    <form id="wishlistForm" action='' method='post'>
                         <input type='hidden' name='movie_id' value='<?php echo $randomMovie['id']; ?>'>
                         <input type='hidden' name='user_id' value='<?php echo $_SESSION['userid']; ?>'>
                         <input type="checkbox" id="favorite" onclick="toggleHeart()" class="hidden">
@@ -248,5 +250,23 @@ window.addEventListener('load', (event) => {
     if (currentRating) {
         document.getElementById('note_' + currentRating).checked = true;
     }
+});
+</script>
+
+<script>
+document.getElementById("wishlistForm").addEventListener("submit", function(e) {
+    e.preventDefault(); 
+
+    var formData2 = new FormData(this);
+
+    fetch('php/wishlist_process.php', {
+        method: 'POST',
+        body: formData2
+    })
+    .then(response => response.text())
+    .then(data => {
+        alert(data);
+    })
+    .catch(error => console.error('Error:', error));
 });
 </script>

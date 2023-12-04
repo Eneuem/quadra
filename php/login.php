@@ -16,11 +16,6 @@ if (session_status() == PHP_SESSION_NONE) {
 
 require 'db_connect.php'; // Inclure db_connect.php
 
-// Le reste de votre code
-if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] == true) {
-    header("Location: acc_admin.php");
-    exit;
-}
 
 if (isset($_POST['submit'])) {
     $username = $_POST['username'];
@@ -37,11 +32,13 @@ if (isset($_POST['submit'])) {
         $_SESSION['loggedin'] = true;
         $_SESSION['userid'] = $user['id']; 
         $_SESSION['username'] = $user['username'];
-        header("Location: acc_admin.php");
+    
+        // Redirection vers index.php
+        header("Location: ../index.php");
         exit;
     } else {
         $error_message = "Nom d'utilisateur ou mot de passe incorrect";
-    }
+    }    
 }
 
 
