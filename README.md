@@ -25,4 +25,4 @@ Clicking on a movie opens a dedicated page with comprehensive details, providing
 
 This section is currently under construction. Check back soon for updates!
 
-<iframe src="https://gifer.com/embed/7VVE" width=480 height=445.867 frameBorder="0" allowFullScreen></iframe>
+<div style="padding-top:92.889%;position:relative;"><iframe src="https://gifer.com/embed/7VVE" width="100%" height="100%" style='position:absolute;top:0;left:0;' frameBorder="0" allowFullScreen></iframe></div>
