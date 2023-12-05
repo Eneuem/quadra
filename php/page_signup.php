@@ -2,8 +2,17 @@
 <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/vue@2"></script>
 
+<?php
+include 'incription.php'; 
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
+?>
+
+
 
 <div x-data="{ open: true }">
+    
     <!-- Modal Overlay -->
     <div x-show="open" class="fixed inset-0 px-2 z-10 overflow-hidden flex items-center justify-center">
         <div x-show="open" x-transition:enter="transition-opacity ease-out duration-300" x-transition:enter-start="opacity-0" x-transition:enter-end="opacity-100" x-transition:leave="transition-opacity ease-in duration-300" x-transition:leave-start="opacity-100" x-transition:leave-end="opacity-0" class="absolute inset-0 bg-gray-500 bg-opacity-75 transition-opacity"></div>
@@ -52,18 +61,18 @@
                         </div>
                         <!-- /Top Navigation -->
 
-
+                        <form action="" method="post">
                         <div class="py-10">
-                            <form action="php/inscription.php">
+                            
                             <!-- Step 1 -->
                             <div x-show.transition.in="step === 1">
                                 <div class="mb-5">
-                                    <label for="login" class="font-bold mb-1 text-gray-700 block">Login</label>
-                                    <input :type="login" x-model='login' class="w-full px-4 py-3 rounded-lg shadow-sm focus:outline-none focus:shadow-outline text-gray-600 font-medium" placeholder="Enter your login..." require>
+                                    <label for="login"  class="font-bold mb-1 text-gray-700 block">Login</label>
+                                    <input :type="login" name="pseudo" id="pseudo" x-model='login' class="w-full px-4 py-3 rounded-lg shadow-sm focus:outline-none focus:shadow-outline text-gray-600 font-medium" placeholder="Enter your login..." require>
                                 </div>
                                 <div class="mb-5">
                                     <label for="email" class="font-bold mb-1 text-gray-700 block">Email</label>
-                                    <input :type="email" x-model="email" class="w-full px-4 py-3 rounded-lg shadow-sm focus:outline-none focus:shadow-outline text-gray-600 font-medium" placeholder="Enter your login..." require>
+                                    <input :type="email" name="email" x-model="email" class="w-full px-4 py-3 rounded-lg shadow-sm focus:outline-none focus:shadow-outline text-gray-600 font-medium" placeholder="Enter your login..." require>
                                 </div>
                             </div>
                             <!-- /Step 1 -->
@@ -86,7 +95,7 @@
 
                                     <div class="relative">
 
-                                        <input :type="togglePassword ? 'text' : 'password'" @keydown="checkPasswordStrength()" x-model="password" class="w-full px-4 py-3 rounded-lg shadow-sm focus:outline-none focus:shadow-outline text-gray-600 font-medium" placeholder="Your strong password...">
+                                        <input name="password" id="password" :type="togglePassword ? 'text' : 'password'" @keydown="checkPasswordStrength()" x-model="password" class="w-full px-4 py-3 rounded-lg shadow-sm focus:outline-none focus:shadow-outline text-gray-600 font-medium" placeholder="Your strong password...">
 
                                         <div class="absolute right-0 bottom-0 top-0 px-3 py-3 cursor-pointer" @click="togglePassword = !togglePassword">
                                             <svg :class="{'hidden': !togglePassword, 'block': togglePassword }" xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 fill-current text-gray-500" viewBox="0 0 24 24">
@@ -137,11 +146,13 @@
                             </div>
                             <!-- /Step 3 -->
                         </div>
+                        </form>
                         <!-- / Step Content -->
                     </div>
                     <!---- /start step---->
                 </div>
                 <!-- Bottom Navigation -->
+                
                 <div class="py-5 bg-white " x-show="step != 'complete'">
                     <div class="max-w-3xl mx-auto px-4">
                         <div class="flex justify-between">
@@ -152,15 +163,18 @@
                             <div class="w-1/2 text-right">
                                 <button x-show="step < 3" @click="step++" class="w-32 focus:outline-none border border-transparent py-2 px-5 rounded-lg shadow-sm text-center text-white bg-blue-500 hover:bg-blue-600 font-medium">Next</button>
 
-                                <button @click="step = 'complete'" x-show="step === 3" class="w-32 focus:outline-none border border-transparent py-2 px-5 rounded-lg shadow-sm text-center text-white bg-blue-500 hover:bg-blue-600 font-medium">Complete</button>
+                                <button type="submit" name="register" @click="step = 'complete'" x-show="step === 3" class="w-32 focus:outline-none border border-transparent py-2 px-5 rounded-lg shadow-sm text-center text-white bg-blue-500 hover:bg-blue-600 font-medium">Complete</button>
                             </div>
                         </div>
                     </div>
                 </div>
+                
             </div>
         </div>
     </div>
+    
 </div>
+
 
 <script>
     function app() {

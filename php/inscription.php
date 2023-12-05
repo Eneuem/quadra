@@ -1,6 +1,8 @@
 <?php
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
 
-require 'db_connect.php';
 // Formulaire d'inscription
 if (isset($_POST['register'])) {
     $pseudo = htmlspecialchars($_POST['pseudo']);
@@ -8,13 +10,15 @@ if (isset($_POST['register'])) {
     $password = password_hash($_POST['password'], PASSWORD_DEFAULT); // Hachage du mot de passe
   
     // Vérifier si le pseudo ou l'email n'est pas déjà utilisé
-    $query = $pdo->prepare("SELECT * FROM users WHERE pseudo = ? OR email = ?");
+    $query = $pdo->prepare("SELECT * FROM formulaire WHERE pseudo = ? OR email = ?");
     $query->execute([$pseudo, $email]);
   
     if ($query->rowCount() == 0) {
         // Insertion des données dans la base de données
-        $insert = $pdo->prepare("INSERT INTO users (pseudo, email, password) VALUES (?, ?, ?)");
+        $insert = $pdo->prepare("INSERT INTO formulaire (pseudo, email, password) VALUES (?, ?, ?)");
         $insert->execute([$pseudo, $email, $password]);
+
+
   
         if ($insert) {
             echo "Inscription réussie.";

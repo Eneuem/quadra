@@ -1,9 +1,8 @@
 <?php
-$servername = "localhost";
-$dbname = "test";
-$user = "root";
-$password = "Quadrastream1!";
-$charset = "utf8mb4";
+define('HOST', 'localhost');
+define('DB_NAME', 'Connexion');
+define('USER', 'root');
+define('PASS', 'root');
 
 $dsn = "mysql:host=$servername;dbname=$dbname;charset=$charset";
 $options = [
