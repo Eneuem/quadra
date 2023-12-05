@@ -5,7 +5,7 @@
         <div class="md:flex md:justify-between items-center ">
             <div class="mb-6 md:mb-0">
                 <a href="" class="flex items-center">
-                    <img src="./img/logo.png" class="w-20 h-20 bg-white rounded-lg" alt="Quadra Logo" />
+                    <img src="./img/logo.png" class="w-20 h-20 bg-white rounded-full" alt="Quadra Logo" />
                 </a>
             </div>
             <div class="grid grid-cols-2 gap-8 sm:gap-6 sm:grid-cols-2 ">
