@@ -12,7 +12,7 @@
                 <div>
                     <ul class="text-white">
                         <li class="mb-4">
-                            <a href="./php/page_profil.php" class="hover:underline">Profil</a>
+                            <a href="index.php?page=users" class="hover:underline">Profil</a>
                         </li>
                         <li>
                             <a href="" class="hover:underline">About</a>
@@ -22,7 +22,7 @@
                 <div>
                     <ul class="text-white">
                         <li class="mb-4">
-                            <a href="./php/page_privacy_policy.php" class="hover:underline">Privacy Policy</a>
+                            <a href="index.php?page=privacy" class="hover:underline">Privacy Policy</a>
                         </li>
                         <li>
                             <a href="" class="hover:underline">Contact</a>

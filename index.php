@@ -23,7 +23,10 @@
             include("php/page_signup.php");
             break;
         case 'users':
-            include("php/profile_page.php");
+            include("php/page_profil.php");
+            break;
+        case 'privacy':
+            include("php/page_privacy_policy.php");
             break;
         default:
             include("php/page_film.php");
