@@ -4,9 +4,9 @@
 
     <script src="js/script.js" defer></script>
 
-        <!-- Hero Container -->
-        <div class="container max-w-6xl mx-auto px-6 py-12">
-        </div>
+    <!-- Hero Container -->
+    <div class="container max-w-6xl mx-auto px-6 py-12">
+    </div>
     </section>
 
     <!-- Gallery Container -->
@@ -107,5 +107,3 @@
             </div>
         </div>
     </div>
-
-
