@@ -4,7 +4,7 @@
     <div class="mx-auto max-w-screen-2xl">
         <div class="md:flex md:justify-between items-center ">
             <div class="mb-6 md:mb-0">
-                <a href="" class="flex items-center">
+                <a href="index.php" class="flex items-center">
                     <img src="./img/logo.png" class="w-20 h-20 bg-white rounded-full" alt="Quadra Logo" />
                 </a>
             </div>
