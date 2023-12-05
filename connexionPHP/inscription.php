@@ -1,6 +1,6 @@
 <?php
 
-require 'db_connect.php';
+require 'dbconnect.php';
 // Formulaire d'inscription
 if (isset($_POST['register'])) {
     $pseudo = htmlspecialchars($_POST['pseudo']);
