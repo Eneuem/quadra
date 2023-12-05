@@ -64,7 +64,7 @@ $selectedGenre = isset($_GET['genre']) ? $_GET['genre'] : null;
 
                 if ($movieDetails) {
         ?>
-                    <div class="w-64 h-96 group relative flex flex-col text-white hover:scale-105 hover:shadow transition duration-700 cursor-pointer">
+                    <div class="w-64 h-96 group relative flex flex-col text-gray-300 hover:scale-105 hover:shadow transition duration-700 cursor-pointer">
                         <img class="rounded-lg object-cover" src="https://image.tmdb.org/t/p/w500<?= $movieDetails['poster_path'] ?>"><br>
                         <div class="opacity-0 rounded-lg bg-opacity-70 p-2  group-hover:opacity-100 bg-black transition duration-300 absolute inset-0 flex flex-col gap-2 justify-end text-white">
                             <h2 class="w-64 text-xl leading-tight pr-2 absolute top-12"><?= $movieDetails['title'] ?></h2>
