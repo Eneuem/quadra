@@ -14,7 +14,7 @@ Clicking on a movie opens a dedicated page with comprehensive details, providing
   <img src="img/quadrareadme.JPG" alt="Quadra Project" width="700">
 </div>
 
-## We have Used to creat our Website
+## What we used to create our website
 
 ![PHP Icon](https://img.icons8.com/color/48/000000/php.png)
 ![JavaScript Icon](https://img.icons8.com/color/48/000000/javascript.png)
@@ -25,4 +25,8 @@ Clicking on a movie opens a dedicated page with comprehensive details, providing
 
 This section is currently under construction. Check back soon for updates!
 
-<div style="padding-top:92.889%;position:relative;"><iframe src="https://gifer.com/embed/7VVE" width="100%" height="100%" style='position:absolute;top:0;left:0;' frameBorder="0" allowFullScreen></iframe></div>
+<div align="center">
+
+![UY0Q](https://github.com/Eneuem/quadra/assets/117818692/a220a658-6eda-4f90-9847-da9a0d576148)
+
+</div>
