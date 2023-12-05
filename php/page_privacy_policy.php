@@ -1,7 +1,7 @@
 <script src="https://cdn.tailwindcss.com"></script>
 
 <div class="w-full mx-auto bg-slate-950 p-8 text-gray-300">
-
+    <img src="../img/logo.png" alt="logo de quadrastream" class="w-12 mb-2 bg-white rounded-xl">
     <h1 class="text-2xl font-bold mb-4">Privacy Policy</h1>
 
     <p class="mb-4">Last Updated: January 1, 2023</p>
