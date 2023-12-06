@@ -10,7 +10,7 @@ $(document).ready(function() {
         } else {
             // Utilisez Ajax pour interroger l'API et obtenir les suggestions
             $.ajax({
-                url: "suggest.php", // Créez un fichier PHP pour gérer les suggestions
+                url: "../suggest.php", // Créez un fichier PHP pour gérer les suggestions
                 type: "GET",
                 data: { search: query },
                 success: function(data) {
