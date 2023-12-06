@@ -220,7 +220,7 @@ foreach ($movieVideos['results'] as $video) {
                 <!-----trailer video ---->
                 <?php if (!empty($trailerUrl)) : ?>
                     <iframe class="rounded-md hidden md:block" width='720' height='400' src='https://www.youtube.com/embed/<?php echo $video['key']; ?>' frameborder='0' allow='autoplay; encrypted-media' allowfullscreen></iframe>
-                    <iframe class="rounded-md md:hidden" width='480' height='270' src='https://www.youtube.com/embed/<?php echo $video['key']; ?>' frameborder='0' allow='autoplay; encrypted-media' allowfullscreen></iframe>
+                    <iframe class="rounded-md md:hidden mt-10" width='470' height='270' src='https://www.youtube.com/embed/<?php echo $video['key']; ?>' frameborder='0' allow='autoplay; encrypted-media' allowfullscreen></iframe>
                 <?php endif; ?>
             </div>
         </div>
