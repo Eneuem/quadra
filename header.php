@@ -32,6 +32,7 @@ $currentUrl = $_SERVER['REQUEST_URI'];
 
 
             <!-- Search -->
+            <div>
             <form id="searchForm" action="php-recherche/api_search.php" method="GET">
                     <div class="flex relative">
                         <input type="text" id="search" name="search" class="w-full border h-10 shadow p-4 pl-10 pr-10 rounded-full placeholder:font-thin" placeholder="Find Movies & TV" required />
@@ -135,7 +136,7 @@ $currentUrl = $_SERVER['REQUEST_URI'];
 
 
 <?php include("js/header_script.php"); ?>
-
+<script src="php-recherche/search.js"></script>
 <script>
     const btn = document.getElementById("menu-btn");
     const menu = document.getElementById("menu");
