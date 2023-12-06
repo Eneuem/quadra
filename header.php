@@ -3,7 +3,7 @@
 if (!isset($_SESSION)) {
     session_start();
 }
-
+//var_dump($_SESSION);
 // Vérifier l'ID de l'utilisateur
 
 $userLoggedIn = isset($_SESSION['userid']) && $_SESSION['userid'] !== null;
@@ -16,6 +16,8 @@ $currentUrl = $_SERVER['REQUEST_URI'];
         color: #aef359;
     }
 </style>
+<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script> <!-- Inclure jQuery -->
+
 <!-- Nav Container -->
 <nav class="sticky top-0 mx-auto p-2  bg-slate-950 z-40">
 
@@ -162,7 +164,7 @@ $currentUrl = $_SERVER['REQUEST_URI'];
         } else {
             // Utilisez Ajax pour interroger l'API et obtenir les suggestions
             $.ajax({
-                url: "../suggest.php", // Créez un fichier PHP pour gérer les suggestions
+                url: "suggest.php", // Créez un fichier PHP pour gérer les suggestions
                 type: "GET",
                 data: { search: query },
                 success: function(data) {
