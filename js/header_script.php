@@ -35,4 +35,27 @@
                 userIconM.style.display = 'none';
             }
         });
+
+        // Ajouter l'événement de clic
+        document.addEventListener('DOMContentLoaded', (event) => {
+            var userName = document.getElementById('userName');
+            var userMenu = document.getElementById('userMenu');
+
+            userName.addEventListener('click', function() {
+                userMenu.classList.toggle('hidden');
+            });
+        });
+
+
+
+        window.addEventListener('click', function(event) {
+            if (!userMenu.contains(event.target) && event.target !== userName) {
+                userMenu.classList.add('hidden');
+            }
+        });
+
+
+
+
+
 </script>

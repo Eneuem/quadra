@@ -6,43 +6,45 @@ error_reporting(E_ALL);
 
 if (session_status() == PHP_SESSION_NONE) {
     session_start();
-  }
-  
-  // Si déjà connecté, redirigez vers une autre page (comme le tableau de bord)
-  if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] == true) {
-    header("Location: acc_admin.php");
+}
+
+// Si déjà connecté, redirigez vers une autre page (comme le tableau de bord)
+if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] == true) {
+    header("Location: ../index.php");
     exit;
-  }
+}
 
 require 'db_connect.php'; // Inclure db_connect.php
-
 
 if (isset($_POST['submit'])) {
     $username = $_POST['username'];
     $password = $_POST['password'];
 
-   
+    // Modifier ici pour inclure user_power dans la requête
     $query = "SELECT * FROM users WHERE username = ?";
-    $stmt = $pdo->prepare($query); 
+    $stmt = $pdo->prepare($query);
     $stmt->bindParam(1, $username);
     $stmt->execute();
     $user = $stmt->fetch(PDO::FETCH_ASSOC);
 
     if ($user && password_verify($password, $user['password'])) {
         $_SESSION['loggedin'] = true;
-        $_SESSION['userid'] = $user['id']; 
+        $_SESSION['userid'] = $user['id'];
         $_SESSION['username'] = $user['username'];
-    
+        
+        // Ajouter user_power à la session
+        $_SESSION['user_power'] = $user['user_power'];
+
         // Redirection vers index.php
         header("Location: ../index.php");
         exit;
     } else {
         $error_message = "Nom d'utilisateur ou mot de passe incorrect";
-    }    
+    }
 }
 
-
 ?>
+
 
         <div class="mt-3 text-center">
             <h1 class="text-lg leading-6 font-medium text-gray-900">Se connecter</h1>
