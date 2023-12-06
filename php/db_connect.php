@@ -1,8 +1,9 @@
 <?php
-define('HOST', 'localhost');
-define('DB_NAME', 'Connexion');
-define('USER', 'root');
-define('PASS', 'root');
+$servername = "localhost";
+$dbname = "Connexion";
+$user = "root";
+$password = "root";
+$charset = "utf8mb4";
 
 $dsn = "mysql:host=$servername;dbname=$dbname;charset=$charset";
 $options = [
