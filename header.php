@@ -19,7 +19,6 @@ $currentUrl = $_SERVER['REQUEST_URI'];
 <!-- Nav Container -->
 <nav class="sticky top-0 mx-auto p-2  bg-slate-950 z-40">
 
-
     <!-- Flex Container For All Items -->
     <div class="flex items-center justify-between">
 
@@ -27,7 +26,10 @@ $currentUrl = $_SERVER['REQUEST_URI'];
         <div class="flex items-center space-x-6">
 
             <!-- Logo -->
-            <img src="./img/logo.png" class="w-10 h-10 bg-white rounded-full" alt="Quadra Logo" />
+            <a href="./index.php">
+                <img src="./img/logo.png" class="w-10 h-10 bg-white rounded-full" alt="Quadra Logo" />
+            </a>
+
 
             <!-- Search -->
             <div>
@@ -48,12 +50,13 @@ $currentUrl = $_SERVER['REQUEST_URI'];
         <!-- Right Buttons Menu -->
 
         <div class="hidden items-center space-x-6 font-bold text-yellow-400 lg:flex">
-            <div class=" hidden space-x-8 font-bold lg:flex">
-                <a href="index.php?page=wishlist" class="<?php echo (strpos($currentUrl, 'page=wishlist') !== false) ? 'active-link' : ''; ?>">Wishlist</a>
-                <a href="index.php?page=categories" class="<?php echo (strpos($currentUrl, 'page=categories') !== false) ? 'active-link' : ''; ?>">Categories</a>
-                <a href="index.php?page=random_movie" class="<?php echo (strpos($currentUrl, 'page=random_movie') !== false) ? 'active-link' : ''; ?>">Random Movie</a>
+            <div class=" hidden space-x-8 font-bold lg:flex ">
+                <a href="index.php" class="<?php echo (strpos($currentUrl, 'page=index') !== false) ? 'active-link' : ''; ?>"><span class="hover:text-lime-100">Home</span></a>
+                <a href="index.php?page=wishlist" class="<?php echo (strpos($currentUrl, 'page=wishlist') !== false) ? 'active-link' : ''; ?>"><span class="hover:text-lime-100">Wishlist</span></a>
+                <a href="index.php?page=categories" class="<?php echo (strpos($currentUrl, 'page=categories') !== false) ? 'active-link' : ''; ?>"><span class="hover:text-lime-100">Categories</span></a>
+                <a href="index.php?page=random_movie" class="<?php echo (strpos($currentUrl, 'page=random_movie') !== false) ? 'active-link' : ''; ?>"><span class="hover:text-lime-100">Random</span></a>
             </div>
-            <a href="#" class="text-yellow-400link-active cursor-default">|</a>
+            <a href="#" class="text-yellow-400 link-active cursor-default">|</a>
 
 
 
@@ -81,16 +84,13 @@ $currentUrl = $_SERVER['REQUEST_URI'];
                     </div>
                 </div>
             </div>
-
-
-            <!-- Hamburger Button -->
-            <button id="menu-btn" class="block hamburger lg:hidden focus:outline-none" type="button">
-                <span class="hamburger-top"></span>
-                <span class="hamburger-middle"></span>
-                <span class="hamburger-bottom"></span>
-            </button>
         </div>
-
+        <!-- Hamburger Button -->
+        <button id="menu-btn" class="block hamburger lg:hidden focus:outline-none ml-4" type="button">
+            <span class="hamburger-top"></span>
+            <span class="hamburger-middle"></span>
+            <span class="hamburger-bottom"></span>
+        </button>
 
         <!-- Mobile Menu -->
         <div id="menu" class="absolute hidden p-6 bg-gray-800 left-6 right-6 top-20 z-50">
@@ -107,10 +107,10 @@ $currentUrl = $_SERVER['REQUEST_URI'];
                     </svg>
                 </div>
 
-
-                <a href=" #" class="w-full text-center ">Categories</a>
-                <a href="#" class="w-full text-center">Wishlist</a>
-                <a href=" #" class="w-full text-center ">Random Movie</a>
+                <a href="index.php" class="w-full text-center">Home</a>
+                <a href="index.php?page=wishlist" class="w-full text-center">Wishlist</a>
+                <a href="index.php?page=categories" class="w-full text-center ">Categories</a>
+                <a href="index.php?page=random_movie" class="w-full text-center ">Random</a>
 
             </div>
         </div>

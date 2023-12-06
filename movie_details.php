@@ -1,6 +1,8 @@
 <?php
-session_start();
-
+// session_start();
+if (session_status() == PHP_SESSION_NONE) {
+    session_start();
+}
 // Supposons que $userId est défini après une authentification réussie
 // $_SESSION['user_id'] = $userId;
 
@@ -8,7 +10,7 @@ ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
 
-include './php/api_connect.php';
+include 'php/api_connect.php';
 
 function getTrendingMovies($timeWindow = 'week')
 {
@@ -55,6 +57,7 @@ foreach ($movieVideos['results'] as $video) {
     }
 }
 ?>
+
 <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
 <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 <script src="https://cdn.tailwindcss.com"></script>
@@ -62,7 +65,7 @@ foreach ($movieVideos['results'] as $video) {
 <link rel="stylesheet" href="./css/movie_random.css">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
 
-<div class="w-full h-screen flex flex-col items-center text-neutral-300 bg-cover bg-center bg-no-repeat bg-fixed relative" style="background-image: url('https://image.tmdb.org/t/p/original/<?php echo $movieDetails['backdrop_path']; ?>');">
+<div class="w-full min-h-screen flex flex-col items-center text-neutral-300 bg-cover bg-center bg-no-repeat relative" style="background-image: url('https://image.tmdb.org/t/p/original/<?php echo $movieDetails['backdrop_path']; ?>');">
     <div class="absolute top-0 left-0 w-full h-full bg-black opacity-80"></div>
     <div class="flex flex-col xl:flex-row w-full min-h-screen z-10 pt-10 tracking-wider">
         <!----cover movie---->
@@ -130,7 +133,7 @@ foreach ($movieVideos['results'] as $video) {
                     <!----rating star components end---->
 
                     <!----wishlist icon start ---->
-                    <form id="wishlistForm" action='wishlist_process.php' method='post'>
+                    <form id="wishlistForm" action='php/wishlist_process.php' method='post'>
                         <input type='hidden' name='movie_id' value='<?php echo $randomMovie['id']; ?>'>
                         <input type='hidden' name='user_id' value='<?php echo $_SESSION['userid']; ?>'>
                         <input type="checkbox" id="favorite" onclick="toggleHeart()" class="hidden">
@@ -217,7 +220,7 @@ foreach ($movieVideos['results'] as $video) {
                 <!-----trailer video ---->
                 <?php if (!empty($trailerUrl)) : ?>
                     <iframe class="rounded-md hidden md:block" width='720' height='400' src='https://www.youtube.com/embed/<?php echo $video['key']; ?>' frameborder='0' allow='autoplay; encrypted-media' allowfullscreen></iframe>
-                    <iframe class="rounded-md md:hidden" width='480' height='270' src='https://www.youtube.com/embed/<?php echo $video['key']; ?>' frameborder='0' allow='autoplay; encrypted-media' allowfullscreen></iframe>
+                    <iframe class="rounded-md md:hidden mt-14" width='470' height='270' src='https://www.youtube.com/embed/<?php echo $video['key']; ?>' frameborder='0' allow='autoplay; encrypted-media' allowfullscreen></iframe>
                 <?php endif; ?>
             </div>
         </div>
@@ -281,4 +284,34 @@ foreach ($movieVideos['results'] as $video) {
         };
     };
     const myScrollProgress = scrollProgress(<?php echo number_format(($movieDetails['vote_average'] / 10) * 100, 0); ?>);
+</script>
+
+<!-- FETCH SANS RELOAD -->
+
+<script>
+    document.getElementById("ratingForm").addEventListener("submit", function(e) {
+        e.preventDefault();
+
+        var formData = new FormData(this);
+
+        fetch('php/notes.php', {
+                method: 'POST',
+                body: formData
+            })
+            .then(response => response.text())
+            .then(data => {
+                alert(data);
+            })
+            .catch(error => console.error('Error:', error));
+    });
+</script>
+<!-- AFFICHAGE ETOILES -->
+
+<script>
+    window.addEventListener('load', (event) => {
+        var currentRating = <?php echo json_encode($currentRating); ?>;
+        if (currentRating) {
+            document.getElementById('note_' + currentRating).checked = true;
+        }
+    });
 </script>

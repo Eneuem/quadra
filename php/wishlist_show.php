@@ -21,7 +21,7 @@ $genres = makeApiRequest("https://api.themoviedb.org/3/genre/movie/list")['genre
 // Récupérer le genre sélectionné, s'il y en a un
 $selectedGenre = isset($_GET['genre']) ? $_GET['genre'] : null;
 ?>
-
+<script src="https://cdn.tailwindcss.com"></script>
 <div class="bg-slate-950 h-screen p-10">
     <div class="flex items-center justify-between">
         <h1 class="text-gray-300 text-5xl">Wishlist</h1>
