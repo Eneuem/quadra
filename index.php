@@ -29,7 +29,7 @@
             include("php/page_privacy_policy.php");
             break;
         default:
-            include("php/page_film.php");
+            include("php/page_main.php");
     }
 
 

@@ -3,7 +3,7 @@
 if (!isset($_SESSION)) {
     session_start();
 }
-var_dump($_SESSION);
+
 // Vérifier l'ID de l'utilisateur
 
 $userLoggedIn = isset($_SESSION['userid']) && $_SESSION['userid'] !== null;
@@ -82,7 +82,7 @@ $currentUrl = $_SERVER['REQUEST_URI'];
                         <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">PROFILE</a>
 
                         <?php if (isset($_SESSION['user_power']) && $_SESSION['user_power'] != 0) : ?>
-                            <a href="php_bo/main.php" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">SUPER-ADMIN</a>
+                            <a href="php_bo/main.php" target="_blank" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">SUPER-ADMIN</a>
                         <?php endif; ?>
 
                         <a href="php/logout.php" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">LOGOUT</a>
@@ -124,7 +124,7 @@ $currentUrl = $_SERVER['REQUEST_URI'];
     <section class="cta mt-5">
         <div class="mx-auto max-w-screen-xl sm:py-16 lg:px-1">
             <div class=" text-center">
-                <h2 style="color: #f74366; font-size: 82px;" class="mb-4 text-4xl tracking-tight font-extrabold leading-tight">Meet your TV concierge.</h2>
+                <h2 style="color: #f74366; font-size: 82px;" class="mb-4 text-4xl tracking-tight font-extrabold leading-tight">Meett your TV concierge.</h2>
                 <p class="mb-12 text-white md:text-2xl mx-auto max-w-screen-md">Need something to watch? We’re on it. Plex combines free movies & TV with your favorite streaming services, so there’s always more to discover.</p>
                 <a href="#" class="text-gray-900 bg-yellow-400 hover:opacity-70 md:text-2xl font-bold rounded-full text-sm px-5 py-2.5 mr-2 mb-2">Start Streaming</a>
             </div>
