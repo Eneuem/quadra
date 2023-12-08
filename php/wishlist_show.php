@@ -14,7 +14,7 @@ if (!isset($_SESSION['userid'])) {
     echo "Veuillez vous connecter pour voir votre wishlist.";
     exit; // Arrête l'exécution du script si l'utilisateur n'est pas connecté
 }
-
+    
 // Récupérer la liste des genres depuis l'API
 $genres = makeApiRequest("https://api.themoviedb.org/3/genre/movie/list")['genres'];
 
