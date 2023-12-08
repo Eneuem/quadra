@@ -1,5 +1,15 @@
+<<<<<<< HEAD
 <link href="https://unpkg.com/tailwindcss@^1.0/dist/tailwind.min.css" rel="stylesheet">
 
+=======
+
+    <link href="https://unpkg.com/tailwindcss@^1.0/dist/tailwind.min.css" rel="stylesheet">
+
+<?php
+include 'db_connect.php';
+?>
+
+>>>>>>> origin/ayoub
 <div class="container mx-auto px-4">
     <div class="max-w-2xl mx-auto my-10">
         <form id="registrationForm">
@@ -7,7 +17,11 @@
             <div id="step1" class="step">
                 <div>
                     <label for="login" class="font-bold mb-1 text-gray-700 block">Login</label>
+<<<<<<< HEAD
                     <input type="text" id="username" name="username" class="w-full px-4 py-3 rounded-lg shadow-sm focus:outline-none focus:shadow-outline text-gray-600 font-medium" placeholder="Enter your login...">
+=======
+                    <input type="text" id="pseudo" name="pseudo" class="w-full px-4 py-3 rounded-lg shadow-sm focus:outline-none focus:shadow-outline text-gray-600 font-medium" placeholder="Enter your login...">
+>>>>>>> origin/ayoub
                 </div>
                 <div class="mt-5">
                     <label for="email" class="font-bold mb-1 text-gray-700 block">Email</label>

@@ -1,4 +1,5 @@
 <?php
+
 session_start();
 
 // Détruire toutes les variables de session
@@ -22,6 +23,6 @@ if (ini_get("session.use_cookies")) {
 session_destroy();
 
 // Rediriger vers la page d'accueil ou toute autre page après la déconnexion
-header("Location: index.php");
+header("Location: login.php");
 exit();
 ?>

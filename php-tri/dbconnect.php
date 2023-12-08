@@ -10,12 +10,6 @@ try {
     $pdo = new PDO("mysql:host=" . HOST . ";dbname=" . DB_NAME, USER, PASS);
     // Configuration pour afficher les erreurs PDO
     $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-} catch (PDOException $e) {
-    // Afficher l'erreur
-    echo "Erreur de connexion à la base de données : " . $e->getMessage();
-    // Arrêter l'exécution du script
-    die();
-}
+} catch (PDOException $e) {}
+
 ?>
-
-

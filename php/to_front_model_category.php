@@ -1,3 +1,6 @@
+<?php
+?>    
+    
     <form action="fetch_movies.php" method="get">
         <label for="genre">Choisissez une catégorie:</label>
         <select name="genre" id="genre">
