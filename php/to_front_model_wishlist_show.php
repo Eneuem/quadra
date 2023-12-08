@@ -10,7 +10,9 @@
         include 'db_connect.php';
         include 'api_connect.php';
 
-        session_start(); // Assurez-vous que la session est démarrée
+        if (session_status() == PHP_SESSION_NONE) {
+            session_start();
+        }
 
         if (!isset($_SESSION['userid'])) {
             echo "Veuillez vous connecter pour voir votre wishlist.";
