@@ -8,10 +8,7 @@ ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
 
-
 include 'api_connect.php';
-
-
 
 function getTrendingMovies($timeWindow = 'week')
 {
@@ -61,6 +58,7 @@ $movieDetails = getMovieDetails($movieId);
 $movieCredits = getMovieCredits($movieId);
 $movieVideos = getMovieVideos($movieId);
 
+
 // Recuperation de donée du film ID 
 $movieTitle = htmlspecialchars($movieDetails['title']);
 $movieReleaseDate = date('Y-m-d', strtotime($movieDetails['release_date']));
@@ -88,39 +86,52 @@ $movieTrailerKey = !empty($movieVideos['results']) ? $movieVideos['results'][0][
 
 var_dump($movieTitle, $movieReleaseDate, $movieVoteAverage, $movieRuntime, $movieGenres, $movieSynopsis, $movieActors, $movieProducers, $movieDirectors, $movieTrailerKey);
 
-// Vérification de la soumission du formulaire
-
 if (isset($_POST['add_to_database'])) {
-    include "dbconnect.php";
+    include ("dbconnect.php");
 
-    try {
-        $pdo = new PDO('mysql:host=hostname;dbname=database_name', 'username', 'password');
-        $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+    $movieTitle = htmlspecialchars($movieDetails['title']);
+    $movieReleaseDate = date('Y-m-d', strtotime($movieDetails['release_date']));
+    $movieVoteAverage = $movieDetails['vote_average'];
+    $movieRuntime = $movieDetails['runtime'];
+    $movieGenres = json_encode($movieDetails['genres']);
+    $movieSynopsis = htmlspecialchars($movieDetails['overview']);
+    $movieActors = json_encode(array_slice($movieCredits['cast'], 0, 5)); 
+    $movieProducers = json_encode(array_column(array_filter($movieCredits['crew'], function($crew) {
+        return $crew['job'] == 'Producer';
+    }), 'name'));
+    $movieDirectors = json_encode(array_column(array_filter($movieCredits['crew'], function($crew) {
+        return $crew['job'] == 'Director';
+    }), 'name'));
+    $movieTrailerKey = !empty($movieVideos['results']) ? $movieVideos['results'][0]['key'] : null;
+    
 
-        // Validation et nettoyage des données
-        $movieTitle = filter_var($_POST['movieTitle'], FILTER_SANITIZE_STRING);
-        // Faites de même pour les autres champs
+// Préparation de la requête SQL
+$stmt = $pdo->prepare("INSERT INTO movies (title, release_date, vote_average, runtime, genres, synopsis, actors, producers, directors, trailer_key) VALUES (:title, :release_date, :vote_average, :runtime, :genres, :synopsis, :actors, :producers, :directors, :trailer_key)");
 
-        // Préparation de la requête SQL
-        $stmt = $pdo->prepare("INSERT INTO movies (title, release_date, vote_average, runtime, genres, synopsis, actors, producers, directors, trailer_key) VALUES (:title, :release_date, :vote_average, :runtime, :genres, :synopsis, :actors, :producers, :directors, :trailer_key)");
+// Liaison des variables
+$stmt->bindValue(':title', $movieTitle);
+$stmt->bindValue(':release_date', $movieReleaseDate);
+$stmt->bindValue(':vote_average', $movieVoteAverage);
+$stmt->bindValue(':runtime', $movieRuntime);
+$stmt->bindValue(':genres', $movieGenres); // Ne pas utiliser json_encode ici car les données sont déjà au format JSON
+$stmt->bindValue(':synopsis', $movieSynopsis);
+$stmt->bindValue(':actors', $movieActors); // Ne pas utiliser json_encode ici
+$stmt->bindValue(':producers', $movieProducers); // Ne pas utiliser json_encode ici
+$stmt->bindValue(':directors', $movieDirectors); // Ne pas utiliser json_encode ici
+$stmt->bindValue(':trailer_key', $movieTrailerKey);
 
-        // Liaison des variables
-        $stmt->bindValue(':title', $movieTitle);
-        // Liaisons pour les autres champs
+// Exécution de la requête
+try {
+    $stmt->execute();
+    echo "Film ajouté avec succès à la base de données.";
+} catch (PDOException $e) {
+    echo "Erreur lors de l'ajout du film : " . $e->getMessage();
+}
 
-        // Exécution de la requête
-        $stmt->execute();
-
-        echo "Film ajouté avec succès à la base de données.";
-    } catch (PDOException $e) {
-        echo "Erreur lors de l'ajout du film : " . $e->getMessage();
-    } finally {
-        $pdo = null;
-    }
 }
 ?>
 
-
+?>
 
 <!-- Inclure les feuilles de style -->
 <link rel="stylesheet" href="https://cdn.tailwindcss.com">
@@ -146,56 +157,15 @@ if (isset($_POST['add_to_database'])) {
                     <h1 class="font-bold text-5xl mb-4">
                         <?php echo htmlspecialchars($movieDetails['title']); ?>
                     </h1>
-                    
-                    <form method="post">
+                </div>
 
-<!-- Champ pour le titre -->
-<div>
-    <label for="movieTitle">Titre du film:</label>
-    <input type="text" id="movieTitle" name="movieTitle" value="<?= htmlspecialchars($movieDetails['title']); ?>" required>
-</div>
+                <!-- Ajout database -->
+                <form method="post">
+                <button type="submit" name="add_to_database">Add to Database</button>
+                </form>
 
-<!-- Champ pour la date de sortie -->
-<div>
-    <label for="movieReleaseDate">Date de sortie:</label>
-    <input type="date" id="movieReleaseDate" name="movieReleaseDate" value="<?= date('Y-m-d', strtotime($movieDetails['release_date'])); ?>" required>
-</div>
-
-<!-- Champ pour la note moyenne -->
-<div>
-    <label for="movieVoteAverage">Note moyenne:</label>
-    <input type="number" step="0.1" id="movieVoteAverage" name="movieVoteAverage" value="<?= number_format($movieDetails['vote_average'], 1); ?>" required>
-</div>
-
-<!-- Champ pour la durée -->
-<div>
-    <label for="movieRuntime">Durée (en minutes):</label>
-    <input type="number" id="movieRuntime" name="movieRuntime" value="<?= $movieDetails['runtime']; ?>" required>
-</div>
-
-<!-- Champ pour le synopsis -->
-<div>
-    <label for="movieSynopsis">Synopsis:</label>
-    <textarea id="movieSynopsis" name="movieSynopsis" required><?= htmlspecialchars($movieDetails['overview']); ?></textarea>
-</div>
-
-<!-- Champs cachés pour les données complexes -->
-<input type="hidden" name="movieGenres" value='<?= json_encode($movieGenres); ?>'>
-<input type="hidden" name="movieActors" value='<?= json_encode($movieActors); ?>'>
-<input type="hidden" name="movieProducers" value='<?= json_encode($movieProducers); ?>'>
-<input type="hidden" name="movieDirectors" value='<?= json_encode($movieDirectors); ?>'>
-<input type="hidden" name="movieTrailerKey" value='<?= $movieTrailerKey; ?>'>
-
-<!-- Bouton pour soumettre le formulaire -->
-<button type="submit" name="add_to_database">Ajouter à la base de données</button>
-</form>
-
-<!-- Bouton pour supprimer de la base de données -->
-<form method="post">
-<button type="submit" name="delete_from_database">Supprimer de la base de données</button>
-</form>
-
-
+                <button>Delete from Database</button>
+            </div>
 
             <!-- Informations détaillées -->
             <div class="grid grid-cols-1 md:grid-cols-2 mt-8 text-lg">
