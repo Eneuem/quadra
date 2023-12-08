@@ -332,7 +332,7 @@ document.getElementById("wishlistForm").addEventListener("submit", function(e) {
     })
     .catch(error => console.error('Error:', error));
 });
-</script>
+
     window.addEventListener('load', (event) => {
         var currentRating = <?php echo json_encode($currentRating); ?>;
         if (currentRating) {

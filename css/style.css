@@ -1110,3 +1110,26 @@ Ensure the default browser behavior of the `hidden` attribute.
 .search.active .btn {
   transform: translateX(198px);
 }
+
+    #search.active {
+  display: block;
+}
+#searchResults li {
+  cursor: pointer;
+  padding: 8px;
+}
+
+#searchResults li.hovered {
+  background-color: #444;
+}
+
+.common-background {
+  background-color: #191919 !important;
+  background-image: radial-gradient(
+      at 80% 100%,
+      hsla(241, 0%, 9%, 1) 0px,
+      transparent 50%
+    ),
+    radial-gradient(at 1% 1%, hsla(348, 47%, 33%, 1) 0px, transparent 50%) !important;
+  min-height: 500px !important;
+}
