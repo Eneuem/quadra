@@ -13,12 +13,6 @@ if (isset($_SESSION['user_id'])) {
     $logout_button = ''; // Pas de bouton de déconnexion si l'utilisateur n'est pas connecté
 }
 
-// Formulaire d'inscription
-include 'inscription.php';
-
-// Formulaire de connexion 
-include 'connexion.php';
-
 
 ?>
 

@@ -4,11 +4,6 @@
 
     <script src="js/script.js" defer></script>
 
-    <!-- Hero Container -->
-    <div class="container max-w-6xl mx-auto px-6 py-12">
-    </div>
-    </section>
-
     <!-- Gallery Container -->
     <div class="gap-4 grid p-4 sm:grid-cols-3 md:grid-cols- lg:grid-cols-4 xl:grid-cols-6 bg-black">
         <!-- Image 1 -->

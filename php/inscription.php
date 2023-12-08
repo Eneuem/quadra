@@ -21,11 +21,12 @@ if (isset($_POST['register'])) {
   
         if ($insert) {
             echo "Inscription réussie.";
-  
+            
             // Stockez des informations sur l'utilisateur dans la session
-            $_SESSION['user_id'] = $pdo->lastInsertId();
+            $_SESSION['userid'] = $pdo->lastInsertId();
             $_SESSION['username'] = $pseudo;
             $_SESSION['email'] = $email;
+            header("Location: ../index.php");
         } else {
             echo "Erreur lors de l'inscription.";
         }

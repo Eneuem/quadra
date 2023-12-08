@@ -1,15 +1,11 @@
-<<<<<<< HEAD
+
 <link href="https://unpkg.com/tailwindcss@^1.0/dist/tailwind.min.css" rel="stylesheet">
-
-=======
-
-    <link href="https://unpkg.com/tailwindcss@^1.0/dist/tailwind.min.css" rel="stylesheet">
-
 <?php
 include 'db_connect.php';
 ?>
 
->>>>>>> origin/ayoub
+<link href="https://unpkg.com/tailwindcss@^1.0/dist/tailwind.min.css" rel="stylesheet">
+
 <div class="container mx-auto px-4">
     <div class="max-w-2xl mx-auto my-10">
         <form id="registrationForm">
@@ -17,11 +13,9 @@ include 'db_connect.php';
             <div id="step1" class="step">
                 <div>
                     <label for="login" class="font-bold mb-1 text-gray-700 block">Login</label>
-<<<<<<< HEAD
                     <input type="text" id="username" name="username" class="w-full px-4 py-3 rounded-lg shadow-sm focus:outline-none focus:shadow-outline text-gray-600 font-medium" placeholder="Enter your login...">
-=======
                     <input type="text" id="pseudo" name="pseudo" class="w-full px-4 py-3 rounded-lg shadow-sm focus:outline-none focus:shadow-outline text-gray-600 font-medium" placeholder="Enter your login...">
->>>>>>> origin/ayoub
+                    <input type="text" id="username" name="username" class="w-full px-4 py-3 rounded-lg shadow-sm focus:outline-none focus:shadow-outline text-gray-600 font-medium" placeholder="Enter your login...">
                 </div>
                 <div class="mt-5">
                     <label for="email" class="font-bold mb-1 text-gray-700 block">Email</label>
@@ -66,54 +60,7 @@ include 'db_connect.php';
     </div>
 </div>
 
-<script>
-    function nextStep(step) {
-        document.querySelectorAll('.step').forEach(function(div) {
-            div.classList.add('hidden');
-        });
-        document.getElementById('step' + step).classList.remove('hidden');
-
-        if (step === 3) {
-            document.getElementById('displayLogin').textContent = document.getElementById('username').value;
-            document.getElementById('displayEmail').textContent = document.getElementById('email').value;
-        }
-    }
-
-    document.getElementById('registrationForm').addEventListener('submit', function(event) {
-        event.preventDefault();
-
-        var username = document.getElementById('username').value;
-        var email = document.getElementById('email').value;
-        var password = document.getElementById('password').value;
-
-        var formData = new FormData();
-        formData.append('register', '1'); // Ajouter 'register'
-        formData.append('userpower', '0'); // Ajouter 'register'
-        formData.append('username', username);
-        formData.append('email', email);
-        formData.append('password', password);
-
-        fetch('inscription.php', {
-                method: 'POST',
-                body: formData
-            })
-            .then(response => {
-                if (!response.ok) {
-                    throw new Error('Network response was not ok');
-                }
-                return response.text();
-            })
-            .then(data => {
-                console.log('Success:', data); // Utiliser console.log pour voir la réponse du serveur
-                alert('Response from server: ' + data); // Afficher la réponse du serveur
-            })
-            .catch(error => {
-                console.error('Error:', error);
-                alert('Error submitting form: ' + error.message);
-            });
-    });
-</script>
+<script src="js/signup.js"></script>
 
 </body>
-
 </html>
