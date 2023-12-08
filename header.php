@@ -153,10 +153,6 @@ $currentUrl = $_SERVER['REQUEST_URI'];
         menu.classList.toggle("flex");
         menu.classList.toggle("hidden");
     }
-<<<<<<< HEAD
 </script>
 
 <script src="php-recherche/script.js"></script>
-=======
-</script>
->>>>>>> origin/justin-dev
