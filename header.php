@@ -80,7 +80,7 @@ $currentUrl = $_SERVER['REQUEST_URI'];
                         <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">PROFILE</a>
 
                         <?php if (isset($_SESSION['user_power']) && $_SESSION['user_power'] != 0) : ?>
-                            <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">SUPER-ADMIN</a>
+                            <a href="php_bo/main.php" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">SUPER-ADMIN</a>
                         <?php endif; ?>
 
                         <a href="php/logout.php" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">LOGOUT</a>

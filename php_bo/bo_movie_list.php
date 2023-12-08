@@ -10,6 +10,23 @@ try {
     exit;
 }
 
+if (isset($_POST['delete_from_database'])) {
+    $imdbIdToDelete = $_POST['imdb_id']; // Récupération de l'ID IMDb depuis le formulaire POST
+
+    try {
+        $stmt = $pdo->prepare("DELETE FROM movies WHERE imdb_id = :imdb_id");
+        $stmt->bindParam(':imdb_id', $imdbIdToDelete); // Utilisation de l'ID récupéré
+        $stmt->execute();
+
+        echo "Film supprimé avec succès de la base de données.";
+        // Recharger les données après la suppression
+        $stmt = $pdo->query("SELECT * FROM movies");
+        $movies = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    } catch (PDOException $e) {
+        echo "Erreur lors de la suppression du film : " . $e->getMessage();
+    }
+}
+
 ?>
 <!--todelete-->
 <script src="https://cdn.tailwindcss.com"></script>
@@ -23,10 +40,11 @@ try {
                     <img src="<?php echo htmlspecialchars($movie['poster_url']); ?>" alt="Affiche" class="rounded mb-4">
                     <h2 class="text-xl font-bold mb-2"><?php echo htmlspecialchars($movie['title']); ?></h2>
                     <div class="flex justify-between mt-auto">
-                        <a href="view_movie.php?id=<?php echo ($movie['imdb_id']); ?>" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Afficher</a>
+                        <a href="bo_view_movie.php?id=<?php echo htmlspecialchars($movie['imdb_id']); ?>" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Afficher</a>
+                        
                         <form method="post">
-                            <input type="hidden" name="imdb_id" value="<?php echo htmlspecialchars($movie['imdb_id']); ?>">
-                            <button type="submit" name="delete_movie" class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded">Effacer</button>
+                        <input type="hidden" name="imdb_id" value="<?php echo htmlspecialchars($movie['imdb_id']); ?>">
+                            <button type="submit" name="delete_from_database" class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded">Effacer</button>
                         </form>
                     </div>
                 </div>

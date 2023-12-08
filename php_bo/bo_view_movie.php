@@ -23,6 +23,18 @@ $movieGenres = json_decode($movieDetails['genres'], true);
 $movieActors = json_decode($movieDetails['actors'], true);
 $movieProducers = json_decode($movieDetails['producers'], true); // Si vous avez des données de producteurs
 $movieDirectors = json_decode($movieDetails['directors'], true);
+
+if (isset($_POST['delete_from_database'])) {
+    try {
+        $stmt = $pdo->prepare("DELETE FROM movies WHERE imdb_id = :imdb_id");
+        $stmt->bindParam(':imdb_id', $movieId);
+        $stmt->execute();
+
+        echo "Film supprimé avec succès de la base de données.";
+    } catch (PDOException $e) {
+        echo "Erreur lors de la suppression du film : " . $e->getMessage();
+    }
+}
 ?>
 
 <!DOCTYPE html>

@@ -29,6 +29,9 @@
     case 'home':
         include("php/page_main.php");
         break;
+    case 'admin':
+        include("php_bo/main.php");
+        break;
     default:
         include("php/page_main.php");
     }
