@@ -8,10 +8,10 @@
 
     switch ($page) {
         case 'wishlist':
-            include("php/to_front_model_wishlist_show.php");
+            include("php/wishlist_show.php");
             break;
         case 'categories':
-            include("php/to_front_model_category.php");
+            include("php/page_categories.php");
             break;
         case 'random_movie':
             include("php/page_film.php");
@@ -23,7 +23,10 @@
             include("php/page_signup.php");
             break;
         case 'users':
-            include("php/profile_page.php");
+            include("php/page_profil.php");
+            break;
+        case 'privacy':
+            include("php/page_privacy_policy.php");
             break;
         default:
             include("php/page_film.php");

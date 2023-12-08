@@ -1,6 +1,8 @@
 <?php
-session_start();
-
+// session_start();
+if (session_status() == PHP_SESSION_NONE) {
+    session_start();
+}
 // Supposons que $userId est défini après une authentification réussie
 // $_SESSION['user_id'] = $userId;
 
@@ -8,7 +10,7 @@ ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
 
-include './php/api_connect.php';
+include 'php/api_connect.php';
 
 function getTrendingMovies($timeWindow = 'week')
 {
@@ -55,15 +57,18 @@ foreach ($movieVideos['results'] as $video) {
     }
 }
 ?>
+
+<script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
 <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 <script src="https://cdn.tailwindcss.com"></script>
 <link rel="stylesheet" href="./css/rating_star.css">
-<link rel="stylesheet" href="./css/movie_details.css">
+<link rel="stylesheet" href="./css/movie_random.css">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
 
-<div class="container-lg w-full min-h-screen flex flex-col items-center text-neutral-300 bg-cover bg-center bg-no-repeat bg-fixed relative" style="background-image: url('https://image.tmdb.org/t/p/original/<?php echo $movieDetails['backdrop_path']; ?>');">
+<div class="w-full min-h-screen flex flex-col items-center text-neutral-300 bg-cover bg-center bg-no-repeat relative" style="background-image: url('https://image.tmdb.org/t/p/original/<?php echo $movieDetails['backdrop_path']; ?>');">
     <div class="absolute top-0 left-0 w-full h-full bg-black opacity-80"></div>
     <div class="flex flex-col xl:flex-row w-full min-h-screen z-10 pt-10 tracking-wider">
+        <!----cover movie---->
         <img src="https://image.tmdb.org/t/p/w500<?php echo $randomMovie['poster_path']; ?>" class="w-96 h-full ml-4 rounded-lg object-contain">
         <div class="flex flex-col pl-4 pr-4 w-full min-h-full">
             <div class="flex flex-col">
@@ -73,7 +78,7 @@ foreach ($movieVideos['results'] as $video) {
                 </h1>
                 <div class="flex items-center gap-1">
                     <!----rating star components start---->
-                    <form action='php/notes.php' method='post' class="mt-2">
+                    <form action='notes.php' method='post' class="mt-2">
                         <fieldset>
                             <input type='hidden' name='id' value='sessionID'>
                             <p class='wrapper-rating'>
@@ -148,21 +153,30 @@ foreach ($movieVideos['results'] as $video) {
             <!---- film details start ---->
             <div class="grid grid-cols-1 md:grid-cols-2 text-lg">
                 <div class="flex flex-col gap-2">
+                    <!-- Circle -->
+                    <div x-data="scrollProgress(<?php echo number_format(($movieDetails['vote_average'] / 10) * 100, 0); ?>)" x-init="init" class="w-20 h-20 inline-flex items-center justify-center rounded-full bg-black">
+                        <svg class="w-20 h-20">
+                            <circle class="text-gray-300" stroke-width="5" :stroke="color" fill="transparent" :r="radius" :cx="center" :cy="center" />
+                            <circle id="circleProgress" style="color: blue;" stroke-width="5" :stroke-dasharray="circumference" :stroke-dashoffset="circumference - percent / 100 * circumference" stroke-linecap="round" :stroke="color" fill="transparent" :r="radius" :cx="center" :cy="center" />
+                        </svg>
+                        <span id="percentageProgress" class="absolute text-xl" x-text="`${percent}%`"></span>
+                    </div>
                     <h5><b>Date </b>: <?php echo date('d/m/Y', strtotime($movieDetails['release_date'])); ?></h5>
-                    <h5><b>Note </b>: <?php echo number_format($movieDetails['vote_average'], 1); ?>/10</h5>
                     <h5><b>Duration </b>: <?php echo $movieDetails['runtime']; ?> minutes</h5>
-                    <h5><b>Genres </b>:</h5>
-                    <?php
-                    $firstGenre = true;
-                    foreach ($movieDetails['genres'] as $genre) {
-                        if (!$firstGenre) {
-                            echo ', ';
-                        } else {
-                            $firstGenre = false;
+                    <h5>
+                        <b>Genres </b>:
+                        <?php
+                        $firstGenre = true;
+                        foreach ($movieDetails['genres'] as $genre) {
+                            if (!$firstGenre) {
+                                echo ', ';
+                            } else {
+                                $firstGenre = false;
+                            }
+                            echo htmlspecialchars($genre['name']);
                         }
-                        echo htmlspecialchars($genre['name']);
-                    }
-                    ?>
+                        ?>
+                    </h5>
                 </div>
                 <div class="flex flex-col">
                     <h5><b>Actors </b>:</h5>
@@ -199,20 +213,19 @@ foreach ($movieVideos['results'] as $video) {
                     </h5>
                 </div>
             </div>
-            <p class="w-full md:w-2/3 mt-10 mr-2 text-xl mb-8 leading-relaxed h-64"><b>Synopsis </b>: <br> <?php echo htmlspecialchars($randomMovie['overview']); ?></p>
+            <p class="w-full md:w-2/3 mt-10 mr-2 text-xl leading-relaxed h-64"><b>Synopsis </b>: <br> <?php echo htmlspecialchars($randomMovie['overview']); ?></p>
             <!---- film details end ---->
 
-            <div class="mb-10">
+            <div class="mb-20 pt-4 ">
                 <!-----trailer video ---->
                 <?php if (!empty($trailerUrl)) : ?>
                     <iframe class="rounded-md hidden md:block" width='720' height='400' src='https://www.youtube.com/embed/<?php echo $video['key']; ?>' frameborder='0' allow='autoplay; encrypted-media' allowfullscreen></iframe>
-                    <iframe class="rounded-md md:hidden" width='480' height='270' src='https://www.youtube.com/embed/<?php echo $video['key']; ?>' frameborder='0' allow='autoplay; encrypted-media' allowfullscreen></iframe>
+                    <iframe class="rounded-md md:hidden mt-14" width='470' height='270' src='https://www.youtube.com/embed/<?php echo $video['key']; ?>' frameborder='0' allow='autoplay; encrypted-media' allowfullscreen></iframe>
                 <?php endif; ?>
             </div>
         </div>
     </div>
 </div>
-
 <script>
     $(document).ready(function() {
         $('.star label').on('click', function() {
@@ -240,4 +253,65 @@ foreach ($movieVideos['results'] as $video) {
             heartRed.style.display = "none";
         }
     }
+
+    const scrollProgress = (initialPercent) => {
+        const colorProgress = document.getElementById('circleProgress');
+        const colorPercentages = document.getElementById('percentageProgress')
+        return {
+            init() {
+                this.circumference = 30 * 2 * Math.PI;
+                this.percent = initialPercent;
+                this.radius = 30;
+                this.center = 40;
+                this.color = 'currentColor';
+                if (initialPercent < 30) {
+                    colorProgress.style.color = 'red';
+                    colorPercentages.style.color = 'red';
+                } else if (initialPercent <= 50) {
+                    colorPercentages.style.color = 'orange';
+                    colorProgress.style.color = 'orange';
+                } else if (initialPercent <= 70) {
+                    colorPercentages.style.color = 'yellow';
+                    colorProgress.style.color = 'yellow';
+                } else if (initialPercent <= 90) {
+                    colorPercentages.style.color = 'green';
+                    colorProgress.style.color = 'green';
+                } else {
+                    colorPercentages.style.color = 'blue';
+                    colorProgress.style.color = 'blue';
+                }
+            },
+        };
+    };
+    const myScrollProgress = scrollProgress(<?php echo number_format(($movieDetails['vote_average'] / 10) * 100, 0); ?>);
+</script>
+
+<!-- FETCH SANS RELOAD -->
+
+<script>
+    document.getElementById("ratingForm").addEventListener("submit", function(e) {
+        e.preventDefault();
+
+        var formData = new FormData(this);
+
+        fetch('php/notes.php', {
+                method: 'POST',
+                body: formData
+            })
+            .then(response => response.text())
+            .then(data => {
+                alert(data);
+            })
+            .catch(error => console.error('Error:', error));
+    });
+</script>
+<!-- AFFICHAGE ETOILES -->
+
+<script>
+    window.addEventListener('load', (event) => {
+        var currentRating = <?php echo json_encode($currentRating); ?>;
+        if (currentRating) {
+            document.getElementById('note_' + currentRating).checked = true;
+        }
+    });
 </script>

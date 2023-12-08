@@ -1,10 +1,10 @@
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" referrerpolicy="no-referrer" />
+<script src="https://cdn.tailwindcss.com"></script>
 
-<footer class="p-4 sm:p-6 bg-gray-900 w-full ">
+<footer class="p-4 sm:p-4 bg-slate-950 w-full">
     <div class="mx-auto max-w-screen-2xl">
         <div class="md:flex md:justify-between items-center ">
             <div class="mb-6 md:mb-0">
-                <a href="" class="flex items-center">
+                <a href="index.php" class="flex items-center">
                     <img src="./img/logo.png" class="w-20 h-20 bg-white rounded-full" alt="Quadra Logo" />
                 </a>
             </div>
@@ -12,7 +12,7 @@
                 <div>
                     <ul class="text-white">
                         <li class="mb-4">
-                            <a href="" class="hover:underline">Profil</a>
+                            <a href="index.php?page=users" class="hover:underline">Profil</a>
                         </li>
                         <li>
                             <a href="" class="hover:underline">About</a>
@@ -22,7 +22,7 @@
                 <div>
                     <ul class="text-white">
                         <li class="mb-4">
-                            <a href="" class="hover:underline">Mention Légales</a>
+                            <a href="index.php?page=privacy" class="hover:underline">Privacy Policy</a>
                         </li>
                         <li>
                             <a href="" class="hover:underline">Contact</a>
@@ -61,4 +61,3 @@
         </div>
     </div>
 </footer>
-<script src="https://cdn.tailwindcss.com"></script>
