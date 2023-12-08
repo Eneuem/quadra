@@ -26,8 +26,11 @@
     case 'users':
         include("php/profile_page.php");
         break;
+    case 'home':
+        include("php/page_main.php");
+        break;
     default:
-        include("php/page_film.php");
+        include("php/page_main.php");
     }
     
 

@@ -117,64 +117,9 @@ $currentUrl = $_SERVER['REQUEST_URI'];
 
             </div>
         </div>
-
-
-        <!-- <section class="bg-yellow-400 rounded-xl">
-        <div class="py-4 px-2 mx-auto max-w-screen-xl sm:py-16 lg:px-6">
-            <div class="mx-auto max-w-screen-sm text-center">
-                <h2 class="mb-4 text-4xl tracking-tight font-extrabold leading-tight text-gray-900 ">Start your free trial today</h2>
-                <p class="mb-6 text-white md:text-lg">Try quadra streaming for 30 days free. No credit card required.</p>
-
-                <a href="#" class="text-yellow-400 bg-blue-800 hover:opacity-70 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 ">Free trial for 30 days</a>
-            </div>
-        </div>
-    </section> -->
-
-
-
 </nav>
 
 
 
 
 <?php include("js/header_script.php"); ?>
-<script src="php-recherche/search.js"></script>
-<script>
-    const btn = document.getElementById("menu-btn");
-    const menu = document.getElementById("menu");
-
-    btn.addEventListener("click", navToggle);
-
-    // Toggle Mobile Menu
-    function navToggle() {
-        btn.classList.toggle("open");
-        menu.classList.toggle("flex");
-        menu.classList.toggle("hidden");
-    }
-
-    $(document).ready(function() {
-    // Attachez un gestionnaire d'événements au champ de recherche
-    $("#search").on("input", function() {
-        // Obtenez la valeur du champ de recherche
-        var query = $(this).val();
-
-        // Vérifiez si la valeur est vide
-        if (query === "") {
-            $("#searchResults").empty();
-        } else {
-            // Utilisez Ajax pour interroger l'API et obtenir les suggestions
-            $.ajax({
-                url: "suggest.php", // Créez un fichier PHP pour gérer les suggestions
-                type: "GET",
-                data: { search: query },
-                success: function(data) {
-                    // Mettez à jour la liste des suggestions
-                    $("#searchResults").html(data);
-                }
-            });
-        }
-    });
-});
-
-
-</script>

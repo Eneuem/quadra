@@ -22,6 +22,7 @@ if (isset($_GET['search'])) {
                 echo "<strong>Title:</strong> {$result['title']} <br>";
                 echo "<strong>Release Date:</strong> {$result['release_date']} <br>";
                 echo "<strong>Synopsis:</strong> {$result['overview']} <br><br>";
+                echo "<button>Add to database</button> <br><br>";
             }
         }
     } else {
