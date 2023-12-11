@@ -77,7 +77,7 @@ $currentUrl = $_SERVER['REQUEST_URI'];
                     <a href="index.php?page=login">
                         <div id="loginBtn" class="hover:text-lime-100">Login</div>
                     </a>
-                    <a href="" id="signupBtn" data-page="signup" class="dynamic-load px-4 py-1 font-bold text-lime-100 bg-yellow-400 rounded-xl hover:opacity-70">Sign Up</a>
+                    <a href="index.php?page=signup" id="signupBtn" data-page="signup" class="dynamic-load px-4 py-1 font-bold text-lime-100 bg-yellow-400 rounded-xl hover:opacity-70">Sign Up</a>
                     <div id="userName" class="hidden hover:text-lime-100 cursor-pointer"><?php echo $_SESSION['username']; ?></div>
                     <div id="userIcon" class="hidden">
                         <svg class="text-yellow-400 h-8 w-8 top-3 fill-current" xmlns="http://www.w3.org/2000/svg" height="34" viewBox="0 -960 960 960" width="24">

@@ -26,7 +26,7 @@ if (isset($_POST['register'])) {
             $_SESSION['userid'] = $pdo->lastInsertId();
             $_SESSION['username'] = $pseudo;
             $_SESSION['email'] = $email;
-            header("Location: ../index.php");
+            header("Location: index.php");
         } else {
             echo "Erreur lors de l'inscription.";
         }

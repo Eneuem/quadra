@@ -1,4 +1,9 @@
 <?php
+
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
+
 include 'db_connect.php'; // Assurez-vous que ce fichier contient les informations de connexion à votre base de données
 
 $imdbId = $_GET['id'] ?? ''; // Récupération de l'ID IMDb depuis l'URL
@@ -19,10 +24,10 @@ try {
 }
 
 // Conversion des données JSON en tableaux PHP
-$movieGenres = json_decode($movieDetails['genres'], true);
-$movieActors = json_decode($movieDetails['actors'], true);
-$movieProducers = json_decode($movieDetails['producers'], true); // Si vous avez des données de producteurs
-$movieDirectors = json_decode($movieDetails['directors'], true);
+$movieGenres = json_decode(stripslashes(trim($movieDetails['genres'], '"')), true);
+$movieActors = json_decode(stripslashes(trim($movieDetails['actors'], '"')), true);
+$movieProducers = json_decode(stripslashes(trim($movieDetails['producers'], '"')), true);
+$movieDirectors = json_decode(stripslashes(trim($movieDetails['directors'], '"')), true);
 
 if (isset($_POST['delete_from_database'])) {
     try {
@@ -70,10 +75,49 @@ if (isset($_POST['delete_from_database'])) {
                         <?php endforeach; ?>
                     </ul>
                 </div>
-
+                <!-- Producteurs -->
+                
+                <div>
+                    <h5><b>Producteurs:</b></h5>
+                    <ul>
+                        <?php foreach ($movieProducers as $producer): ?>
+                            <li><?php echo htmlspecialchars($producer); ?></li>
+                        <?php endforeach; ?>
+                    </ul>
+                <!-- Directeurs -->
+                <div>
+                    <h5><b>Directeurs:</b></h5>
+                    <ul>
+                        <?php foreach ($movieDirectors as $director): ?>
+                            <li><?php echo htmlspecialchars($director); ?></li>
+                        <?php endforeach; ?>
+                    </ul>
+                </div>
                 <p class="mt-4 text-xl leading-relaxed"><b>Synopsis:</b> <?php echo htmlspecialchars($movieDetails['synopsis']); ?></p>
             </div>
         </div>
     </div>
+
+    <div>
+    <form action="update_movie.php" method="post">
+    <input type="hidden" name="imdb_id" value="<?php echo htmlspecialchars($imdbId); ?>">
+
+    <label for="title">Titre :</label>
+    <input type="text" id="title" name="title" value="<?php echo htmlspecialchars($movieDetails['title']); ?>">
+
+    <label for="release_date">Date de sortie :</label>
+    <input type="date" id="release_date" name="release_date" value="<?php echo htmlspecialchars($movieDetails['release_date']); ?>">
+
+    <!-- Ajoutez d'autres champs ici selon les données que vous voulez permettre de modifier -->
+
+    <input type="submit" value="Mettre à jour">
+    </form>
+
+    </div>
+
+                        <form method="post">
+                        <input type="hidden" name="imdb_id" value="<?php echo htmlspecialchars($movie['imdb_id']); ?>">
+                            <button type="submit" name="delete_from_database" class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded">Effacer</button>
+                        </form>
 </body>
 </html>
