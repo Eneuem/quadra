@@ -1,24 +1,41 @@
-$(document).ready(function() {
-    // Attachez un gestionnaire d'événements au champ de recherche
-    $("#search").on("input", function() {
-        // Obtenez la valeur du champ de recherche
-        var query = $(this).val();
+function searchMovies() {
+    var input = document.getElementById('movie-search').value;
 
-        // Vérifiez si la valeur est vide
-        if (query === "") {
-            $("#searchResults").empty();
-        } else {
-            // Utilisez Ajax pour interroger l'API et obtenir les suggestions
-            $.ajax({
-                url: "../suggest.php", // Créez un fichier PHP pour gérer les suggestions
-                type: "GET",
-                data: { search: query },
-                success: function(data) {
-                    // Mettez à jour la liste des suggestions
-                    $("#searchResults").html(data);
-                }
-            });
-        }
+    if (input.length >= 2) {
+        // Faire une requête AJAX pour obtenir des suggestions depuis le serveur
+        var xmlhttp = new XMLHttpRequest();
+
+        xmlhttp.onreadystatechange = function() {
+            if (this.readyState == 4 && this.status == 200) {
+                var suggestions = JSON.parse(this.responseText);
+                displaySuggestions(suggestions);
+            }
+        };
+
+        xmlhttp.open('GET', 'search.php?input=' + input, true);
+        xmlhttp.send();
+    } else {
+        clearSuggestions();
+    }
+}
+
+function displaySuggestions(suggestions) {
+    var suggestionsList = document.getElementById('suggestions');
+    suggestionsList.innerHTML = '';
+
+    suggestions.forEach(function(movie) {
+        var listItem = document.createElement('li');
+        listItem.textContent = movie.title;
+        listItem.addEventListener('click', function() {
+            document.getElementById('movie-search').value = movie.title;
+            clearSuggestions();
+        });
+        suggestionsList.appendChild(listItem);
     });
-});
+}
+
+function clearSuggestions() {
+    var suggestionsList = document.getElementById('suggestions');
+    suggestionsList.innerHTML = '';
+}
 

@@ -10,6 +10,7 @@ error_reporting(E_ALL);
 
 include 'api_connect.php';
 
+
 function getTrendingMovies($timeWindow = 'week')
 {
     $url = "https://api.themoviedb.org/3/trending/movie/$timeWindow";
