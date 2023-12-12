@@ -10,6 +10,7 @@ $userLoggedIn = isset($_SESSION['userid']) && $_SESSION['userid'] !== null;
 
 // Obtenir l'URL
 $currentUrl = $_SERVER['REQUEST_URI'];
+
 ?>
 
 <link rel="stylesheet" href="css/style.css">

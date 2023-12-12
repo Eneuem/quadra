@@ -18,15 +18,26 @@ if (!isset($_SESSION['userid'])) {
     <div class="text-xl text-gray-300 flex flex-col items-center justify-center">
         <div class="flex flex-col gap-4">
             <p>
-                Username : <span id="username" onclick="editField('username')" class="cursor-pointer"><?php echo $_SESSION['username']; ?></span>
+                Username : <span id="username" class="cursor-pointer">
+                    <?php echo $_SESSION['username']; ?>
+                    <i class="fas fa-pencil-alt" onclick="editField('username')"></i>
+                </span>
             </p>
             <p>
-                Email : <span id="email" onclick="editField('email')" class="cursor-pointer">email</span>
+                Email :
+                <span id="email" class="cursor-pointer">
+                    <?php echo $_SESSION['email']; ?>
+                    <i class="fas fa-pencil-alt" onclick="editField('email')"></i>
+                </span>
             </p>
             <p>
-                Password : <span id="password" onclick="editField('password')" class="cursor-pointer">********</span>
+                Password : <span id="password" class="cursor-pointer">
+                    <?php echo $_SESSION['password']; ?>
+                    <i class="fas fa-pencil-alt" onclick="editField('password')"></i>
+                </span>
             </p>
         </div>
+        <button type="button" id="saveChanges" onclick="saveChanges()" class="relative top-10  w-56 text-green-700 hover:text-white border border-green-700 hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-green-300 rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2 dark:border-green-500 dark:text-green-500 dark:hover:text-white dark:hover:bg-green-600 dark:focus:ring-green-900">Save Changes</button>
         <button type="button" class="relative top-10  w-56 text-red-700 hover:text-white border border-red-700 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2 dark:border-red-500 dark:text-red-500 dark:hover:text-white dark:hover:bg-red-600 dark:focus:ring-red-900">Delete Your Account</button>
     </div>
 </div>
@@ -34,41 +45,26 @@ if (!isset($_SESSION['userid'])) {
 <script>
     function editField(field) {
         var currentValue = document.getElementById(field).innerText;
-
-        // Créer un champ d'entrée
         var inputField = document.createElement("input");
         inputField.value = currentValue;
-        inputField.className = "border rounded p-1 text-black "; // Ajoutez les classes Tailwind nécessaires ici
-
-        // Remplacer le texte par le champ d'entrée
+        inputField.className = "border rounded p-1 text-black ";
         document.getElementById(field).innerText = '';
         document.getElementById(field).appendChild(inputField);
-
-        // Ajouter un événement pour sauvegarder les changements lorsqu'on appuie sur Enter
-        inputField.addEventListener('keyup', function(event) {
-            if (event.key === 'Enter') {
-                saveChanges(field, inputField.value);
-            }
+        var saveChangesButton = document.getElementById('saveChanges');
+        // Ajoutez un gestionnaire de clic au bouton saveChanges
+        saveChangesButton.addEventListener('click', function() {
+            saveChanges(field, inputField.value);
         });
-
-        // Focus sur le champ d'entrée
         inputField.focus();
     }
 
     function saveChanges(field, newValue) {
-        // Vous pouvez utiliser AJAX ici pour envoyer les nouvelles valeurs au serveur et les mettre à jour en base de données
-        // En supposant que vous avez une page de traitement appelée update_profile.php
-
-        // Exemple d'utilisation de XMLHttpRequest pour effectuer une requête AJAX
         var xhr = new XMLHttpRequest();
         xhr.open("POST", "update_profile.php", true);
         xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-
-        // Construire les données à envoyer
         var data = "field=" + field + "&value=" + encodeURIComponent(newValue);
         xhr.send(data);
-
-        // Mettre à jour la valeur dans le DOM sans recharger la page
         document.getElementById(field).innerText = newValue;
+        console.log("Changements sauvegardés pour le champ " + field + ": " + value);
     }
 </script>
