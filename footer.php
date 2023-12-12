@@ -1,5 +1,5 @@
 <script src="https://cdn.tailwindcss.com"></script>
-
+</div>
 <footer class="p-4 sm:p-4 bg-slate-950 w-full">
     <div class="mx-auto max-w-screen-2xl">
         <div class="md:flex md:justify-between items-center ">
