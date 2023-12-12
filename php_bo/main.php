@@ -7,6 +7,8 @@ $titleMap = [
     'list' => 'Liste des utilisateurs',
     'add' => 'Ajouter un film',
     'featured' => 'Ajouter un film en vedette',
+    'seance' => 'Ajouter une séance',
+    'listseance' => 'Liste des séances',
     // Ajoutez ici d'autres cas
 ];
 
@@ -26,7 +28,11 @@ $title = $titleMap[$page];
         <li class="mb-2"><a href="main.php" class="text-gray-300 px-6 hover:text-white <?php echo $page == 'default' ? 'active-link' : ''; ?>">Home</a></li>
         <li class="mb-2"><a href="main.php?page=featured" class="text-gray-300 px-6 hover:text-white <?php echo $page == 'featured' ? 'active-link' : ''; ?>">Films en Vedette</a></li>
         <li class="mb-2"><a href="main.php?page=add" class="text-gray-300 px-6 hover:text-white <?php echo $page == 'add' ? 'active-link' : ''; ?>">Ajouter un film</a></li>
+        <li class="mb-2"><a href="main.php?page=seance" class="text-gray-300 px-6 hover:text-white <?php echo $page == 'seance' ? 'active-link' : ''; ?>">Ajouter une séance</a></li>
+        <li class="mb-2"><a href="main.php?page=listseance" class="text-gray-300 px-6 hover:text-white <?php echo $page == 'listseance' ? 'active-link' : ''; ?>">Voir les séances</a></li>
         <li class="mb-2"><a href="main.php?page=list" class="text-gray-300 px-6 hover:text-white <?php echo $page == 'list' ? 'active-link' : ''; ?>">Accounts</a></li>
+                <br>
+        <li class="mb-2"><a href="php/logout.php" class="text-gray-300 px-6 hover:text-white">Logout</a></li>
         <li class="mb-2"><a href="../index.php" target="_blank" class="text-gray-300 px-6 hover:text-white">Voir le site</a></li>
         <button onclick="goBack()">Retour</button>
       </ul>
@@ -65,6 +71,15 @@ $title = $titleMap[$page];
         case 'featured':
             include("bo_featured_movies_form.php");
             break;
+        case 'seance':
+            include("bo_add_seance_form.php");
+            break;
+        case 'listseance':
+            include("bo_manage_seance.php");
+            break;
+        case 'editseance':
+              include("edit_seance.php");
+              break;
         default :
             include("bo_movie_list.php");
             break;
