@@ -4,7 +4,7 @@
 
     <script src="js/script.js" defer></script>
 
-    <!-- Gallery Container -->
+    Gallery Container
     <div class="gap-4 grid p-4 sm:grid-cols-3 md:grid-cols- lg:grid-cols-4 xl:grid-cols-6 bg-black">
         <!-- Image 1 -->
         <div class="relative group">
@@ -12,8 +12,7 @@
             <div class="absolute bottom-0 left-0 right-0 p-2 px-4 text-white duration-500 bg-black opacity-0 group-hover:opacity-100 bg-opacity-40">
                 <div class="flex justify-between w-full">
                     <div class="font-normal">
-                        <p class="text-sm">Abstract Painting</p>
-                        <p class="text-xs">245 likes - 35 Shares</p>
+                        <p class="text-sm">Abstract P - 35 Shares</p>
                     </div>
                     <div class="flex items-center">
                         <img src="img/bookmark.svg" alt="bookmark" />

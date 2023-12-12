@@ -12,13 +12,14 @@ if (isset($_GET['search'])) {
     // Fait la demande à l'API
     $searchResult = makeApiRequest($searchUrl);
 
-    // Affiche les résultats sous forme de liste pour les suggestions
     if (isset($searchResult['results'])) {
         foreach ($searchResult['results'] as $result) {
             $movieId = $result['id'];
-            echo "<li><a href='barre_resultat.php?id=$movieId'>{$result['title']}</a></li>";
+            // Modifiez cette ligne pour pointer vers main.php
+            echo "<li><a href='main.php?page=movieDetails&id=$movieId'>{$result['title']}</a></li>";
         }
     } else {
         echo "<li>No results found.</li>";
     }
 }
+?>
