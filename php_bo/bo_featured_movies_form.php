@@ -51,6 +51,10 @@ $featuredMovieIds = array_column($featuredMovies, 'id');
         <li>
             <?php echo htmlspecialchars($movie['title']); ?>
             - Position: <?php echo htmlspecialchars($movie['position']); ?>
+            <form action="delete_featured_movie.php" method="post" style="display: inline;">
+                <input type="hidden" name="movie_id" value="<?php echo htmlspecialchars($movie['id']); ?>">
+                <input type="submit" value="Supprimer" onclick="return confirm('Êtes-vous sûr de vouloir supprimer ce film de la liste des vedettes ?');">
+            </form>
         </li>
     <?php endforeach; ?>
 </ul>
