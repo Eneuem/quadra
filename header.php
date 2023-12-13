@@ -26,7 +26,7 @@ $currentUrl = $_SERVER['REQUEST_URI'];
 
 <!-- Nav Container -->
 
-<div class="common-background pt-3 px-3 pb-10">
+<div class="common-background pt-3 px-3 pb-10 w-full">
 
 
     <nav class="sticky top-0 mx-auto p-2 bg-gray-900 backdrop-blur-sm z-40  rounded-md ">
