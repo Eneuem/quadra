@@ -39,7 +39,7 @@ if (isset($_POST['submit'])) {
         $_SESSION['username'] = $user['username'];
         $_SESSION['user_power'] = $user['user_power']; // Ajout de user_power à la session
     
-        header("Location: index.php"); // Redirection vers index.php
+        header("Location: ../index.php"); // Redirection vers index.php
         exit;
     } else {
         $error_message = "Nom d'utilisateur ou mot de passe incorrect";

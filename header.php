@@ -26,7 +26,7 @@ $currentUrl = $_SERVER['REQUEST_URI'];
 
 <!-- Nav Container -->
 
-<div class="common-background pt-3 px-3 pb-10 w-full">
+<div class="common-background pt-3 px-3 pb-10">
 
 
     <nav class="sticky top-0 mx-auto p-2 bg-gray-900 backdrop-blur-sm z-40  rounded-md ">
@@ -36,7 +36,7 @@ $currentUrl = $_SERVER['REQUEST_URI'];
         <div class="flex items-center justify-between">
 
             <!-- Flex Container For Logo/Search -->
-            <div class="flex items-center space-x-6">
+            <div class="flex items-center space-x-6 w-full">
 
                 <!-- Logo -->
                 <a href="index.php"><img src="./img/logo.png" class="w-10 h-10 bg-white rounded-full" alt="Quadra Logo" /></a>

@@ -1,67 +1,83 @@
-<!-- Affichage du formulaire -->
-<form action="" method="get" id="movieForm">
-    <label for="genre">Choisissez une catégorie :</label>
-    <select name="genre" id="genre">
-        <option value="28" <?php if (isset($_GET['genre']) && $_GET['genre'] == '28') echo 'selected'; ?>>Action</option>
-        <option value="35" <?php if (isset($_GET['genre']) && $_GET['genre'] == '35') echo 'selected'; ?>>Comédie</option>
-        <option value="27" <?php if (isset($_GET['genre']) && $_GET['genre'] == '27') echo 'selected'; ?>>Horreur</option>
-        <option value="10749" <?php if (isset($_GET['genre']) && $_GET['genre'] == '10749') echo 'selected'; ?>>Romance</option>
-        <option value="878" <?php if (isset($_GET['genre']) && $_GET['genre'] == '878') echo 'selected'; ?>>Science-Fiction</option>
-        <option value="53" <?php if (isset($_GET['genre']) && $_GET['genre'] == '53') echo 'selected'; ?>>Thriller</option>
-        <option value="16" <?php if (isset($_GET['genre']) && $_GET['genre'] == '16') echo 'selected'; ?>>Animation</option>
-        <option value="12" <?php if (isset($_GET['genre']) && $_GET['genre'] == '12') echo 'selected'; ?>>Aventure</option>
-        <option value="80" <?php if (isset($_GET['genre']) && $_GET['genre'] == '80') echo 'selected'; ?>>Crime</option>
-        <option value="" <?php if (empty($_GET['genre'])) echo 'selected'; ?>>Tous les genres</option>
-    </select>
-    <input type="submit" value="Rechercher">
-    <button type="button" onclick="resetForm()">Supprimer la recherche</button>
-</form>
-
-
-
-
 <!-- Conteneur pour les résultats des films -->
 <div id="movieResultsContainer">
     <?php
-    include 'api_connect.php';
+    error_reporting(E_ALL);
+    ini_set('display_errors', 1);
+    
+    // Inclure le fichier de connexion à la base de données
+    include 'dbconnect.php';
 
-    // Vérifie si le formulaire a été soumis
-    if (isset($_GET['genre'])) {
-        $genre = $_GET['genre'];
-        $url = "https://api.themoviedb.org/3/discover/movie?with_genres=$genre&language=en";
+    // Récupérer les genres distincts depuis la base de données
+    $sqlGenres = "SELECT DISTINCT genres FROM movies";
+    $resultGenres = $pdo->query($sqlGenres);
 
-        $response = makeApiRequest($url, $apiKey);
+    // Vérifier s'il y a des résultats
+    if ($resultGenres) {
+        $genres = $resultGenres->fetchAll(PDO::FETCH_COLUMN);
 
-        // Vérifie que la clé 'results' existe dans la réponse
-        if (isset($response['results'])) {
-            foreach ($response['results'] as $movie) {
-                // Assurez-vous que l'image et le titre sont disponibles avant de les afficher
-                if (!empty($movie['poster_path']) && !empty($movie['title'])) {
-                    $imageUrl = "https://image.tmdb.org/t/p/w500" . $movie['poster_path'];
-                    echo "<img src='$imageUrl' alt='{$movie['title']}'> <br>";
-                    echo "<strong>Title:</strong> {$movie['title']} <br>";
+        // Filtrer les genres pour les rendre uniques
+        $uniqueGenres = array_unique($genres);
 
-                    // Ajout du synopsis (overview)
-                    if (!empty($movie['overview'])) {
-                        echo "<strong>Synopsis:</strong> {$movie['overview']} <br>";
-                    } else {
-                        echo "<em>Aucun synopsis disponible</em> <br>";
-                    }
+        // Affichage du formulaire
+        echo '<form action="" method="get" id="genreForm">';
+        echo '<label for="genre">Choisissez une catégorie :</label>';
+        echo '<select name="genre" id="genreSelect">';
 
-                    echo "<br>";
-                }
-            }
-        } else {
-            echo "Aucun résultat trouvé.";
+        // Afficher les options du menu déroulant
+        foreach ($uniqueGenres as $genre) {
+            $selected = (isset($_GET['genre']) && $_GET['genre'] == $genre) ? 'selected' : '';
+            echo '<option value="' . htmlspecialchars($genre) . '" ' . $selected . '>' . htmlspecialchars($genre) . '</option>';
         }
+
+        // Option pour afficher tous les genres
+        $selectedAll = (empty($_GET['genre'])) ? 'selected' : '';
+        echo '<option value="" ' . $selectedAll . '>Tous les genres</option>';
+
+        echo '</select>';
+        echo '<input type="submit" value="Rechercher">';
+        echo '<button type="button" onclick="resetForm()">Supprimer la recherche</button>';
+        echo '</form>';
+
+        // Si un genre est sélectionné, récupérer les films correspondants
+        if (isset($_GET['genre'])) {
+            $selectedGenre = $_GET['genre'];
+            $sqlMovies = "SELECT * FROM movies WHERE genres = :genre";
+            $stmtMovies = $pdo->prepare($sqlMovies);
+            $stmtMovies->bindParam(':genre', $selectedGenre);
+            $stmtMovies->execute();
+        
+            // Afficher les résultats des films
+            while ($row = $stmtMovies->fetch(PDO::FETCH_ASSOC)) {
+                echo '<div>';
+                echo '<h2>' . $row['title'] . '</h2>';
+        
+                // Décoder la chaîne JSON dans la colonne 'genres'
+                $decodedGenres = json_decode(stripslashes(trim($row['genres'], '"')), true);
+        
+                // Vérifier si $decodedGenres est un tableau avant d'utiliser foreach
+                if (is_array($decodedGenres)) {
+                    echo '<p>Genres: <ul>';
+                    foreach ($decodedGenres as $genre) {
+                        echo '<li>' . htmlspecialchars($genre['name']) . '</li>';
+                    }
+                    echo '</ul></p>';
+                } else {
+                    echo '<p>Aucun genre disponible pour ce film.</p>';
+                }
+        
+                echo '<img src="' . $row['poster_url'] . '" alt="' . $row['title'] . '">';
+                echo '</div>';
+            }
+        }
+    } else {
+        echo "Erreur lors de la récupération des genres depuis la base de données.";
     }
     ?>
 </div>
 
 <script>
 function resetForm() {
-    document.getElementById("movieForm").reset();
+    document.getElementById("genreForm").reset();
     document.getElementById("movieResultsContainer").innerHTML = ""; // Efface les résultats des films
 }
 </script>
-
