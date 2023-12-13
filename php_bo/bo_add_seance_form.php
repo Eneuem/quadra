@@ -45,5 +45,17 @@ try {
     <label for="date_precise">Date Précise (si non récurrente) :</label>
     <input type="date" id="date_precise" name="date_precise">
 
+    <label for="prix_normal">Prix Normal :</label>
+    <input type="number" id="prix_normal" name="prix_normal" step="0.01" required>
+
+    <label for="prix_reduit">Prix Réduit :</label>
+    <input type="number" id="prix_reduit" name="prix_reduit" step="0.01" required>
+
+    <label for="nom_salle">Nom de la Salle :</label>
+    <input type="text" id="nom_salle" name="nom_salle" required>
+
+    <label for="nombre_places_disponibles">Nombre de Places Disponibles :</label>
+    <input type="number" id="nombre_places_disponibles" name="nombre_places_disponibles" required>
+
     <input type="submit" value="Ajouter la Séance">
 </form>

@@ -9,8 +9,7 @@ include 'db_connect.php';
 $filterMovie = $_GET['filter_movie'] ?? '';
 $filterDate = $_GET['filter_date'] ?? '';
 
-$query = "SELECT s.*, m.title as movie_title FROM seances s JOIN movies m ON s.movie_id = m.id";
-
+$query = "SELECT s.*, m.title as movie_title, s.prix_normal, s.prix_reduit, s.nom_salle, s.nombre_places_disponibles FROM seances s JOIN movies m ON s.movie_id = m.id";
 $conditions = [];
 $params = [];
 
@@ -67,6 +66,7 @@ try {
 </form>
 
 <!-- Affichage des séances -->
+
 <h2>Gestion des Séances</h2>
 <table>
 <thead>
@@ -75,6 +75,10 @@ try {
             <th>Jour de la Séance</th>
             <th>Heure</th>
             <th>Langue</th>
+            <th>Prix Normal</th>
+            <th>Prix Réduit</th>
+            <th>Nom de la Salle</th>
+            <th>Places Disponibles</th>
             <th>Actions</th>
         </tr>
     </thead>
@@ -85,6 +89,10 @@ try {
                 <td><?php echo htmlspecialchars($seance['jour_de_seance']); ?></td>
                 <td><?php echo htmlspecialchars($seance['heure_de_seance']); ?></td>
                 <td><?php echo htmlspecialchars($seance['langue']); ?></td>
+                <td><?php echo htmlspecialchars($seance['prix_normal']); ?></td>
+                <td><?php echo htmlspecialchars($seance['prix_reduit']); ?></td>
+                <td><?php echo htmlspecialchars($seance['nom_salle']); ?></td>
+                <td><?php echo htmlspecialchars($seance['nombre_places_disponibles']); ?></td>
                 <td>
                     <a href="main.php?page=editseance&id=<?php echo $seance['id']; ?>">Modifier</a>
                     <a href="delete_seance.php?id=<?php echo $seance['id']; ?>" onclick="return confirm('Êtes-vous sûr de vouloir supprimer cette séance ?');">Supprimer</a>
