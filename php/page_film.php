@@ -62,8 +62,8 @@ if (isset($_POST['delete_from_database'])) {
 <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
 <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 <script src="https://cdn.tailwindcss.com"></script>
-<link rel="stylesheet" href="../css/rating_star.css">
-<link rel="stylesheet" href="./css/movie_random.css">
+<link rel="stylesheet" href="css/rating_star.css">
+<link rel="stylesheet" href="css/movie_random.css">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
 
 <div class="w-full min-h-screen flex flex-col items-center text-neutral-300 bg-cover bg-center bg-no-repeat relative" style="background-image: url('https://image.tmdb.org/t/p/original/<?php echo $movieDetails['screenshot_urls'];  ?>');"> 
