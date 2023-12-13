@@ -15,9 +15,9 @@
         case 'wishlist':
             include("php/wishlist_show.php");
             break;
-        case 'categories':
-            include("php/page_categories.php");
-            break;
+        // case 'categories':
+        //     include("php/page_categories.php");
+        //     break;
         case 'random_movie':
             include("php/page_film.php");
             break;

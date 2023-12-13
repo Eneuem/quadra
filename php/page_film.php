@@ -10,71 +10,72 @@ ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
 
-include 'php/api_connect.php';
+include 'db_connect.php'; // Assurez-vous que ce fichier contient les informations de connexion à votre base de données
 
-function getTrendingMovies($timeWindow = 'week')
-{
-    $url = "https://api.themoviedb.org/3/trending/movie/$timeWindow";
-    return makeApiRequest($url);
+$imdbId = $_GET['id'] ?? ''; // Récupération de l'ID IMDb depuis l'URL
+
+try {
+    $stmt = $pdo->prepare("SELECT * FROM movies WHERE imdb_id = :imdb_id");
+    $stmt->bindParam(':imdb_id', $imdbId);
+    $stmt->execute();
+
+    $movieDetails = $stmt->fetch(PDO::FETCH_ASSOC);
+    if (!$movieDetails) {
+        echo "Film non trouvé.";
+        exit;
+    }
+} catch (PDOException $e) {
+    echo "Erreur lors de la récupération des détails du film : " . $e->getMessage();
+    exit;
 }
 
-function getMovieDetails($movieId)
-{
-    $detailsUrl = "https://api.themoviedb.org/3/movie/$movieId";
-    return makeApiRequest($detailsUrl);
-}
+// Conversion des données JSON en tableaux PHP
+$movieGenres = json_decode(stripslashes(trim($movieDetails['genres'], '"')), true);
+$movieActors = json_decode(stripslashes(trim($movieDetails['actors'], '"')), true);
+$movieProducers = json_decode(stripslashes(trim($movieDetails['producers'], '"')), true);
+$movieDirectors = json_decode(stripslashes(trim($movieDetails['directors'], '"')), true);
 
-function getMovieCredits($movieId)
-{
-    $creditsUrl = "https://api.themoviedb.org/3/movie/$movieId/credits";
-    return makeApiRequest($creditsUrl);
-}
+// Supposons que $movieDetails contient les détails de votre film depuis la base de données
+
+// 1. Récupération de trailer_key sans json_decode (si ce n'est pas une chaîne JSON)
+$trailer_key = $movieDetails['trailer_key'];
+$movieVideo = "https://www.youtube.com/embed/" . $trailer_key;
+
+// 2. Utilisation correcte de $movieDetails au lieu de $movieVideos
+$trailerUrl = 'https://www.youtube.com/embed/' . htmlspecialchars($movieDetails['trailer_key'] ?? '');
 
 
-function getMovieVideos($movieId)
-{
-    $videosUrl = "https://api.themoviedb.org/3/movie/$movieId/videos";
-    return makeApiRequest($videosUrl);
-}
+if (isset($_POST['delete_from_database'])) {
+    try {
+        $stmt = $pdo->prepare("DELETE FROM movies WHERE imdb_id = :imdb_id");
+        $stmt->bindParam(':imdb_id', $movieId);
+        $stmt->execute();
 
-// Récupérer les films tendance
-$trendingMovies = getTrendingMovies();
-
-// Sélectionner un film au hasard
-$randomIndex = array_rand($trendingMovies['results']);
-$randomMovie = $trendingMovies['results'][$randomIndex];
-
-// Récupérer les détails du film sélectionné
-$movieDetails = getMovieDetails($randomMovie['id']);
-$movieCredits = getMovieCredits($randomMovie['id']);
-$movieVideos = getMovieVideos($randomMovie['id']);
-$trailerUrl = '';
-
-foreach ($movieVideos['results'] as $video) {
-    if ($video['type'] == 'Trailer' && $video['site'] == 'YouTube') {
-        $trailerUrl = 'https://www.youtube.com/watch?v=' . $video['key'];
-        break;
+        echo "Film supprimé avec succès de la base de données.";
+    } catch (PDOException $e) {
+        echo "Erreur lors de la suppression du film : " . $e->getMessage();
     }
 }
+
 ?>
 
 <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
 <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 <script src="https://cdn.tailwindcss.com"></script>
-<link rel="stylesheet" href="./css/rating_star.css">
+<link rel="stylesheet" href="../css/rating_star.css">
 <link rel="stylesheet" href="./css/movie_random.css">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
 
-<div class="w-full min-h-screen flex flex-col items-center text-neutral-300 bg-cover bg-center bg-no-repeat relative" style="background-image: url('https://image.tmdb.org/t/p/original/<?php echo $movieDetails['backdrop_path']; ?>');">
+<div class="w-full min-h-screen flex flex-col items-center text-neutral-300 bg-cover bg-center bg-no-repeat relative" style="background-image: url('https://image.tmdb.org/t/p/original/<?php echo $movieDetails['screenshot_urls'];  ?>');"> 
     <div class="absolute top-0 left-0 w-full h-full bg-black opacity-80"></div>
     <div class="flex flex-col xl:flex-row w-full min-h-screen z-10 pt-10 tracking-wider">
         <!----cover movie---->
-        <img src="https://image.tmdb.org/t/p/w500<?php echo $randomMovie['poster_path']; ?>" class="w-96 h-full ml-4 rounded-lg object-contain">
+        <img src="https://image.tmdb.org/t/p/w500<?php echo htmlspecialchars($movieDetails['poster_url']); ?>" class="w-96 h-full ml-4 rounded-lg object-contain">
         <div class="flex flex-col pl-4 pr-4 w-full min-h-full">
             <div class="flex flex-col">
                 <!----title movie--->
                 <h1 class="font-bold text-5xl mb-4 flex items-center">
-                    <?php echo htmlspecialchars($randomMovie['title']); ?>
+                <?php echo htmlspecialchars($movieDetails['title']); ?>
                 </h1>
                 <div class="flex items-center gap-1">
                     <!----rating star components start---->
@@ -133,7 +134,7 @@ foreach ($movieVideos['results'] as $video) {
                     <!----rating star components end---->
 
                     <!----wishlist icon start ---->
-                    <form id="wishlistForm" action='php/wishlist_process.php' method='post'>
+                    <form id="wishlistForm" action='wishlist_process.php' method='post'>
                         <input type='hidden' name='movie_id' value='<?php echo $randomMovie['id']; ?>'>
                         <input type='hidden' name='user_id' value='<?php echo $_SESSION['userid']; ?>'>
                         <input type="checkbox" id="favorite" onclick="toggleHeart()" class="hidden">
@@ -162,67 +163,49 @@ foreach ($movieVideos['results'] as $video) {
                         <span id="percentageProgress" class="absolute text-xl" x-text="`${percent}%`"></span>
                     </div>
                     <h5><b>Date </b>: <?php echo date('d/m/Y', strtotime($movieDetails['release_date'])); ?></h5>
-                    <h5><b>Duration </b>: <?php echo $movieDetails['runtime']; ?> minutes</h5>
+                    <h5><b>Duration </b>: <?php echo htmlspecialchars($movieDetails['runtime']); ?> minutes</h5>
                     <h5>
                         <b>Genres </b>:
-                        <?php
-                        $firstGenre = true;
-                        foreach ($movieDetails['genres'] as $genre) {
-                            if (!$firstGenre) {
-                                echo ', ';
-                            } else {
-                                $firstGenre = false;
-                            }
-                            echo htmlspecialchars($genre['name']);
-                        }
-                        ?>
+                        <?php echo implode(', ', array_column($movieGenres, 'name')); ?>
                     </h5>
                 </div>
                 <div class="flex flex-col">
                     <h5><b>Actors </b>:</h5>
                     <ul>
-                        <?php foreach ($movieCredits['cast'] as $key => $cast) : ?>
-                            <?php if ($key < 5) : ?>
-                                <li><?php echo htmlspecialchars($cast['name']); ?> (as <?php echo htmlspecialchars($cast['character']); ?>)</li>
-                            <?php endif; ?>
+                        <?php foreach ($movieActors as $actor): ?>
+                            <li><?php echo htmlspecialchars($actor['name']); ?> (as <?php echo htmlspecialchars($actor['character']); ?>)</li>
                         <?php endforeach; ?>
                     </ul>
+                    
                     <h5 class="mr-2 mt-4">
                         <ul class="list-none">
                             <?php
-                            $producerNames = [];
-                            $directorNames = [];
-
-                            foreach ($movieCredits['crew'] as $crew) {
-                                if ($crew['job'] == 'Producer') {
-                                    $producerNames[] = $crew['name'];
-                                } elseif ($crew['job'] == 'Director') {
-                                    $directorNames[] = $crew['name'];
-                                }
-                            }
+                            $producerNames = array_map('htmlspecialchars', $movieProducers);
+                            $directorNames = array_map('htmlspecialchars', $movieDirectors);
 
                             if (!empty($producerNames)) {
-                                echo '<li><b>Producer</b> : ' . implode(', ', array_map('htmlspecialchars', $producerNames)) . '</li>';
+                                echo '<li><b>Producer</b> : ' . implode(', ', $producerNames) . '</li>';
                             }
 
                             if (!empty($directorNames)) {
-                                echo '<li><b>Director</b> : ' . implode(', ', array_map('htmlspecialchars', $directorNames)) . '</li>';
+                                echo '<li><b>Director</b> : ' . implode(', ', $directorNames) . '</li>';
                             }
                             ?>
                         </ul>
                     </h5>
+
                 </div>
             </div>
-            <p class="w-full md:w-2/3 mt-10 mr-2 text-xl leading-relaxed h-64"><b>Synopsis </b>: <br> <?php echo htmlspecialchars($randomMovie['overview']); ?></p>
+            <p class="w-full md:w-2/3 mt-10 mr-2 text-xl leading-relaxed h-64"><b>Synopsis </b>: <br> <?php echo htmlspecialchars($movieDetails['synopsis']); ?></p>
             <!---- film details end ---->
 
             <div class="mb-20 pt-4 ">
                 <!-----trailer video ---->
-                <?php if (!empty($trailerUrl)) : ?>
-                    <iframe class="rounded-md hidden md:block" width='720' height='400' src='https://www.youtube.com/embed/<?php echo $video['key']; ?>' frameborder='0' allow='autoplay; encrypted-media' allowfullscreen></iframe>
-                    <iframe class="rounded-md md:hidden mt-14" width='470' height='270' src='https://www.youtube.com/embed/<?php echo $video['key']; ?>' frameborder='0' allow='autoplay; encrypted-media' allowfullscreen></iframe>
+                <?php if (!empty($movieVideo)) : ?>
+                    <iframe class="rounded-md hidden md:block" width='720' height='400' src='<?= $movieVideo ?>' frameborder='0' allow='autoplay; encrypted-media' allowfullscreen></iframe>
+                    <iframe class="rounded-md md:hidden mt-14" width='470' height='270' src='<?= $movieVideo ?>' frameborder='0' allow='autoplay; encrypted-media' allowfullscreen></iframe>
                 <?php endif; ?>
-            </div>
+            </div> 
         </div>
     </div>
 </div>
@@ -308,31 +291,6 @@ foreach ($movieVideos['results'] as $video) {
 <!-- AFFICHAGE ETOILES -->
 
 <script>
-window.addEventListener('load', (event) => {
-    var currentRating = <?php echo json_encode($currentRating); ?>;
-    if (currentRating) {
-        document.getElementById('note_' + currentRating).checked = true;
-    }
-});
-</script>
-
-<script>
-document.getElementById("wishlistForm").addEventListener("submit", function(e) {
-    e.preventDefault(); 
-
-    var formData2 = new FormData(this);
-
-    fetch('php/wishlist_process.php', {
-        method: 'POST',
-        body: formData2
-    })
-    .then(response => response.text())
-    .then(data => {
-        alert(data);
-    })
-    .catch(error => console.error('Error:', error));
-});
-
     window.addEventListener('load', (event) => {
         var currentRating = <?php echo json_encode($currentRating); ?>;
         if (currentRating) {

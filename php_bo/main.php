@@ -9,6 +9,7 @@ $titleMap = [
     'featured' => 'Ajouter un film en vedette',
     'seance' => 'Ajouter une séance',
     'listseance' => 'Liste des séances',
+    'editseance' => 'Modifier une séance',
     // Ajoutez ici d'autres cas
 ];
 
