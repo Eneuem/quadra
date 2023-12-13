@@ -67,35 +67,35 @@ try {
 
 <!-- Affichage des séances -->
 
-<h2>Gestion des Séances</h2>
-<table>
-<thead>
+<h2 class="text-2xl font-bold mb-4">Gestion des Séances</h2>
+<table class="min-w-full border border-gray-300 shadow-sm rounded-lg overflow-hidden">
+    <thead class="bg-blue-500 text-white">
         <tr>
-            <th>Film</th>
-            <th>Jour de la Séance</th>
-            <th>Heure</th>
-            <th>Langue</th>
-            <th>Prix Normal</th>
-            <th>Prix Réduit</th>
-            <th>Nom de la Salle</th>
-            <th>Places Disponibles</th>
-            <th>Actions</th>
+            <th class="px-4 py-2">Film</th>
+            <th class="px-4 py-2">Jour de la Séance</th>
+            <th class="px-4 py-2">Heure</th>
+            <th class="px-4 py-2">Langue</th>
+            <th class="px-4 py-2">Prix Normal</th>
+            <th class="px-4 py-2">Prix Réduit</th>
+            <th class="px-4 py-2">Nom de la Salle</th>
+            <th class="px-4 py-2">Places Disponibles</th>
+            <th class="px-4 py-2">Actions</th>
         </tr>
     </thead>
     <tbody>
         <?php foreach ($seances as $seance): ?>
-            <tr>
-                <td><?php echo htmlspecialchars($seance['movie_title']); ?></td>
-                <td><?php echo htmlspecialchars($seance['jour_de_seance']); ?></td>
-                <td><?php echo htmlspecialchars($seance['heure_de_seance']); ?></td>
-                <td><?php echo htmlspecialchars($seance['langue']); ?></td>
-                <td><?php echo htmlspecialchars($seance['prix_normal']); ?></td>
-                <td><?php echo htmlspecialchars($seance['prix_reduit']); ?></td>
-                <td><?php echo htmlspecialchars($seance['nom_salle']); ?></td>
-                <td><?php echo htmlspecialchars($seance['nombre_places_disponibles']); ?></td>
-                <td>
-                    <a href="main.php?page=editseance&id=<?php echo $seance['id']; ?>">Modifier</a>
-                    <a href="delete_seance.php?id=<?php echo $seance['id']; ?>" onclick="return confirm('Êtes-vous sûr de vouloir supprimer cette séance ?');">Supprimer</a>
+            <tr class="hover:bg-gray-100">
+                <td class="px-4 py-2"><?php echo htmlspecialchars($seance['movie_title']); ?></td>
+                <td class="px-4 py-2"><?php echo htmlspecialchars($seance['jour_de_seance']); ?></td>
+                <td class="px-4 py-2"><?php echo htmlspecialchars($seance['heure_de_seance']); ?></td>
+                <td class="px-4 py-2"><?php echo htmlspecialchars($seance['langue']); ?></td>
+                <td class="px-4 py-2"><?php echo htmlspecialchars($seance['prix_normal']); ?></td>
+                <td class="px-4 py-2"><?php echo htmlspecialchars($seance['prix_reduit']); ?></td>
+                <td class="px-4 py-2"><?php echo htmlspecialchars($seance['nom_salle']); ?></td>
+                <td class="px-4 py-2"><?php echo htmlspecialchars($seance['nombre_places_disponibles']); ?></td>
+                <td class="px-4 py-2">
+                    <a href="main.php?page=editseance&id=<?php echo $seance['id']; ?>" class="text-blue-500 hover:underline">Modifier</a>
+                    <a href="delete_seance.php?id=<?php echo $seance['id']; ?>" onclick="return confirm('Êtes-vous sûr de vouloir supprimer cette séance ?');" class="text-red-500 hover:underline ml-2">Supprimer</a>
                 </td>
             </tr>
         <?php endforeach; ?>
