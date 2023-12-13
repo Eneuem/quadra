@@ -25,7 +25,7 @@ $pdo = null;
 $suggestionsWithLink = array_map(function ($row) {
     return [
         'title' => $row['title'],
-        'link'  => 'php/page_film.php?id=' . urlencode($row['imdb_id']), // Ajoutez le lien avec l'ID IMDb
+        'link'  => 'index.php?page=movie_search&id=' . urlencode($row['imdb_id']), // Ajoutez le lien avec l'ID IMDb
     ];
 }, $suggestions);
 

@@ -6,7 +6,7 @@ include 'dbconnect.php';
 $input = $_GET['input'];
 
 // Préparer la requête SQL avec un paramètre de liaison pour éviter les injections SQL
-$query = "SELECT title FROM movies WHERE title LIKE :input";
+$query = "SELECT title, imdb_id FROM movies WHERE title LIKE :input";
 $stmt = $pdo->prepare($query);
 $stmt->bindValue(':input', '%' . $input . '%', PDO::PARAM_STR);
 $stmt->execute();
@@ -18,9 +18,17 @@ while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
     $suggestions[] = $row;
 }
 
-// Retourner les suggestions au format JSON
-echo json_encode($suggestions);
-
 // Ne pas oublier de fermer la connexion à la base de données (pas nécessaire avec PDO, mais c'est une bonne pratique)
 $pdo = null;
+
+$suggestionsWithLink = array_map(function ($row) {
+    return [
+        'title' => $row['title'],
+        'link'  => 'index.php?page=movie_search&id=' . urlencode($row['imdb_id']), // Utilisez le paramètre de page
+    ];
+}, $suggestions);
+
+
+// Retourner les suggestions au format JSON avec les liens
+echo json_encode($suggestionsWithLink);
 ?>

@@ -25,14 +25,22 @@ function displaySuggestions(suggestions) {
 
     suggestions.forEach(function(movie) {
         var listItem = document.createElement('li');
-        listItem.textContent = movie.title;
-        listItem.addEventListener('click', function() {
+
+        // Créer un lien plutôt qu'un simple élément de liste
+        var link = document.createElement('a');
+        link.href = movie.link; // Utiliser le lien fourni par votre script PHP
+        link.textContent = movie.title;
+
+        link.addEventListener('click', function() {
             document.getElementById('movie-search').value = movie.title;
             clearSuggestions();
         });
+
+        listItem.appendChild(link);
         suggestionsList.appendChild(listItem);
     });
 }
+
 
 function clearSuggestions() {
     var suggestionsList = document.getElementById('suggestions');

@@ -9,16 +9,14 @@
     <?php
     include("header.php");
 
-    $page = isset($_GET['page']) ? $_GET['page'] : 'default';
-
+    $page = isset($_GET['page']) ? $_GET['page'] : 'default'; // Page par défaut si le paramètre 'page' n'est pas défini
+    $id = isset($_GET['id']) ? $_GET['id'] : null; // ID IMDb (si présent)
+    
     switch ($page) {
         case 'wishlist':
             include("php/wishlist_show.php");
             break;
-        // case 'categories':
-        //     include("php/page_categories.php");
-        //     break;
-        case 'random_movie':
+        case 'movie_search':
             include("php/page_film.php");
             break;
         case 'login':
@@ -36,7 +34,7 @@
         default:
             include("php/page_main.php");
     }
-
+    
 
     include("footer.php"); ?>
 
