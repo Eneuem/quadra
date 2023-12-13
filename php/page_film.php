@@ -10,11 +10,12 @@ ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
 
-include 'db_connect.php'; // Assurez-vous que ce fichier contient les informations de connexion à votre base de données
+include 'db_connect.php'; // Connexion à la base de données MySQL
 
 $imdbId = $_GET['id'] ?? ''; // Récupération de l'ID IMDb depuis l'URL
 
 try {
+    // Récupération des détails du film
     $stmt = $pdo->prepare("SELECT * FROM movies WHERE imdb_id = :imdb_id");
     $stmt->bindParam(':imdb_id', $imdbId);
     $stmt->execute();
@@ -24,10 +25,21 @@ try {
         echo "Film non trouvé.";
         exit;
     }
+
+    // Utilisation de l'ID interne du film pour récupérer les séances
+    $movieInternalId = $movieDetails['id']; 
+    $stmt = $pdo->prepare("SELECT * FROM seances WHERE movie_id = :movie_id");
+    $stmt->bindParam(':movie_id', $movieInternalId);
+    $stmt->execute();
+
+    $movieSessions = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
 } catch (PDOException $e) {
-    echo "Erreur lors de la récupération des détails du film : " . $e->getMessage();
+    echo "Erreur lors de la récupération des informations : " . $e->getMessage();
     exit;
 }
+
+
 
 // Conversion des données JSON en tableaux PHP
 $movieGenres = json_decode(stripslashes(trim($movieDetails['genres'], '"')), true);
@@ -150,6 +162,24 @@ if (isset($_POST['delete_from_database'])) {
                     <!----wishlist icon end ---->
                 </div>
             </div>
+            <!--- seance de cinéma start ---->
+            <div class="flex items-center gap-4 mt-4 mb-4">
+                <?php foreach ($movieSessions as $session): ?>
+                    <button class="bg-slate-950 w-36 p-2 text-yellow-400 flex items-center justify-around rounded-lg hover:bg-slate-600">
+                        <div>
+                            <p><?php echo htmlspecialchars(date('H\hi', strtotime($session['heure_de_seance']))); ?></p>
+                            <p><?php echo htmlspecialchars($session['jour_de_seance']); ?></p>
+                            <p><?php echo htmlspecialchars($session['langue']); ?></p>
+                            <p>Salle <?php echo htmlspecialchars($session['nom_salle']); ?></p>
+                        </div>
+                        <svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 -960 960 960" width="24" style="fill: #ffffff;">
+                            <path d="M200-120q-17 0-28.5-11.5T160-160v-40q-50 0-85-35t-35-85v-200q0-50 35-85t85-35v-80q0-50 35-85t85-35h400q50 0 85 35t35 85v80q50 0 85 35t35 85v200q0 50-35 85t-85 35v40q0 17-11.5 28.5T760-120q-17 0-28.5-11.5T720-160v-40H240v40q0 17-11.5 28.5T200-120Zm-40-160h640q17 0 28.5-11.5T840-320v-200q0-17-11.5-28.5T800-560q-17 0-28.5 11.5T760-520v160H200v-160q0-17-11.5-28.5T160-560q-17 0-28.5 11.5T120-520v200q0 17 11.5 28.5T160-280Zm120-160h400v-80q0-27 11-49t29-39v-112q0-17-11.5-28.5T680-760H280q-17 0-28.5 11.5T240-720v112q18 17 29 39t11 49v80Zm200 0Zm0 160Zm0-80Z" />
+                        </svg>
+                    </button>
+                <?php endforeach; ?>
+
+            </div>
+            <!--- seance de cinéma end ---->
 
             <!---- film details start ---->
             <div class="grid grid-cols-1 md:grid-cols-2 text-lg">

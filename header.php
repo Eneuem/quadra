@@ -1,5 +1,5 @@
 <?php
-// Au début de votre fichier PHP
+
 if (!isset($_SESSION)) {
     session_start();
 }
@@ -10,7 +10,6 @@ $userLoggedIn = isset($_SESSION['userid']) && $_SESSION['userid'] !== null;
 
 // Obtenir l'URL
 $currentUrl = $_SERVER['REQUEST_URI'];
-
 ?>
 
 <link rel="stylesheet" href="css/style.css">
@@ -29,14 +28,14 @@ $currentUrl = $_SERVER['REQUEST_URI'];
 <div class="common-background pt-3 px-3 pb-10">
 
 
-    <nav class="sticky top-0 mx-auto p-2 bg-gray-900 backdrop-blur-sm z-40  rounded-md ">
+    <nav class="sticky top-0 mx-auto p-2 bg-gray-900 backdrop-blur-sm z-40 rounded-md ">
 
 
         <!-- Flex Container For All Items -->
-        <div class="flex items-center w-full justify-evenly">
+        <div class="flex items-center justify-between">
 
             <!-- Flex Container For Logo/Search -->
-            <div class="flex items-center space-x-6 flex-grow">
+            <div class="flex items-center space-x-6">
 
                 <!-- Logo -->
                 <a href="index.php"><img src="./img/logo.png" class="w-10 h-10 bg-white rounded-full" alt="Quadra Logo" /></a>
@@ -55,6 +54,8 @@ $currentUrl = $_SERVER['REQUEST_URI'];
                     </div>
                 </form>
                 </div>
+                <!--THERE WAS THE MISTAKE THAT BROKE THE LAYOUT @HAMID A SIMPLE </div> CLOSE THAT WAS ERASE -->
+            </div>
 
             <!-- Right Buttons Menu -->
 
