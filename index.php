@@ -31,6 +31,12 @@
         case 'privacy':
             include("php/page_privacy_policy.php");
             break;
+        case 'subscription':
+            include("php/page_sub.php");
+            break;
+        case 'seances':
+            include("php/page_seance.php");
+            break;
         default:
             include("php/page_main.php");
     }
