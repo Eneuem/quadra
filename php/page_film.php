@@ -56,19 +56,6 @@ $movieVideo = "https://www.youtube.com/embed/" . $trailer_key;
 // 2. Utilisation correcte de $movieDetails au lieu de $movieVideos
 $trailerUrl = 'https://www.youtube.com/embed/' . htmlspecialchars($movieDetails['trailer_key'] ?? '');
 
-
-if (isset($_POST['delete_from_database'])) {
-    try {
-        $stmt = $pdo->prepare("DELETE FROM movies WHERE imdb_id = :imdb_id");
-        $stmt->bindParam(':imdb_id', $movieId);
-        $stmt->execute();
-
-        echo "Film supprimé avec succès de la base de données.";
-    } catch (PDOException $e) {
-        echo "Erreur lors de la suppression du film : " . $e->getMessage();
-    }
-}
-
 ?>
 
 <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
@@ -89,6 +76,9 @@ if (isset($_POST['delete_from_database'])) {
                 <h1 class="font-bold text-5xl mb-4 flex items-center">
                 <?php echo htmlspecialchars($movieDetails['title']); ?>
                 </h1>
+                <!-- Trigger pour ouvrir la modal -->
+                <button id="openModalBtn" class="w-[10%] bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Voir le trailer</button>
+
                 <div class="flex items-center gap-1">
                     <!----rating star components start---->
                     <form action='notes.php' method='post' class="mt-2">
@@ -177,6 +167,9 @@ if (isset($_POST['delete_from_database'])) {
                         </svg>
                     </button>
                 <?php endforeach; ?>
+                <?php if (!$movieSessions): ?>
+                    <p class="text-xl">Aucune séance n'est disponible pour ce film.</p>
+                <?php endif; ?>
 
             </div>
             <!--- seance de cinéma end ---->
@@ -231,14 +224,44 @@ if (isset($_POST['delete_from_database'])) {
 
             <div class="mb-20 pt-4 ">
                 <!-----trailer video ---->
-                <?php if (!empty($movieVideo)) : ?>
-                    <iframe class="rounded-md hidden md:block" width='720' height='400' src='<?= $movieVideo ?>' frameborder='0' allow='autoplay; encrypted-media' allowfullscreen></iframe>
-                    <iframe class="rounded-md md:hidden mt-14" width='470' height='270' src='<?= $movieVideo ?>' frameborder='0' allow='autoplay; encrypted-media' allowfullscreen></iframe>
-                <?php endif; ?>
+
+<!-- Modal -->
+<div id="trailerModal" class="modal hidden fixed inset-0 bg-black bg-opacity-40 overflow-y-auto h-full w-full">
+    <div class="modal-content relative p-4 bg-white w-full max-w-2xl m-auto mt-20 rounded">
+        <span id="closeModalBtn" class="close absolute top-4 right-4 text-3xl text-gray-600 cursor-pointer">&times;</span>
+        <?php if (!empty($movieVideo)) : ?>
+            <iframe class="w-full h-80" src='<?= $movieVideo ?>' frameborder='0' allow='autoplay; encrypted-media' allowfullscreen></iframe>
+        <?php endif; ?>
+    </div>
+</div>
+
             </div> 
         </div>
     </div>
 </div>
+<script>
+    document.addEventListener('DOMContentLoaded', (event) => {
+        var modal = document.getElementById("trailerModal");
+        var btn = document.getElementById("openModalBtn");
+        var span = document.getElementById("closeModalBtn");
+
+        btn.addEventListener('click', function() {
+            modal.classList.remove('hidden');
+        });
+
+        span.addEventListener('click', function() {
+            modal.classList.add('hidden');
+        });
+
+        window.addEventListener('click', function(event) {
+            if (event.target == modal) {
+                modal.classList.add('hidden');
+            }
+        });
+    });
+</script>
+
+
 <script>
     $(document).ready(function() {
         $('.star label').on('click', function() {
@@ -328,3 +351,4 @@ if (isset($_POST['delete_from_database'])) {
         }
     });
 </script>
+

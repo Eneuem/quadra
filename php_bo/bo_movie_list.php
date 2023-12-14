@@ -39,7 +39,7 @@ if (isset($_POST['delete_from_database'])) {
                     <img src="<?php echo htmlspecialchars($movie['poster_url']); ?>" alt="Affiche" class="rounded mb-4">
                     <h2 class="text-xl font-bold mb-2"><?php echo htmlspecialchars($movie['title']); ?></h2>
                     <div class="flex justify-between mt-auto">
-                        <a href="main.php?page=movieDetails&id=<?php echo htmlspecialchars($movie['imdb_id']); ?>" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Afficher</a>
+                        <a href="main.php?page=movieDBDetails&id=<?php echo htmlspecialchars($movie['imdb_id']); ?>" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Afficher</a>
 
                         <form method="post">
                         <input type="hidden" name="imdb_id" value="<?php echo htmlspecialchars($movie['imdb_id']); ?>">

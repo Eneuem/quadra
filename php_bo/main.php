@@ -69,6 +69,9 @@ $title = $titleMap[$page];
         case 'movieDetails':
             include("barre_resultat.php"); 
             break;
+        case 'movieDBDetails':
+            include("bo_view_movie.php");
+            break;
         case 'featured':
             include("bo_featured_movies_form.php");
             break;
