@@ -67,9 +67,6 @@ $currentUrl = $_SERVER['REQUEST_URI'];
                     <a href="">Special event</a>
                 </div>
                 <a href="#" class="text-yellow-400link-active cursor-default">|</a>
-                <a href="#" class="hidden text-yellow-400 hover:text-lime-100 link-active">PROFILE</a>
-                <a href="#" class="hidden text-yellow-400 hover:text-lime-100 link-active">SUPER-ADMIN</a>
-                <a href="php/logout.php" class="hidden text-yellow-400 hover:text-lime-100">LOGOUT</a>
                 <div class="items-center space-x-6 font-bold text-yellow-400 lg:flex">
                     <a href="index.php?page=login">
                         <div id="loginBtn" class="hover:text-lime-100">Login</div>
@@ -82,13 +79,14 @@ $currentUrl = $_SERVER['REQUEST_URI'];
                         </svg>
                     </div>
                     <div id="userMenu" class="hidden absolute right-0 top-10 py-2 w-48 bg-white rounded-md shadow-xl z-20">
-                        <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">PROFILE</a>
+                        <a href="index.php?page=users" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Profile</a>
+                        <a href="index.php?page=wishlist" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Wishlist</a>
 
                         <?php if (isset($_SESSION['user_power']) && $_SESSION['user_power'] != 0) : ?>
-                            <a href="php_bo/main.php" target="_blank" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">SUPER-ADMIN</a>
+                            <a href="php_bo/main.php" target="_blank" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Administration</a>
                         <?php endif; ?>
 
-                        <a href="php/logout.php" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">LOGOUT</a>
+                        <a href="php/logout.php" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Logout</a>
                     </div>
                 </div>
             </div>

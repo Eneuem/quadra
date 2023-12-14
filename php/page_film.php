@@ -136,8 +136,8 @@ $trailerUrl = 'https://www.youtube.com/embed/' . htmlspecialchars($movieDetails[
                     <!----rating star components end---->
 
                     <!----wishlist icon start ---->
-                    <form id="wishlistForm" action='wishlist_process.php' method='post'>
-                        <input type='hidden' name='movie_id' value='<?php echo $randomMovie['id']; ?>'>
+                    <form id="wishlistForm" action='php/wishlist_process.php' method='post'>
+                        <input type='hidden' name='movie_id' value='<?php echo $movieDetails['id']; ?>'>
                         <input type='hidden' name='user_id' value='<?php echo $_SESSION['userid']; ?>'>
                         <input type="checkbox" id="favorite" onclick="toggleHeart()" class="hidden">
                         <label for="favorite" class="material-symbols-outlined cursor-pointer mt-2 ml-2 mr-2" style="font-variation-settings:'FILL' 0;transition: filter 0.3s;" onclick="document.getElementById('wishlistForm').submit();">
