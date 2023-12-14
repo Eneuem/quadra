@@ -1,5 +1,6 @@
 <?php
 include 'db_connect.php'; 
+include 'bo_check.php';
 
 $userId = $_GET['id'];
 

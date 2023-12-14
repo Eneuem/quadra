@@ -1,6 +1,6 @@
 <?php
 include 'db_connect.php';
-
+include 'bo_check.php';
 try {
     $stmt = $pdo->query("SELECT users.*, abonnements.type_abonnement, abonnements.date_debut, abonnements.date_fin FROM users LEFT JOIN abonnements ON users.id = abonnements.user_id");
     $users = $stmt->fetchAll();

@@ -9,7 +9,7 @@ ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
 
 include 'api_connect.php';
-
+include 'bo_check.php';
 function getTrendingMovies($timeWindow = 'week')
 {
     $url = "https://api.themoviedb.org/3/trending/movie/$timeWindow";

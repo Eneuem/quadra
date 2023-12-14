@@ -43,11 +43,10 @@
       <form action="#" method="POST">
         <!-- Form fields go here -->
         <!-- ... -->
-        <button type="submit"
-          class="bg-red-600 text-white px-4 py-2 rounded-xl mt-auto animate-pulse">Subscribe</button>
+      <?= include '../php-stripes/premium/payement.php';?>
 
 
-      </form>
+      </form> 
     </div>
 
   </div>

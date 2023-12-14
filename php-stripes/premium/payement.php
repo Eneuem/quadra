@@ -1,11 +1,6 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <meta charset="UTF-8">
-    <script src="https://js.stripe.com/v3/"></script>
-</head>
-<body>
-    <button id="checkout-button">Payer maintenant</button>
+<script src="https://js.stripe.com/v3/"></script>
+
+    <button id="checkout-button" class="bg-red-600 text-white px-4 py-2 rounded-xl mt-auto animate-pulse">Payer maintenant</button>
 
     <script>
         var stripe = Stripe('pk_test_51ONDw8C1fQp5mFZfKUAuNBjrGoFkYh7mJ8halFujXNihDeERFQFT3xmOAJnHlKgXwRypD54Lkau58ORbgOvnoADA00xonoKJG0');
@@ -29,5 +24,4 @@
             });
         });
     </script>
-</body>
-</html>
+

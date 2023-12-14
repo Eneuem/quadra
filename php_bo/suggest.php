@@ -1,6 +1,6 @@
 <?php
 include 'api_connect.php';
-
+include 'bo_check.php';
 // Vérifie si la requête GET a été effectuée
 if (isset($_GET['search'])) {
     // Récupère la chaîne de recherche de l'utilisateur

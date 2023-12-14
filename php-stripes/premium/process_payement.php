@@ -1,5 +1,10 @@
 <?php 
-require_once('../vendor/autoload.php');
+
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
+
+require_once('../../.vendor/autoload.php');
 \Stripe\Stripe::setApiKey('sk_test_51ONDw8C1fQp5mFZfNo92rN47eJkdPMbhoj0xxj9H5veHHiPA3yisajnabYHfMEPWSBZcvnnK7nASXL70lhDy8Jyg00vS0Uxa1j'); // Utilisez votre nouvelle clé secrète Stripe
 
 header('Content-Type: application/json');
@@ -27,7 +32,7 @@ if ($event->type == 'checkout.session.completed') {
     $dateDebut = date("Y-m-d"); 
     $dateFin = date("Y-m-d", strtotime("+1 month")); 
 
-    require '../php/db_connect.php';
+    require '../../php/db_connect.php';
 
     try {
         $stmt = $pdo->prepare("INSERT INTO abonnements (user_id, type_abonnement, est_paye, date_debut, date_fin) VALUES (:user_id, :type_abonnement, :est_paye, :date_debut, :date_fin) ON DUPLICATE KEY UPDATE type_abonnement=:type_abonnement, est_paye=:est_paye, date_debut=:date_debut, date_fin=:date_fin");

@@ -1,4 +1,5 @@
-<?php include "process_movie_data.php"; ?>
+<?php include "process_movie_data.php";
+include 'bo_check.php'; ?>
 
 <script src="https://cdn.tailwindcss.com"></script>
 

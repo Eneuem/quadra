@@ -5,7 +5,7 @@ ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
 
 include 'db_connect.php'; // Assurez-vous que ce fichier contient les informations de connexion à votre base de données
-
+include 'bo_check.php';
 $imdbId = $_GET['id'] ?? ''; // Récupération de l'ID IMDb depuis l'URL
 
 try {

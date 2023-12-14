@@ -5,6 +5,7 @@ ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
 
 include 'db_connect.php';
+include 'bo_check.php';
 
 $filterMovie = $_GET['filter_movie'] ?? '';
 $filterDate = $_GET['filter_date'] ?? '';

@@ -1,6 +1,7 @@
 <?php
 
 include 'db_connect.php';
+include 'bo_check.php';
 
 $stmt = $pdo->prepare("INSERT INTO movies (title, release_date, vote_average, runtime, genres, synopsis, actors, producers, directors, trailer_key) VALUES (:title, :release_date, :vote_average, :runtime, :genres, :synopsis, :actors, :producers, :directors, :trailer_key)");
 

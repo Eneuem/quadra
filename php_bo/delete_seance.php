@@ -1,5 +1,6 @@
 <?php
 include 'db_connect.php';
+include 'bo_check.php';
 
 if (isset($_GET['id'])) {
     $seanceId = $_GET['id'];

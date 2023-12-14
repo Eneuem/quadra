@@ -1,6 +1,7 @@
 <?php
 
 include 'db_connect.php';
+include 'bo_check.php';
 
 try {
     $stmt = $pdo->query("SELECT * FROM movies");

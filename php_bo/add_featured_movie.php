@@ -1,5 +1,6 @@
 <?php
 include 'db_connect.php'; // Votre script de connexion à la base de données
+include 'bo_check.php'; // Votre script de vérification de l'authentification
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $movieId = $_POST['movie_id'];

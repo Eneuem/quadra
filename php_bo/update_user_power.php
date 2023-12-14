@@ -1,6 +1,6 @@
 <?php
 include 'db_connect.php'; // Inclure votre script de connexion
-
+include 'bo_check.php';
 $userId = $_POST['update_power'];
 $userPower = isset($_POST['user_power'][$userId]) ? 1 : 0;
 

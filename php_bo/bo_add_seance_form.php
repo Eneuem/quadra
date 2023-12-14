@@ -1,6 +1,6 @@
 <?php
 include 'db_connect.php';
-
+include 'bo_check.php';
 try {
     $stmt = $pdo->query("SELECT id, title FROM movies ORDER BY title");
     $movies = $stmt->fetchAll();

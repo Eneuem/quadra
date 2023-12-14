@@ -1,4 +1,5 @@
 <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script> <!-- Inclure jQuery -->
+<?php include("bo_check.php"); ?>
             <div>
             <form id="searchForm" action="api_search.php" method="GET">
                     <div class="flex relative">

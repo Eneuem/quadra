@@ -25,12 +25,14 @@ if (!isset($_SESSION['userid'])) {
         <?php
         try {
             $userId = $_SESSION['userid']; 
-            $stmt = $pdo->prepare("SELECT m.* FROM wishlist w INNER JOIN movies m ON w.movie_id = m.id WHERE w.userid = :userid");
+            $stmt = $pdo->prepare("SELECT m.id, m.imdb_id, m.title, m.poster_url FROM wishlist w INNER JOIN movies m ON w.movie_id = m.id WHERE w.userid = :userid");
             $stmt->bindParam(':userid', $userId, PDO::PARAM_INT);
             $stmt->execute();
 
             while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
-                echo "<div class='w-64 h-96 group relative flex flex-col text-white hover:scale-105 hover:shadow transition duration-700 cursor-pointer'>";
+                $filmUrl = "index.php?page=movie_search&id=" . htmlspecialchars($row['imdb_id']);  // Création de l'URL
+            
+                echo "<a href='$filmUrl' class='w-64 h-96 group relative flex flex-col text-white hover:scale-105 hover:shadow transition duration-700 cursor-pointer'>";
                 echo "<img class='rounded-lg object-cover' src='https://image.tmdb.org/t/p/w500" . htmlspecialchars($row['poster_url']) . "'><br>";
                 echo "<div class='opacity-0 rounded-lg bg-opacity-70 p-2  group-hover:opacity-100 bg-black transition duration-300 absolute inset-0 flex flex-col gap-2 justify-end text-white'>";
                 echo "<h2 class='w-64 text-xl leading-tight pr-2 absolute top-12'>" . htmlspecialchars($row['title']) . "</h2>";
@@ -43,7 +45,7 @@ if (!isset($_SESSION['userid'])) {
                 echo "</button>";
                 echo "</form>";
                 echo "</div>";
-                echo "</div>";
+                echo "</a>"; // Fin de la balise <a>
             }
         } catch (PDOException $e) {
             echo "Erreur: " . $e->getMessage();
