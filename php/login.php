@@ -50,7 +50,7 @@ if (isset($_POST['submit'])) {
 ?>
 
 <div class="text-center bg-slate-950 h-screen mt-4 rounded-md flex flex-col justify-center items-center">
-    <h1 class="text-lg leading-6 font-medium text-gray-300">Se connecter</h1>
+    <h1 class="text-lg leading-6 font-medium text-gray-300">Sign In</h1>
     <div class="mt-2 px-7 py-3">
         <?php if (isset($error_message)) { ?>
             <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative" role="alert">
@@ -66,7 +66,7 @@ if (isset($_POST['submit'])) {
             </div>
             <div class="flex items-center justify-center">
                 <button class=" bg-blue-700 hover:bg-blue-800 text-white font-bold mb-5 py-2 px-4 rounded focus:outline-none focus:shadow-outline " name="submit" type="submit">
-                    Sign In
+                    Connect
                 </button>
             </div>
             <a href="index.php?page=signup" class=" text-gray-300 hover:text-white">Not Account Yet ?</a>

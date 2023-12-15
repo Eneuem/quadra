@@ -15,7 +15,7 @@ try {
 
 ?>
 
-<h1 class="text-3xl text-gray-300 mb-4 text-bold uppercase tracking-wider">In the Cinemas Now :</h1>
+<h1 class="text-3xl text-gray-300 mb-4 text-bold uppercase tracking-wider mt-4">In the Cinemas Now :</h1>
 <div class="gap-4 grid p-4 sm:grid-cols-3 md:grid-cols- lg:grid-cols-4 xl:grid-cols-6 bg-black">
     <?php foreach ($featuredMovies as $movie) : ?>
         <a href="index.php?page=movie_search&id=<?php echo htmlspecialchars($movie['imdb_id']); ?>" class="relative group block">

@@ -67,7 +67,7 @@ $trailerUrl = 'https://www.youtube.com/embed/' . htmlspecialchars($movieDetails[
     <div class="absolute top-0 left-0 w-full h-full bg-black opacity-80"></div>
     <div class="flex flex-col xl:flex-row w-full min-h-screen z-10 pt-10 tracking-wider">
         <!----cover movie---->
-        <img src="https://image.tmdb.org/t/p/w500<?php echo htmlspecialchars($movieDetails['poster_url']); ?>" class="w-96 h-full ml-4 rounded-lg object-contain">
+        <img src="https://image.tmdb.org/t/p/w500<?php echo htmlspecialchars($movieDetails['poster_url']); ?>" class="md:w-96 w-80 h-full ml-4 rounded-lg object-contain">
         <div class="flex flex-col pl-4 pr-4 w-full min-h-full">
             <div class="flex flex-col">
                 <!----title movie--->
@@ -75,7 +75,7 @@ $trailerUrl = 'https://www.youtube.com/embed/' . htmlspecialchars($movieDetails[
                     <?php echo htmlspecialchars($movieDetails['title']); ?>
                 </h1>
                 <!-- Trigger pour ouvrir la modal -->
-                <button id="openModalBtn" class="w-[10%] bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Voir le trailer</button>
+                <button id="openModalBtn" class="lg:w-[15%] w-[40%] mb-4 mt-4 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Voir le trailer</button>
 
                 <div class="flex items-center gap-1">
                     <!----rating star components start---->
@@ -217,15 +217,15 @@ $trailerUrl = 'https://www.youtube.com/embed/' . htmlspecialchars($movieDetails[
 
                 </div>
             </div>
-            <p class="w-full md:w-2/3 mt-10 mr-2 text-xl leading-relaxed h-64"><b>Synopsis </b>: <br> <?php echo htmlspecialchars($movieDetails['synopsis']); ?></p>
+            <p class="w-full md:w-2/3 mt-10 mr-2 text-md md:text-xl mb-10 leading-relaxed h-64"><b>Synopsis </b>: <br> <?php echo htmlspecialchars($movieDetails['synopsis']); ?></p>
             <!---- film details end ---->
 
             <div class="mb-20 pt-4 ">
                 <!-----trailer video ---->
 
                 <!-- Modal -->
-                <div id="trailerModal" class="modal hidden fixed inset-0 bg-black bg-opacity-40 overflow-y-auto h-full w-full">
-                    <div class="modal-content relative p-4 bg-white w-full max-w-2xl m-auto mt-20 rounded">
+                <div id="trailerModal" class="modal hidden fixed inset-0 bg-opacity-40 overflow-y-auto h-full w-full">
+                    <div class="modal-content relative p-4  w-full max-w-2xl m-auto mt-20 rounded">
                         <span id="closeModalBtn" class="close absolute top-4 right-4 text-3xl text-gray-600 cursor-pointer">&times;</span>
                         <?php if (!empty($movieVideo)) : ?>
                             <iframe class="w-full h-80" src='<?= $movieVideo ?>' frameborder='0' allow='autoplay; encrypted-media' allowfullscreen></iframe>
