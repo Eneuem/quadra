@@ -217,7 +217,7 @@ $trailerUrl = 'https://www.youtube.com/embed/' . htmlspecialchars($movieDetails[
 
                 </div>
             </div>
-            <p class="w-full md:w-2/3 mt-10 mr-2 text-md md:text-xl mb-10 leading-relaxed h-64"><b>Synopsis </b>: <br> <?php echo htmlspecialchars($movieDetails['synopsis']); ?></p>
+            <p class="w-full md:w-2/3 mt-10 mr-2 text-md md:text-xl mb-10 lg:mb-8 leading-relaxed h-64"><b>Synopsis </b>: <br> <?php echo htmlspecialchars($movieDetails['synopsis']); ?></p>
             <!---- film details end ---->
 
             <div class="mb-20 pt-4 ">
