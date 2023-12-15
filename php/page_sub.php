@@ -2,7 +2,7 @@
 
   <div class="flex flex-wrap justify-center">
     <!-- Basic Plan -->
-    <div class="max-w-md mx-4 my-6 p-8 bg-gray-800 text-white rounded-xl shadow-md w-full sm:w-1/2 md:w-1/3 lg:w-1/4 border-2 border-yellow-400">
+    <div class="max-w-md mx-4 my-6 p-8 bg-gray-800 text-white rounded-xl shadow-md w-full sm:w-1/2 md:w-1/3 lg:w-1/4 border-2 border-gray-400">
 
       <h2 class="text-2xl font-semibold mb-2 py-1 bg-yellow-500 rounded-xl flex items-center justify-center">Basic Plan</h2>
 
