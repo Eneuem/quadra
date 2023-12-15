@@ -5,7 +5,6 @@ ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
 
 include 'db_connect.php';
-include 'bo_check.php';
 
 $filterMovie = $_GET['filter_movie'] ?? '';
 $filterDate = $_GET['filter_date'] ?? '';
@@ -51,9 +50,9 @@ try {
 <!-- Formulaire de filtre -->
 <form action="bo_manage_seances.php" method="get">
     <label for="filter_movie">Film :</label>
-    <select id="filter_movie" name="filter_movie">
+    <select id="filter_movie" name="filter_movie" class="text-black rounded-md p-2 mr-2">
         <option value="">Tous les films</option>
-        <?php foreach ($movies as $movie): ?>
+        <?php foreach ($movies as $movie) : ?>
             <option value="<?php echo htmlspecialchars($movie['id']); ?>" <?php echo $filterMovie == $movie['id'] ? 'selected' : ''; ?>>
                 <?php echo htmlspecialchars($movie['title']); ?>
             </option>
@@ -61,16 +60,16 @@ try {
     </select>
 
     <label for="filter_date">Date :</label>
-    <input type="date" id="filter_date" name="filter_date" value="<?php echo htmlspecialchars($filterDate); ?>">
+    <input type="date" id="filter_date" name="filter_date" class="text-black rounded-md p-2" value="<?php echo htmlspecialchars($filterDate); ?>">
 
-    <input type="submit" value="Filtrer">
+    <input type="submit" value="Filtrer" class="cursor-pointer hover:text-gray-50">
 </form>
 
 <!-- Affichage des séances -->
 
 <h2 class="text-2xl font-bold mb-4">Gestion des Séances</h2>
 <table class="min-w-full border border-gray-300 shadow-sm rounded-lg overflow-hidden">
-    <thead class="bg-blue-500 text-white">
+    <thead class="bg-slate-950">
         <tr>
             <th class="px-4 py-2">Film</th>
             <th class="px-4 py-2">Jour de la Séance</th>
@@ -84,8 +83,8 @@ try {
         </tr>
     </thead>
     <tbody>
-        <?php foreach ($seances as $seance): ?>
-            <tr class="hover:bg-gray-100">
+        <?php foreach ($seances as $seance) : ?>
+            <tr class="hover:bg-slate-800 text-center">
                 <td class="px-4 py-2"><?php echo htmlspecialchars($seance['movie_title']); ?></td>
                 <td class="px-4 py-2"><?php echo htmlspecialchars($seance['jour_de_seance']); ?></td>
                 <td class="px-4 py-2"><?php echo htmlspecialchars($seance['heure_de_seance']); ?></td>
@@ -95,8 +94,8 @@ try {
                 <td class="px-4 py-2"><?php echo htmlspecialchars($seance['nom_salle']); ?></td>
                 <td class="px-4 py-2"><?php echo htmlspecialchars($seance['nombre_places_disponibles']); ?></td>
                 <td class="px-4 py-2">
-                    <a href="main.php?page=editseance&id=<?php echo $seance['id']; ?>" class="text-blue-500 hover:underline">Modifier</a>
-                    <a href="delete_seance.php?id=<?php echo $seance['id']; ?>" onclick="return confirm('Êtes-vous sûr de vouloir supprimer cette séance ?');" class="text-red-500 hover:underline ml-2">Supprimer</a>
+                    <a href="main.php?page=editseance&id=<?php echo $seance['id']; ?>" class="text-blue-500 bg-blue-950 p-2 rounded-md hover:underline">Modifier</a>
+                    <a href="delete_seance.php?id=<?php echo $seance['id']; ?>" onclick="return confirm('Êtes-vous sûr de vouloir supprimer cette séance ?');" class="text-red-500 bg-red-950 p-2 rounded-md hover:underline ml-2">Supprimer</a>
                 </td>
             </tr>
         <?php endforeach; ?>

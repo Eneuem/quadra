@@ -1,9 +1,8 @@
 <body class="common-background font-sans">
 
-  <div class="flex flex-wrap justify-center">
+  <div class="flex flex-wrap justify-center items-center min-h-screen">
     <!-- Basic Plan -->
-    <div
-      class="max-w-md mx-4 my-8 bg-gray-900 text-white rounded-xl p-8 shadow-md w-full sm:w-1/2 md:w-1/3 lg:w-1/4 border-2 border-yellow-400">
+    <div class="max-w-md mx-4 my-8 bg-gray-900 text-white rounded-xl p-8 shadow-md w-full sm:w-1/2 md:w-1/3 lg:w-1/4 border-2 border-yellow-400">
       <h2 class="text-2xl font-semibold mb-2 py-1 bg-yellow-400 rounded-xl flex items-center justify-center">Basic Plan
       </h2>
 
@@ -26,10 +25,8 @@
 
 
     <!-- Premium Plan -->
-    <div
-      class="max-w-md mx-4 my-8 bg-yellow-400  rounded-xl p-8 shadow-md w-full sm:w-1/2 md:w-1/3 lg:w-1/4 border-2 border-gray-200">
-      <h2
-        class="text-2xl font-semibold text-yellow-400 mb-2 py-1 bg-gray-900 rounded-xl flex items-center justify-center">
+    <div class="max-w-md mx-4 my-8 bg-yellow-400  rounded-xl p-8 shadow-md w-full sm:w-1/2 md:w-1/3 lg:w-1/4 border-2 border-gray-200">
+      <h2 class="text-2xl font-semibold text-yellow-400 mb-2 py-1 bg-gray-900 rounded-xl flex items-center justify-center">
         Premium Plan
       </h2>
       <h3 class="text-2xl font-bold pb-6 mt-4 text-red-700 border-b-2 ">55 €</h3>
@@ -43,10 +40,10 @@
       <form action="#" method="POST">
         <!-- Form fields go here -->
         <!-- ... -->
-      <?= include 'php-stripes/premium/payement.php';?>
+        <?= include 'php-stripes/premium/payement.php'; ?>
 
 
-      </form> 
+      </form>
     </div>
 
   </div>
