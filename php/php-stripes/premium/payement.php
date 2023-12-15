@@ -1,4 +1,4 @@
-<script src="https://js.stripe.com/v3/"></script>
+<!-- <script src="https://js.stripe.com/v3/"></script> -->
 
     <button id="checkout-button" class="bg-red-600 text-white px-4 py-2 rounded-xl mt-auto animate-pulse">Payer maintenant</button>
 
@@ -7,7 +7,7 @@
         
         var checkoutButton = document.getElementById('checkout-button');
         checkoutButton.addEventListener('click', function () {
-            fetch('create_stripe_session.php', {
+            fetch('php/php-stripes/premium/create_stripe_session.php', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -24,4 +24,5 @@
             });
         });
     </script>
+
 

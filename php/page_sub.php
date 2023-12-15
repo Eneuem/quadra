@@ -43,7 +43,7 @@
       <form action="#" method="POST">
         <!-- Form fields go here -->
         <!-- ... -->
-      <?= include '../php-stripes/premium/payement.php';?>
+      <?= include 'php-stripes/premium/payement.php';?>
 
 
       </form> 

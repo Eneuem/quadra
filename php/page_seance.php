@@ -8,9 +8,10 @@ include 'db_connect.php'; // Assurez-vous que ce fichier contient votre connexio
 
 // Fonction pour obtenir les séances pour un jour donné de la semaine
 function getSeancesForDay($pdo, $dayOfWeek) {
-    $sql = "SELECT seances.*, movies.title AS movie_title FROM seances
-            INNER JOIN movies ON seances.movie_id = movies.id
-            WHERE seances.jour_de_seance = :dayOfWeek";
+    $sql = "
+        SELECT seances.*, movies.title AS movie_title, movies.poster_url FROM seances
+        INNER JOIN movies ON seances.movie_id = movies.id
+        WHERE seances.jour_de_seance = :dayOfWeek";
     $stmt = $pdo->prepare($sql);
     $stmt->bindValue(':dayOfWeek', $dayOfWeek);
     $stmt->execute();
@@ -24,6 +25,7 @@ function getSeancesForDay($pdo, $dayOfWeek) {
 
     return $groupedSeances;
 }
+
 
 // Déterminer le jour de la semaine actuel et le jour suivant
 $daysOfWeek = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
@@ -60,11 +62,14 @@ $seancesTomorrow = getSeancesForDay($pdo, $tomorrow);
                 <tbody>
                     <?php foreach ($seancesToday as $movie_title => $seances) : ?>
                         <tr>
-                            <td class="border px-4 py-2"><?= htmlspecialchars($movie_title); ?></td>
+                            <td class="border px-4 py-2">
+                            <?= htmlspecialchars($movie_title); ?>
+                            <img src="https://image.tmdb.org/t/p/w500<?= htmlspecialchars($seances[0]['poster_url']); ?>" class="w-32 ml-4 rounded-lg object-contain">
+                           
                             <td class="border px-4 py-2">
                                 <div class="flex items-center gap-4">
                                     <?php foreach ($seances as $seance) : ?>
-                                        <button class="bg-slate-900 hover:bg-slate-800 w-36 p-2 text-gray-300 mr-2 flex items-center justify-around rounded-lg">
+                                        <button class="bg-slate-900 hover:bg-slate-800 w-36 p-2 text-gray-300 mr-2 flex items-end justify-around rounded-lg">
                                         <div>
                                             <p>Heure : <?php echo htmlspecialchars(date('H\hi', strtotime($seance['heure_de_seance']))); ?></p>
                                             <p>Langue : <?= htmlspecialchars($seance['langue']); ?></p>
@@ -96,6 +101,7 @@ $seancesTomorrow = getSeancesForDay($pdo, $tomorrow);
                     <?php foreach ($seancesTomorrow as $movie_title => $seances) : ?>
                         <tr>
                             <td class="border px-4 py-2"><?= htmlspecialchars($movie_title); ?></td>
+                            <img src="https://image.tmdb.org/t/p/w500<?php echo htmlspecialchars($seance['poster_url']); ?>" class="w-32 ml-4 rounded-lg object-contain">
                             <td class="border px-4 py-2">
                                 <div class="flex items-center gap-4">
                                     <?php foreach ($seances as $seance) : ?>
