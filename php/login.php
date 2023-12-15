@@ -38,7 +38,7 @@ if (isset($_POST['submit'])) {
         $_SESSION['userid'] = $user['id'];
         $_SESSION['username'] = $user['username'];
         $_SESSION['user_power'] = $user['user_power']; // Ajout de user_power à la session
-    
+
         header("Location: ../index.php"); // Redirection vers index.php
         exit;
     } else {
@@ -49,7 +49,7 @@ if (isset($_POST['submit'])) {
 
 ?>
 
-<div class="text-center bg-slate-950 h-screen flex flex-col justify-center items-center">
+<div class="text-center bg-slate-950 h-screen mt-4 rounded-md flex flex-col justify-center items-center">
     <h1 class="text-lg leading-6 font-medium text-gray-300">Se connecter</h1>
     <div class="mt-2 px-7 py-3">
         <?php if (isset($error_message)) { ?>
@@ -65,11 +65,11 @@ if (isset($_POST['submit'])) {
                 <input type="password" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="password" name="password" placeholder="Mot de passe" required>
             </div>
             <div class="flex items-center justify-center">
-                <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline " name="submit" type="submit">
-                    Se connecter
+                <button class=" bg-blue-700 hover:bg-blue-800 text-white font-bold mb-5 py-2 px-4 rounded focus:outline-none focus:shadow-outline " name="submit" type="submit">
+                    Sign In
                 </button>
             </div>
-            <a href="index.php?page=signup" class="mt-5 text-gray-300 hover:text-white">Not Account ?</a>
+            <a href="index.php?page=signup" class=" text-gray-300 hover:text-white">Not Account Yet ?</a>
         </form>
     </div>
 </div>

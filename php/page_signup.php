@@ -2,7 +2,6 @@
 include 'db_connect.php';
 ?>
 
-
 <div class="w-full h-screen bg-slate-950 mt-4 rounded-md flex flex-col justify-center items-center">
     <form id="registrationForm" class="w-1/3">
         <div class="mb-5">
