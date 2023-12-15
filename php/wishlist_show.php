@@ -16,7 +16,7 @@ if (!isset($_SESSION['userid'])) {
 
 ?>
 
-<div class="bg-slate-950 h-fit p-10">
+<div class="bg-slate-950 h-screen mt-4 rounded-md p-10">
     <div class="flex items-center justify-between">
         <h1 class="text-gray-300 text-5xl">Wishlist</h1>
     </div>
@@ -24,14 +24,14 @@ if (!isset($_SESSION['userid'])) {
     <div class="mt-10 grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6 gap-8">
         <?php
         try {
-            $userId = $_SESSION['userid']; 
+            $userId = $_SESSION['userid'];
             $stmt = $pdo->prepare("SELECT m.id, m.imdb_id, m.title, m.poster_url FROM wishlist w INNER JOIN movies m ON w.movie_id = m.id WHERE w.userid = :userid");
             $stmt->bindParam(':userid', $userId, PDO::PARAM_INT);
             $stmt->execute();
 
             while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
                 $filmUrl = "index.php?page=movie_search&id=" . htmlspecialchars($row['imdb_id']);  // Création de l'URL
-            
+
                 echo "<a href='$filmUrl' class='w-64 h-96 group relative flex flex-col text-white hover:scale-105 hover:shadow transition duration-700 cursor-pointer'>";
                 echo "<img class='rounded-lg object-cover' src='https://image.tmdb.org/t/p/w500" . htmlspecialchars($row['poster_url']) . "'><br>";
                 echo "<div class='opacity-0 rounded-lg bg-opacity-70 p-2  group-hover:opacity-100 bg-black transition duration-300 absolute inset-0 flex flex-col gap-2 justify-end text-white'>";

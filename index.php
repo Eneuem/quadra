@@ -11,7 +11,7 @@
 
     $page = isset($_GET['page']) ? $_GET['page'] : 'default'; // Page par défaut si le paramètre 'page' n'est pas défini
     $id = isset($_GET['id']) ? $_GET['id'] : null; // ID IMDb (si présent)
-    
+
     switch ($page) {
         case 'wishlist':
             include("php/wishlist_show.php");
@@ -31,6 +31,12 @@
         case 'privacy':
             include("php/page_privacy_policy.php");
             break;
+        case 'about':
+            include("php/page_about.php");
+            break;
+        case 'contact':
+            include("php/page_contact.php");
+            break;
         case 'subscription':
             include("php/page_sub.php");
             break;
@@ -40,7 +46,7 @@
         default:
             include("php/page_main.php");
     }
-    
+
 
     include("footer.php"); ?>
 

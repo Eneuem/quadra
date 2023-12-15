@@ -15,7 +15,7 @@
                             <a href="index.php?page=users" class="hover:underline">Profil</a>
                         </li>
                         <li>
-                            <a href="" class="hover:underline">About</a>
+                            <a href="index.php?page=about" class="hover:underline">About</a>
                         </li>
                     </ul>
                 </div>
@@ -25,7 +25,7 @@
                             <a href="index.php?page=privacy" class="hover:underline">Privacy Policy</a>
                         </li>
                         <li>
-                            <a href="" class="hover:underline">Contact</a>
+                            <a href="index.php?page=contact" class="hover:underline">Contact</a>
                         </li>
                     </ul>
                 </div>
