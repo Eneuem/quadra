@@ -1,5 +1,6 @@
-<?php include"../php/start.php"; 
+<?php 
 session_start();
+include 'start.php'; 
 include 'bo_check.php';?>
 
 <?php $page = $_GET['page'] ?? 'default';
