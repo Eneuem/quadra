@@ -27,13 +27,12 @@ try {
     }
 
     // Utilisation de l'ID interne du film pour récupérer les séances
-    $movieInternalId = $movieDetails['id']; 
+    $movieInternalId = $movieDetails['id'];
     $stmt = $pdo->prepare("SELECT * FROM seances WHERE movie_id = :movie_id");
     $stmt->bindParam(':movie_id', $movieInternalId);
     $stmt->execute();
 
     $movieSessions = $stmt->fetchAll(PDO::FETCH_ASSOC);
-
 } catch (PDOException $e) {
     echo "Erreur lors de la récupération des informations : " . $e->getMessage();
     exit;
@@ -60,12 +59,11 @@ $trailerUrl = 'https://www.youtube.com/embed/' . htmlspecialchars($movieDetails[
 
 <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
 <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
-<script src="https://cdn.tailwindcss.com"></script>
 <link rel="stylesheet" href="css/rating_star.css">
 <link rel="stylesheet" href="css/movie_random.css">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
 
-<div class="w-full min-h-screen flex flex-col items-center text-neutral-300 bg-cover bg-center bg-no-repeat relative" style="background-image: url('https://image.tmdb.org/t/p/original/<?php echo $movieDetails['screenshot_urls'];  ?>');"> 
+<div class="w-full min-h-screen flex flex-col items-center text-neutral-300 mt-4 rounded-md overflow-hidden bg-cover bg-no-repeat relative" style="background-image: url('https://image.tmdb.org/t/p/original/<?php echo $movieDetails['screenshot_urls'];  ?>');">
     <div class="absolute top-0 left-0 w-full h-full bg-black opacity-80"></div>
     <div class="flex flex-col xl:flex-row w-full min-h-screen z-10 pt-10 tracking-wider">
         <!----cover movie---->
@@ -74,7 +72,7 @@ $trailerUrl = 'https://www.youtube.com/embed/' . htmlspecialchars($movieDetails[
             <div class="flex flex-col">
                 <!----title movie--->
                 <h1 class="font-bold text-5xl mb-4 flex items-center">
-                <?php echo htmlspecialchars($movieDetails['title']); ?>
+                    <?php echo htmlspecialchars($movieDetails['title']); ?>
                 </h1>
                 <!-- Trigger pour ouvrir la modal -->
                 <button id="openModalBtn" class="w-[10%] bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Voir le trailer</button>
@@ -154,7 +152,7 @@ $trailerUrl = 'https://www.youtube.com/embed/' . htmlspecialchars($movieDetails[
             </div>
             <!--- seance de cinéma start ---->
             <div class="flex items-center gap-4 mt-4 mb-4">
-                <?php foreach ($movieSessions as $session): ?>
+                <?php foreach ($movieSessions as $session) : ?>
                     <button class="bg-slate-950 w-36 p-2 text-yellow-400 flex items-center justify-around rounded-lg hover:bg-slate-600">
                         <div>
                             <p><?php echo htmlspecialchars(date('H\hi', strtotime($session['heure_de_seance']))); ?></p>
@@ -167,7 +165,7 @@ $trailerUrl = 'https://www.youtube.com/embed/' . htmlspecialchars($movieDetails[
                         </svg>
                     </button>
                 <?php endforeach; ?>
-                <?php if (!$movieSessions): ?>
+                <?php if (!$movieSessions) : ?>
                     <p class="text-xl">Aucune séance n'est disponible pour ce film.</p>
                 <?php endif; ?>
 
@@ -195,11 +193,11 @@ $trailerUrl = 'https://www.youtube.com/embed/' . htmlspecialchars($movieDetails[
                 <div class="flex flex-col">
                     <h5><b>Actors </b>:</h5>
                     <ul>
-                        <?php foreach ($movieActors as $actor): ?>
+                        <?php foreach ($movieActors as $actor) : ?>
                             <li><?php echo htmlspecialchars($actor['name']); ?> (as <?php echo htmlspecialchars($actor['character']); ?>)</li>
                         <?php endforeach; ?>
                     </ul>
-                    
+
                     <h5 class="mr-2 mt-4">
                         <ul class="list-none">
                             <?php
@@ -225,17 +223,17 @@ $trailerUrl = 'https://www.youtube.com/embed/' . htmlspecialchars($movieDetails[
             <div class="mb-20 pt-4 ">
                 <!-----trailer video ---->
 
-<!-- Modal -->
-<div id="trailerModal" class="modal hidden fixed inset-0 bg-black bg-opacity-40 overflow-y-auto h-full w-full">
-    <div class="modal-content relative p-4 bg-white w-full max-w-2xl m-auto mt-20 rounded">
-        <span id="closeModalBtn" class="close absolute top-4 right-4 text-3xl text-gray-600 cursor-pointer">&times;</span>
-        <?php if (!empty($movieVideo)) : ?>
-            <iframe class="w-full h-80" src='<?= $movieVideo ?>' frameborder='0' allow='autoplay; encrypted-media' allowfullscreen></iframe>
-        <?php endif; ?>
-    </div>
-</div>
+                <!-- Modal -->
+                <div id="trailerModal" class="modal hidden fixed inset-0 bg-black bg-opacity-40 overflow-y-auto h-full w-full">
+                    <div class="modal-content relative p-4 bg-white w-full max-w-2xl m-auto mt-20 rounded">
+                        <span id="closeModalBtn" class="close absolute top-4 right-4 text-3xl text-gray-600 cursor-pointer">&times;</span>
+                        <?php if (!empty($movieVideo)) : ?>
+                            <iframe class="w-full h-80" src='<?= $movieVideo ?>' frameborder='0' allow='autoplay; encrypted-media' allowfullscreen></iframe>
+                        <?php endif; ?>
+                    </div>
+                </div>
 
-            </div> 
+            </div>
         </div>
     </div>
 </div>
@@ -351,4 +349,3 @@ $trailerUrl = 'https://www.youtube.com/embed/' . htmlspecialchars($movieDetails[
         }
     });
 </script>
-
