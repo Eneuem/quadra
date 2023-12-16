@@ -2,7 +2,7 @@
 $servername = "localhost";
 $dbname = "test";
 $user = "root";
-$password = "";
+$password = "Quadrastream1!";
 $charset = "utf8mb4";
 
 $dsn = "mysql:host=$servername;dbname=$dbname;charset=$charset";

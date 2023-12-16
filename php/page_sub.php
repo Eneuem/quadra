@@ -1,4 +1,4 @@
-<body class="common-background font-sans">
+<div class="common-background">
 
   <div class="flex flex-wrap justify-center items-center min-h-screen">
     <!-- Basic Plan -->
@@ -39,4 +39,4 @@
     </div>
 
   </div>
-</body>
+</div>
