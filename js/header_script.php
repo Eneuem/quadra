@@ -36,6 +36,7 @@
             }
         });
 
+        
         // Ajouter l'événement de clic
         document.addEventListener('DOMContentLoaded', (event) => {
             var userName = document.getElementById('userName');

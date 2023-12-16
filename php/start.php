@@ -14,8 +14,6 @@
     <link rel="stylesheet" href="css/reset.css" />
     <link rel="stylesheet" href="css/style.css" />
     <link rel="stylesheet" href="input.css" />
-    <script src="https://js.stripe.com/v3/"></script>
-
     <!-- <script src="js/script.js" defer></script> -->
     <title>Quadra | Streaming services</title>
 </head>
