@@ -2,59 +2,28 @@
 include 'db_connect.php';
 ?>
 
-<div class="container mx-auto px-4">
-    <div class="max-w-2xl mx-auto my-10">
-        <form id="registrationForm">
-            <!-- Step 1: Profile -->
-            <div id="step1" class="step">
-                <div>
-                    <label for="login" class="font-bold mb-1 text-gray-700 block">Login</label>
-                    <input type="text" id="username" name="username" class="w-full px-4 py-3 rounded-lg shadow-sm focus:outline-none focus:shadow-outline text-gray-600 font-medium" placeholder="Enter your login...">
-                </div>
-                <div class="mt-5">
-                    <label for="email" class="font-bold mb-1 text-gray-700 block">Email</label>
-                    <input type="email" id="email" name="email" class="w-full px-4 py-3 rounded-lg shadow-sm focus:outline-none focus:shadow-outline text-gray-600 font-medium" placeholder="Enter your email...">
-                </div>
-                <div class="mt-5 text-right">
-                    <button type="button" onclick="nextStep(2)" class="py-2 px-5 rounded-lg shadow-sm text-white bg-blue-500 hover:bg-blue-600 font-medium">Next</button>
-                </div>
-            </div>
+<div class="w-full h-screen bg-slate-950 mt-4 rounded-md flex flex-col justify-center items-center">
+    <form id="registrationForm" class="w-1/3">
+        <div class="mb-5">
+            <label for="login" class="block mb-2 text-sm font-medium text-gray-300 dark:text-white">Your username</label>
+            <input type="text" name="username" id="username" class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 dark:shadow-sm-light" placeholder="enter your username" required>
+        </div>
+        <div class="mb-5">
+            <label for="email" class="block mb-2 text-sm font-medium text-gray-300 dark:text-white">Your email</label>
+            <input type="email" id="email" class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 dark:shadow-sm-light" placeholder="name@gmail.com" required>
+        </div>
+        <div class="mb-5">
+            <label for="password" class="block mb-2 text-sm font-medium text-gray-300 dark:text-white">Your password</label>
+            <input type="password" id="password" class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 dark:shadow-sm-light" placeholder="enter your password" required>
+        </div>
+        <button type="submit" value="Register" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Register</button>
+    </form>
 
-            <!-- Step 2: Password -->
-            <div id="step2" class="step hidden">
-                <div>
-                    <label for="password" class="font-bold mb-1 text-gray-700 block">Set up password</label>
-                    <input type="password" id="password" name="password" class="w-full px-4 py-3 rounded-lg shadow-sm focus:outline-none focus:shadow-outline text-gray-600 font-medium" placeholder="Your strong password...">
-                </div>
-                <div class="mt-5 flex justify-between">
-                    <button type="button" onclick="nextStep(1)" class="py-2 px-5 rounded-lg shadow-sm text-gray-600 bg-white hover:bg-gray-100 font-medium">Previous</button>
-                    <button type="button" onclick="nextStep(3)" class="py-2 px-5 rounded-lg shadow-sm text-white bg-blue-500 hover:bg-blue-600 font-medium">Next</button>
-                </div>
-            </div>
-
-            <!-- Step 3: Profile Details -->
-            <div id="step3" class="step hidden">
-                <div>
-                    <!-- Display login and email as text -->
-                    <div class="mb-5">
-                        <span class="font-bold text-gray-700">Login: </span><span id="displayLogin"></span>
-                    </div>
-                    <div class="mb-5">
-                        <span class="font-bold text-gray-700">Email: </span><span id="displayEmail"></span>
-                    </div>
-                    <input type="hidden" name="register" value="1">
-                    <input type="hidden" name="userpower" value="0">
-                </div>
-                <div class="mt-5 flex justify-between">
-                    <button type="button" onclick="nextStep(2)" class="py-2 px-5 rounded-lg shadow-sm text-gray-600 bg-white hover:bg-gray-100 font-medium">Previous</button>
-                    <input type="submit" value="Register" class="py-2 px-5 rounded-lg shadow-sm text-white bg-blue-500 hover:bg-blue-600 font-medium">
-                </div>
-            </div>
-        </form>
-    </div>
 </div>
+
 
 <script src="js/signup.js"></script>
 
 </body>
+
 </html>

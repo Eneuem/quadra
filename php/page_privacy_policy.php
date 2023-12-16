@@ -1,6 +1,4 @@
-<script src="https://cdn.tailwindcss.com"></script>
-
-<div class="w-full mx-auto bg-slate-950 p-8 text-gray-300 flex justify-center">
+<div class="w-full mx-auto bg-slate-950 p-8 mt-4 rounded-md text-gray-300 flex justify-center">
     <div class="w-2/3 ">
         <img src="./img/logo.png" alt="logo de quadrastream" class="w-12 mb-2 bg-white rounded-full">
         <h1 class="text-2xl font-bold mb-4">Privacy Policy</h1>

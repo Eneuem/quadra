@@ -1,6 +1,6 @@
 <body class="common-background font-sans">
 
-  <div class="flex flex-wrap justify-center">
+  <div class="flex flex-wrap justify-center items-center min-h-screen">
     <!-- Basic Plan -->
     <div class="max-w-md mx-4 my-6 p-8 bg-gray-800 text-white rounded-xl shadow-md w-full sm:w-1/2 md:w-1/3 lg:w-1/4 border-2 border-gray-400">
 
