@@ -43,6 +43,15 @@
         case 'seances':
             include("php/page_seance.php");
             break;
+        case 'reset':
+            include("php/reset/new_pass_req.php");
+            break;
+        case 'verify':
+            include("php/reset/verify_secret_question_form.php");
+            break;
+        case 'reset_password':
+            include("php/reset/password_form.php");
+            break;
         default:
             include("php/page_main.php");
     }

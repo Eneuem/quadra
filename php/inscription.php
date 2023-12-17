@@ -9,6 +9,8 @@ if (isset($_POST['register'])) {
     $pseudo = htmlspecialchars($_POST['username']);
     $email = htmlspecialchars($_POST['email']);
     $password = password_hash($_POST['password'], PASSWORD_DEFAULT); // Hachage du mot de passe
+    $secret_question = htmlspecialchars($_POST['secret_question']);
+    $secret_answer = htmlspecialchars($_POST['secret_answer']);
   
     // Vérifier si le pseudo ou l'email n'est pas déjà utilisé
     $query = $pdo->prepare("SELECT * FROM users WHERE username = ? OR email = ?");
@@ -16,8 +18,8 @@ if (isset($_POST['register'])) {
   
     if ($query->rowCount() == 0) {
         // Insertion des données dans la base de données
-        $insert = $pdo->prepare("INSERT INTO users (username, email, password, user_power) VALUES (?, ?, ?, ?)");
-        $insert->execute([$pseudo, $email, $password, 0]);
+        $insert = $pdo->prepare("INSERT INTO users (username, email, password, user_power, secret_question, secret_answer) VALUES (?, ?, ?, ?, ?, ?)");
+        $insert->execute([$pseudo, $email, $password, 0, $secret_question, $secret_answer]);
   
         if ($insert) {
             echo "Inscription réussie.";

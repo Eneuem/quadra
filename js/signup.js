@@ -16,6 +16,8 @@
     var username = document.getElementById('username').value; 
     var email = document.getElementById('email').value;
     var password = document.getElementById('password').value;
+    var secret_question = document.getElementById('secret_question').value;
+    var secret_answer = document.getElementById('secret_answer').value;
 
     var formData = new FormData();
     formData.append('register', '1'); // Ajouter 'register'
@@ -23,6 +25,9 @@
     formData.append('username', username);
     formData.append('email', email);
     formData.append('password', password);
+    formData.append('secret_question', secret_question);
+    formData.append('secret_answer', secret_answer);
+    
 
     fetch('php/inscription.php', {
         method: 'POST',
