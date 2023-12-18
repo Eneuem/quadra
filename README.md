@@ -27,6 +27,6 @@ We, as admins, add movies to our database and showcase them on the page. Users c
 
 <div align="center">
 
-<iframe src="https://giphy.com/embed/Bzebpz5rnyBb2" width="480" height="232" frameBorder="0" class="giphy-embed" allowFullScreen></iframe><p><a href="https://giphy.com/gifs/popcorn-emmys-2013-Bzebpz5rnyBb2"></a></p>
+![1bjy](https://github.com/Eneuem/quadra/assets/117818692/2bd8a78e-2654-40bf-b193-da68db5e8490)
 
 </div>
