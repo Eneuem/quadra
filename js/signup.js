@@ -1,14 +1,28 @@
-    function nextStep(step) {
-        document.querySelectorAll('.step').forEach(function(div) {
-            div.classList.add('hidden');
-        });
-        document.getElementById('step' + step).classList.remove('hidden');
+function validatePassword(password) {
+    var regex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{6,}$/;
+    return regex.test(password);
+}
 
-        if (step === 3) {
-            document.getElementById('displayLogin').textContent = document.getElementById('username').value; 
-            document.getElementById('displayEmail').textContent = document.getElementById('email').value;
-        }
+function validateForm() {
+    var password = document.getElementById('password').value;
+    if (!validatePassword(password)) {
+        alert('Le mot de passe doit contenir au moins une minuscule, une majuscule, un chiffre et être d\'au moins 6 caractères.');
+        return false;
     }
+    return true;
+}
+    
+    // function nextStep(step) {
+    //     document.querySelectorAll('.step').forEach(function(div) {
+    //         div.classList.add('hidden');
+    //     });
+    //     document.getElementById('step' + step).classList.remove('hidden');
+
+    //     if (step === 3) {
+    //         document.getElementById('displayLogin').textContent = document.getElementById('username').value; 
+    //         document.getElementById('displayEmail').textContent = document.getElementById('email').value;
+    //     }
+    // }
     
     document.getElementById('registrationForm').addEventListener('submit', function(event) {
     event.preventDefault();

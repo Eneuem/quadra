@@ -20,10 +20,10 @@ include 'db_connect.php';
             <label for="secret_question" class="block mb-2 text-sm font-medium text-gray-300 dark:text-white">Your secret question</label>
             <select id="secret_question" name="secret_question" class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 dark:shadow-sm-light" required>
                 <option value="">Select a question</option>
-                <option value="pet">What is the name of your first pet?</option>
-                <option value="school">What is the name of your primary school?</option>
-                <option value="phone">What was the first smartphone you had ?</option>
-                <option value="love">What is the name of your first love?</option>
+                <option value="What is the name of your first pet?">What is the name of your first pet?</option>
+                <option value="What is the name of your primary school">What is the name of your primary school?</option>
+                <option value="What was the first smartphone you had">What was the first smartphone you had ?</option>
+                <option value="What is the name of your first love">What is the name of your first love?</option>
             </select>
         </div>
         <div class="mb-5">
@@ -37,19 +37,7 @@ include 'db_connect.php';
 </div>
 
 <script>
-    function validatePassword(password) {
-        var regex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{6,}$/;
-        return regex.test(password);
-    }
 
-    function validateForm() {
-        var password = document.getElementById('password').value;
-        if (!validatePassword(password)) {
-            alert('Le mot de passe doit contenir au moins une minuscule, une majuscule, un chiffre et être d\'au moins 6 caractères.');
-            return false;
-        }
-        return true;
-    }
 </script>
 
 
