@@ -34,7 +34,7 @@
       <form action="#" method="POST">
         <!-- Form fields go here -->
         <!-- ... -->
-        <?= include 'php-stripes/premium/payement.php'; ?>
+        <?php include 'php-stripes/payement_premium.php'; ?>
       </form>
     </div>
 

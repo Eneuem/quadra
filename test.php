@@ -27,7 +27,7 @@
       </div>
     </div>
     <div>
-      <img src="https://i.ibb.co/ck1SGFJ/Group.png" />
+      <img src="php/php-stripes/premium/create_stripe_session.php" />
     </div>
   </div>
 </body>

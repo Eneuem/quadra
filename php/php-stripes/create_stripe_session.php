@@ -1,4 +1,8 @@
 <?php // create_stripe_session.php
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
+
 require_once('../../vendor/autoload.php');
 \Stripe\Stripe::setApiKey('sk_test_51ONDw8C1fQp5mFZfNo92rN47eJkdPMbhoj0xxj9H5veHHiPA3yisajnabYHfMEPWSBZcvnnK7nASXL70lhDy8Jyg00vS0Uxa1j');
 
