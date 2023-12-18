@@ -52,6 +52,9 @@
         case 'reset_password':
             include("php/reset/password_form.php");
             break;
+        case 'new_movie':
+            include("php/comp/new.php");
+            break;
         default:
             include("php/page_main.php");
     }

@@ -9,7 +9,9 @@ include 'db_connect.php';
 
 // Assurez-vous que l'utilisateur est connecté et que l'ID utilisateur est disponible
 if (!isset($_SESSION['userid'])) {
-    die("Utilisateur non connecté.");
+    $_SESSION['error_message'] = "Utilisateur non connecté.";
+    header("Location: ../index.php");
+    exit;
 }
 
 $userId = $_SESSION['userid']; // Récupérez l'ID utilisateur de la session
@@ -26,7 +28,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $checkStmt->execute();
 
     if ($checkStmt->rowCount() > 0) {
-        echo "Ce film est déjà dans votre wishlist.";
+        $_SESSION['error_message'] = "Ce film est déjà dans votre wishlist.";
+        header("Location: ../index.php?page=wishlist");
         exit;
     }
 
@@ -41,12 +44,16 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
         $stmt->execute();
 
-        echo "Film ajouté à la wishlist avec succès.";
+        $_SESSION['success_message'] = "Film ajouté à la wishlist avec succès.";
+        header("Location: ../index.php?page=wishlist");
+        exit;
     } catch(PDOException $e) {
-        echo "Erreur lors de l'ajout du film à la wishlist : " . $e->getMessage();
+        $_SESSION['error_message'] = "Erreur lors de l'ajout du film à la wishlist : " . $e->getMessage();
+        header("Location: ../index.php?page=wishlist");
     }
 } else {
-    echo "Requête invalide.";
+    $_SESSION['error_message'] = "Requête invalide.";
+    header("Location: ../index.php");
 }
 ?>
 

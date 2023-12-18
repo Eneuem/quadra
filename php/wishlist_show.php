@@ -54,6 +54,61 @@ if (!isset($_SESSION['userid'])) {
     </div>
 </div>
 
+<div id="messageModal" class="fixed z-10 inset-0 overflow-y-auto top-[40%] left-[50%] hidden" aria-labelledby="modal-title" role="dialog" aria-modal="true">
+  <div class="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity" aria-hidden="true"></div>
+
+  <!-- Modal content -->
+<div class="fixed z-10 inset-0 overflow-y-auto flex items-center justify-center">
+    <div class="bg-white rounded-lg text-center overflow-hidden shadow-xl transform transition-all w-[30%] left-[50%]">
+        <div class="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
+            <div class="text-center">
+                <h3 class="font-medium text-gray-900" id="modal-title">Notification</h3>
+                <div class="mt-2">
+                    <p class="text-sm text-gray-500" id="modalText"></p>
+                </div>
+            </div>
+            <div class="px-4 py-3 sm:flex sm:flex-row-reverse">
+                <button type="button" id="closeModalButton" class="w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-red-600 text-base font-medium text-white hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500 sm:w-auto sm:text-sm mx-auto">
+                    Fermer
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+  
+
+</div>
+
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    var modal = document.getElementById("messageModal");
+    var closeButton = document.getElementById("closeModalButton");
+
+    <?php if (isset($_SESSION['error_message']) || isset($_SESSION['success_message'])): ?>
+        document.getElementById("modalText").innerText = "<?php 
+            echo isset($_SESSION['error_message']) ? $_SESSION['error_message'] : $_SESSION['success_message'];
+            unset($_SESSION['error_message']);
+            unset($_SESSION['success_message']);
+        ?>";
+        modal.style.display = "block";
+    <?php endif; ?>
+
+    closeButton.onclick = function() {
+        modal.style.display = "none";
+    }
+
+    window.onclick = function(event) {
+        if (event.target == modal) {
+            modal.style.display = "none";
+        }
+    }
+});
+
+</script>
+
 <script>
     document.getElementById('genre').addEventListener('change', function() {
         this.form.submit();

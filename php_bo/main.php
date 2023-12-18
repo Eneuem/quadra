@@ -33,6 +33,7 @@ $title = $titleMap[$page];
           <li class="mb-2"><a href="main.php?page=featured" class="text-gray-300 px-6 hover:text-white <?php echo $page == 'featured' ? 'active-link' : ''; ?>">Films en Vedette</a></li>
           <li class="mb-2"><a href="main.php?page=add" class="text-gray-300 px-6 hover:text-white <?php echo $page == 'add' ? 'active-link' : ''; ?>">Ajouter un film</a></li>
           <li class="mb-2"><a href="main.php?page=seance" class="text-gray-300 px-6 hover:text-white <?php echo $page == 'seance' ? 'active-link' : ''; ?>">Ajouter une séance</a></li>
+          <li class="mb-2"><a href="main.php?page=sortie" class="text-gray-300 px-6 hover:text-white <?php echo $page == 'sortie' ? 'active-link' : ''; ?>">Ajouter une sortie</a></li>
           <li class="mb-2"><a href="main.php?page=listseance" class="text-gray-300 px-6 hover:text-white <?php echo $page == 'listseance' ? 'active-link' : ''; ?>">Voir les séances</a></li>
           <li class="mb-2"><a href="main.php?page=list" class="text-gray-300 px-6 hover:text-white <?php echo $page == 'list' ? 'active-link' : ''; ?>">Accounts</a></li>
           <br>
@@ -85,6 +86,9 @@ $title = $titleMap[$page];
                 break;
               case 'editseance':
                 include("edit_seance.php");
+                break;
+              case 'sortie':
+                include("bo_new_movies_form.php");
                 break;
               default:
                 include("bo_movie_list.php");

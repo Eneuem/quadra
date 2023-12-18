@@ -64,7 +64,7 @@ $currentUrl = $_SERVER['REQUEST_URI'];
                 <div class=" hidden space-x-8 font-bold lg:flex">
                     <a href="index.php?page=subscription" class="">Membership</a>
                     <a href="index.php?page=seances">What's On</a>
-                    <a href="">Coming Soon</a>
+                    <a href="index.php?page=new_movie">Coming Soon</a>
                     <!-- <a href="">Special Event</a> -->
                 </div>
                 <a href="#" class="text-yellow-400link-active cursor-default">|</a>
