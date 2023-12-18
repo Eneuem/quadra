@@ -1,14 +1,18 @@
-# **<span style="color:#FFBC21;">Q</span>uadra**
+# **Quadra**
 
 ## Project Overview
 
-The Quadra project aims to create a website reminiscent of Netflix, featuring a dynamic homepage with distinct sections: <span style="color:#FFBC21;">Categories</span>, <span style="color:#FFBC21;">Random Movie</span>, and <span style="color:#FFBC21;">Wishlist</span>.
+The Quadra project is like a cinema website . It has a cool homepage with different sections: , **Membership** , **What's On**, **Comming Soon**...
 
-Users have the option to log in or sign up, enhancing their overall experience on the platform.
+You can log in or sign up to make your experience better.
 
-The homepage showcases a prominently displayed movie header along with relevant information. Notably, the header movie is not hardcoded; instead, it dynamically changes with each page load through a random function, ensuring a fresh experience every time the page is reloaded.
+The homepage always has a big movie at the top with info. What's cool is that it's not always the same movie; it changes each time you reload the page, so it's always fresh and CTA.
 
-Clicking on a movie opens a dedicated page with comprehensive details, providing users with the ability to rate the movie using a star-based system: ⭐️⭐️⭐️⭐️⭐️.
+When you click on a movie, you get a whole page with lots of details. You can even rate the movie with stars: ⭐️⭐️⭐️⭐️⭐️.
+
+You can pick movies to add to your wishlist.
+
+We, as admins, add movies to our database and showcase them on the page. Users can subscribe and choose between basic (2 movies a month) or premium (all movies for the whole month) plans.
 
 <div align="center">
   <img src="img/quadrareadme.JPG" alt="Quadra Project" width="700">
@@ -21,12 +25,8 @@ Clicking on a movie opens a dedicated page with comprehensive details, providing
 
 ![Tailwind CSS Badge](https://img.shields.io/badge/Tailwind%20CSS-38B2AC?style=flat&logo=tailwind-css)
 
-# Project in Progress 🚧
-
-This section is currently under construction. Check back soon for updates!
-
 <div align="center">
 
-![UY0Q](https://github.com/Eneuem/quadra/assets/117818692/a220a658-6eda-4f90-9847-da9a0d576148)
+<iframe src="https://giphy.com/embed/Bzebpz5rnyBb2" width="480" height="232" frameBorder="0" class="giphy-embed" allowFullScreen></iframe><p><a href="https://giphy.com/gifs/popcorn-emmys-2013-Bzebpz5rnyBb2"></a></p>
 
 </div>
